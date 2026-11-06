@@ -2003,3 +2003,472 @@ body.clean-live-mode .live-stage {
 .frame-streak7::before { content: '🌟'; }
 .frame-streak3 { --f1: #f97316; --f2: #fde047; border-color: #fb923c !important; box-shadow: 0 0 2.4cqw rgba(249, 115, 22, 0.7), 0 0.8cqw 2.4cqw #000 !important; }
 .frame-streak3::before { content: '🔥'; }
+
+
+/* ==========================================================================
+   1. GLOBAL FEVER BAR: ĐỐT NHANG CẦU MAY / TÍCH CÔNG ĐỨC (THẢ TIM)
+   ========================================================================== */
+.server-fever-card {
+  width: 90%;
+  max-width: 92cqw;
+  background: linear-gradient(90deg, rgba(30, 20, 10, 0.94) 0%, rgba(55, 30, 10, 0.92) 100%);
+  border: 0.3cqw solid #faad14;
+  border-radius: 999px;
+  padding: 0.5cqw 1.4cqw;
+  box-shadow: 0 0.5cqw 2cqw rgba(0, 0, 0, 0.85), 0 0 1.5cqw rgba(250, 173, 20, 0.35);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.server-fever-card.fever-active {
+  border-color: #ff4d4f;
+  background: linear-gradient(90deg, rgba(60, 15, 15, 0.96) 0%, rgba(90, 25, 20, 0.96) 100%);
+  box-shadow: 0 0 3cqw rgba(255, 77, 79, 0.8), 0 0 1.5cqw #ffd700;
+  animation: feverFlamePulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes feverFlamePulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0.8cqw rgba(255, 77, 79, 0.6)); }
+  100% { transform: scale(1.03); filter: drop-shadow(0 0 2.2cqw rgba(255, 215, 0, 0.9)); }
+}
+
+.fever-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1cqw;
+  margin-bottom: 0.3cqw;
+  font-size: 1.6cqw;
+  font-weight: 800;
+  color: #fff1b8;
+  text-shadow: 0 0.2cqw 0.4cqw #000;
+}
+
+.fever-icon {
+  font-size: 2.2cqw;
+}
+
+.fever-val {
+  color: #ffd666;
+  font-weight: 900;
+}
+
+.fever-bar-bg {
+  position: relative;
+  height: 1.4cqw;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fever-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fa8c16, #faad14, #ff4d4f);
+  background-size: 200% 100%;
+  animation: dragonQiStream 2.5s linear infinite;
+  box-shadow: 0 0 1.2cqw rgba(255, 140, 0, 0.8);
+  transition: width 0.35s ease;
+}
+
+.fever-status-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2cqw;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0.2cqw 0.4cqw #000;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   2. BỤC THƯỢNG ĐIỆN: TAM KHÔI TRIỀU ĐÌNH (TOP 1, 2, 3 KING OF THE HILL)
+   ========================================================================== */
+.royal-trio-podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2.2cqw;
+  width: 95%;
+  margin-top: 0.5cqw;
+  pointer-events: none;
+}
+
+.trio-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.trio-seat.seat-top-1 {
+  transform: translateY(-0.8cqw) scale(1.12);
+  z-index: 10;
+}
+
+.trio-crown {
+  font-size: 2.8cqw;
+  line-height: 1;
+  filter: drop-shadow(0 0.3cqw 0.6cqw rgba(0,0,0,0.85));
+}
+
+.trio-crown.king-crown {
+  font-size: 3.6cqw;
+}
+
+.trio-dragon-crest {
+  position: absolute;
+  top: -3.6cqw;
+  font-size: 3.2cqw;
+  animation: empHaloPulse 2s infinite ease-in-out;
+}
+
+.trio-avatar-wrap {
+  width: 8.5cqw;
+  height: 8.5cqw;
+  border-radius: 50%;
+  border: 0.4cqw solid #d9d9d9;
+  background: #101524;
+  box-shadow: 0 0.6cqw 1.8cqw rgba(0, 0, 0, 0.9);
+  position: relative;
+}
+
+.seat-top-1 .trio-avatar-wrap {
+  width: 10.5cqw;
+  height: 10.5cqw;
+  border: 0.55cqw solid #ffd700;
+  box-shadow: 0 0 3.5cqw rgba(255, 215, 0, 0.9), 0 0.8cqw 2.4cqw #000;
+}
+
+.crown-aura::after {
+  content: '';
+  position: absolute;
+  inset: -1.2cqw;
+  border-radius: 50%;
+  background: conic-gradient(#ffd700, #ff85c0, #36cfc9, #ffd700);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.8cqw), #000 calc(100% - 0.8cqw));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 0.8cqw), #000 calc(100% - 0.8cqw));
+  animation: frameSpin 3.6s linear infinite;
+  pointer-events: none;
+}
+
+.trio-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.trio-info {
+  margin-top: 0.3cqw;
+  text-align: center;
+  background: rgba(10, 15, 28, 0.88);
+  border: 0.2cqw solid rgba(255, 215, 0, 0.35);
+  border-radius: 999px;
+  padding: 0.2cqw 1cqw;
+  line-height: 1.1;
+  max-width: 18cqw;
+}
+
+.trio-rank {
+  font-size: 1.3cqw;
+  font-weight: 800;
+  color: #ffd666;
+}
+
+.trio-rank.king-rank {
+  color: #ffd700;
+  font-weight: 900;
+}
+
+.trio-name {
+  font-size: 1.5cqw;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 0.2cqw 0.4cqw #000;
+}
+
+.trio-score {
+  font-size: 1.25cqw;
+  font-weight: 800;
+  color: #ffd666;
+}
+
+/* Hiệu ứng soán ngôi văng khỏi ghế */
+.trio-seat.shoved-away {
+  animation: usurpShove 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes usurpShove {
+  0% { transform: translateY(-0.8cqw) scale(1.12); opacity: 1; }
+  35% { transform: translate(-30cqw, -15cqw) rotate(-45deg) scale(0.6); opacity: 0.5; }
+  70% { transform: translate(30cqw, 10cqw) scale(0.2); opacity: 0; }
+  100% { transform: translateY(-0.8cqw) scale(1.12); opacity: 1; }
+}
+
+/* ==========================================================================
+   3. BẢNG FIRST BLOOD: TOP 3 ĐÁP ĐÚNG NHANH NHẤT (LOWER-MID SAFE ZONE)
+   ========================================================================== */
+.first-blood-card {
+  position: absolute;
+  top: 67%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86%;
+  background: linear-gradient(180deg, rgba(18, 26, 46, 0.96) 0%, rgba(9, 14, 25, 0.98) 100%);
+  border: 0.3cqw solid #ffd700;
+  border-radius: 1.8cqw;
+  padding: 0.6cqw 1.2cqw;
+  z-index: 105;
+  box-shadow: 0 1cqw 3cqw rgba(0, 0, 0, 0.9), 0 0 2cqw rgba(255, 215, 0, 0.45);
+  animation: firstBloodSlide 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes firstBloodSlide {
+  0% { opacity: 0; transform: translate(-50%, 15cqw) scale(0.85); }
+  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+.fb-badge {
+  text-align: center;
+  font-size: 1.8cqw;
+  font-weight: 900;
+  color: #ffd700;
+  letter-spacing: 0.1cqw;
+  text-shadow: 0 0.2cqw 0.5cqw #000, 0 0 1cqw rgba(255, 215, 0, 0.6);
+  margin-bottom: 0.4cqw;
+}
+
+.fb-items-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 1cqw;
+}
+
+.fb-item-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.8cqw;
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.2cqw solid rgba(255, 215, 0, 0.3);
+  border-radius: 999px;
+  padding: 0.3cqw 1.2cqw 0.3cqw 0.5cqw;
+}
+
+.fb-rank-icon {
+  font-size: 2.2cqw;
+}
+
+.fb-avatar {
+  width: 4.8cqw;
+  height: 4.8cqw;
+  border-radius: 50%;
+  border: 0.25cqw solid #ffd700;
+}
+
+.fb-name-box {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.fb-user-name {
+  font-size: 1.5cqw;
+  font-weight: 800;
+  color: #ffffff;
+  max-width: 12cqw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fb-time-pts {
+  font-size: 1.2cqw;
+  font-weight: 700;
+  color: #ffd666;
+}
+
+/* ==========================================================================
+   4. VIỀN CHỚP ĐỎ KỊCH TÍNH (VIGNETTE PULSE 3S CUỐI)
+   ========================================================================== */
+.vignette-pulse {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 110;
+  background: radial-gradient(circle at center, transparent 55%, rgba(220, 38, 38, 0.72) 100%);
+  animation: redVignettePulse 0.48s infinite alternate ease-in-out;
+}
+
+@keyframes redVignettePulse {
+  0% { opacity: 0.25; }
+  100% { opacity: 1; }
+}
+
+/* Trạng thái đổi màu đồng hồ */
+.timer-safe { color: #52c41a !important; }
+.timer-warn { color: #faad14 !important; text-shadow: 0 0 1cqw rgba(250, 173, 20, 0.8); }
+.timer-danger {
+  color: #ff4d4f !important;
+  text-shadow: 0 0 1.5cqw #ff4d4f;
+  animation: timerPulseDanger 0.45s infinite alternate ease-in-out;
+}
+
+@keyframes timerPulseDanger {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.18); }
+}
+
+/* ==========================================================================
+   5. CÁC MÀN CHỨC NĂNG ĐẶC BIỆT: PVP VĂN QUAN vs VÕ TƯỚNG & PHÁ RƯƠNG
+   ========================================================================== */
+.special-event-arena {
+  position: absolute;
+  top: 24.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84%;
+  z-index: 125;
+}
+
+.pvp-arena-box,
+.treasure-event-box {
+  background: linear-gradient(180deg, rgba(20, 16, 32, 0.98) 0%, rgba(10, 8, 18, 0.98) 100%);
+  border: 0.35cqw solid #ffd700;
+  border-radius: 2cqw;
+  padding: 1.2cqw 1.8cqw;
+  box-shadow: 0 1cqw 3.5cqw rgba(0,0,0,0.95), 0 0 2.5cqw rgba(255, 215, 0, 0.5);
+  text-align: center;
+}
+
+.pvp-header,
+.treasure-header {
+  font-size: 2.1cqw;
+  font-weight: 900;
+  color: #ffd700;
+  margin-bottom: 0.8cqw;
+  text-shadow: 0 0.2cqw 0.5cqw #000;
+}
+
+.treasure-sub {
+  font-size: 1.6cqw;
+  font-weight: 700;
+  color: #fffbe6;
+  margin-bottom: 1cqw;
+}
+
+.pvp-teams-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5cqw;
+}
+
+.pvp-team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4cqw;
+}
+
+.pvp-team-title {
+  font-size: 1.7cqw;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.team-van .pvp-team-title { color: #40a9ff; }
+.team-vo .pvp-team-title { color: #ff4d4f; }
+
+.pvp-hp-bar,
+.treasure-hp-bar {
+  position: relative;
+  height: 2cqw;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.pvp-hp-fill.van-hp {
+  height: 100%;
+  background: linear-gradient(90deg, #1890ff, #36cfc9);
+  transition: width 0.3s ease;
+}
+
+.pvp-hp-fill.vo-hp {
+  height: 100%;
+  background: linear-gradient(90deg, #f5222d, #fa8c16);
+  transition: width 0.3s ease;
+}
+
+.pvp-vs-badge {
+  font-size: 2.6cqw;
+  font-weight: 900;
+  color: #ffd700;
+  text-shadow: 0 0 1.2cqw #ff4d4f;
+}
+
+.treasure-chest-graphic {
+  font-size: 9cqw;
+  margin: 0.5cqw 0;
+  animation: chestJiggle 0.6s infinite ease-in-out;
+  filter: drop-shadow(0 0.8cqw 2cqw rgba(255, 215, 0, 0.7));
+}
+
+@keyframes chestJiggle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.08) rotate(-4deg); }
+  75% { transform: scale(1.08) rotate(4deg); }
+}
+
+.treasure-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #52c41a, #fadb14, #f5222d);
+  transition: width 0.2s ease;
+}
+
+.treasure-hp-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3cqw;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0.2cqw 0.4cqw #000;
+}
+
+/* ==========================================================================
+   6. NGỤC TỐI / GIAM CẦM SĨ TỬ (LỆNH /giam @ten)
+   ========================================================================== */
+.seat-node.jailed .scholar-avatar-wrap {
+  filter: grayscale(0.85) brightness(0.65) !important;
+  border-color: #64748b !important;
+}
+
+.seat-node.jailed .scholar-avatar-wrap::after {
+  content: '⛓️';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5cqw;
+  z-index: 8;
+  background: repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0px, rgba(15, 23, 42, 0.85) 6px, transparent 6px, transparent 16px);
+  border-radius: 50%;
+  animation: cageRattle 0.8s infinite ease-in-out;
+}
+
+@keyframes cageRattle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.3cqw); }
+}

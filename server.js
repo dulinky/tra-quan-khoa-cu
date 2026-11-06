@@ -84,6 +84,7 @@ if (express && Server) {
   let currentRoomId = null;
   let latestStateSnapshot = null;
   let recentEventsBuffer = [];
+  let userProvidedEulerKey = process.env.EULERSTREAM_API_KEY || process.env.SIGN_API_KEY || '';
 
   // ===== LƯU ĐIỂM & NGƯỜI NẠP VÀO FILE (giữ nguyên khi tắt/mở lại game) =====
   const fs = require('fs');
@@ -149,11 +150,17 @@ if (express && Server) {
     console.log(`Đang kết nối tới TikTok LIVE của @${cleanUser} (TikTokLiveConnection v2.5)...`);
     io.emit('tiktok_status', { connecting: true, username: cleanUser });
 
-    tiktokConnection = new ConnectorClass(cleanUser, {
+    const connOptions = {
       processInitialData: true,
       fetchRoomInfoOnConnect: false,
       enableExtendedGiftInfo: false
-    });
+    };
+    const activeKey = userProvidedEulerKey || process.env.EULERSTREAM_API_KEY || process.env.SIGN_API_KEY;
+    if (activeKey) {
+      connOptions.signApiKey = activeKey;
+      connOptions.apiKey = activeKey;
+    }
+    tiktokConnection = new ConnectorClass(cleanUser, connOptions);
 
     tiktokConnection.on('error', (err) => {
       console.error('⚠️ [TikTok Stream Warning]:', err?.message || err?.info || err);
@@ -280,14 +287,22 @@ if (express && Server) {
       currentRoomId = null;
       const msg = err?.message || String(err);
       console.error('❌ Lỗi kết nối TikTok:', msg);
+      let friendlyError = `Không kết nối được @${cleanUser}. Hãy chắc chắn kênh @${cleanUser} ĐANG PHÁT LIVE trên TikTok! (${msg.slice(0, 120)})`;
+      if (msg.includes('rate_limit') || msg.includes('Too many connections')) {
+        friendlyError = `⚠️ IP server Render đang chạm giới hạn lượt kết nối miễn phí của EulerStream. Bạn có thể đăng ký API key miễn phí tại eulerstream.com rồi điền vào Render Environment Variable: EULERSTREAM_API_KEY hoặc kết nối TikTok trực tiếp từ máy cá nhân!`;
+      }
       io.emit('tiktok_status', {
         connected: false,
-        error: `Không kết nối được @${cleanUser}. Hãy chắc chắn kênh @${cleanUser} ĐANG PHÁT LIVE trên TikTok! (${msg.slice(0, 120)})`
+        error: friendlyError
       });
     }
   }
 
   io.on('connection', (socket) => {
+    socket.on('set_euler_key', (key) => {
+      userProvidedEulerKey = String(key || '').trim();
+      console.log('🔑 Đã cập nhật EulerStream API Key từ giao diện.');
+    });
     if (currentUsername) {
       socket.emit('tiktok_status', { connected: true, username: currentUsername, roomId: currentRoomId });
     }

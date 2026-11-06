@@ -574,7 +574,8 @@ function renderSeats() {
     const occupant = seat.occupantId ? players.get(seat.occupantId) : null;
     const hasShield = occupant && occupant.shieldUntil && occupant.shieldUntil > Date.now();
     const hasStreak = occupant && (occupant.correctStreak || 0) >= 2;
-    const targetClass = `seat-node tier-${seat.tier} ${occupant ? 'occupied' : 'empty'} ${editSeatsMode ? 'editable' : ''} ${hasShield ? 'shielded' : ''} ${hasStreak ? 'on-fire' : ''}`;
+    const isJailed = occupant && occupant.jailedUntil && occupant.jailedUntil > Date.now();
+    const targetClass = `seat-node tier-${seat.tier} ${occupant ? 'occupied' : 'empty'} ${editSeatsMode ? 'editable' : ''} ${hasShield ? 'shielded' : ''} ${hasStreak ? 'on-fire' : ''} ${isJailed ? 'is-jailed' : ''}`;
 
     if (!node) {
       node = document.createElement('div');
@@ -589,7 +590,7 @@ function renderSeats() {
     node.style.top = `${seat.y}%`;
 
     const occKey = occupant
-      ? `${occupant.uniqueId}_${occupant.score}_${getAvatarFrame(occupant)}_${getDonorTitle(occupant.uniqueId)}_${occupant.streak || 1}_${hasShield ? 1 : 0}_${hasStreak ? occupant.correctStreak : 0}`
+      ? `${occupant.uniqueId}_${occupant.score}_${getAvatarFrame(occupant)}_${getDonorTitle(occupant.uniqueId)}_${occupant.streak || 1}_${hasShield ? 1 : 0}_${hasStreak ? occupant.correctStreak : 0}_${isJailed ? Math.ceil((occupant.jailedUntil - Date.now())/1000) : 0}`
       : '__empty__';
 
     // Chỉ cập nhật DOM bên trong khi có thay đổi thực sự -> Giúp 60FPS mượt mà, không chớp giật avatar
@@ -597,9 +598,11 @@ function renderSeats() {
       node.dataset.renderedState = occKey;
       if (occupant) {
         const streakBadge = hasStreak ? `<span class="scholar-streak-badge">🔥x${occupant.correctStreak}</span>` : '';
+        const jailOverlay = isJailed ? `<div class="jailed-cage-overlay">⛓️ NGỤC (${Math.ceil((occupant.jailedUntil - Date.now())/1000)}s)</div>` : '';
         node.innerHTML = `
           <div class="scholar-figure">
             <div class="scholar-halo"></div>
+            ${jailOverlay}
             <div class="scholar-avatar-wrap ${getAvatarFrame(occupant)}">
               <span class="scholar-hat-badge">${seat.hat}</span>
               ${streakBadge}
@@ -841,6 +844,324 @@ let lastRivalryAlertAt = 0;
 let binhBienCoins = 0; // Thanh Binh Biến: khán giả góp xu để ép Thừa Tướng thách đấu Vua
 const BINH_BIEN_TARGET = 100;
 let giftBoard = new Map(); // uniqueId -> { nickname, coins } (đặt lại mỗi 15 phút)
+
+// =========================================================================
+// CƠ CHẾ LIVE STREAMING CHUYÊN SÂU THEO BẢN THIẾT KẾ CHI TIẾT
+// =========================================================================
+let globalFeverLikes = 0;
+const FEVER_TARGET_LIKES = 300; // 300 tim để đầy thanh
+let isFeverActive = false;
+let quizSessionCount = 0; // Đếm số câu hỏi để tự kích hoạt minigame đặc biệt mỗi 10 câu
+let currentQuizStartTime = Date.now();
+let quizFirstBloodWinners = [];
+let previousTop1Id = null;
+let previousTop1Name = '';
+let specialBossRoundActive = false;
+let pvpArenaState = null; // { active: false, vanHp: 50, voHp: 50, timer: 0, voters: new Map() }
+let treasureChestState = null; // { active: false, hp: 50, maxHp: 50, timer: 0, lastHitUser: null }
+
+function addFeverLikes(count = 1) {
+  if (isFeverActive) return;
+  globalFeverLikes = Math.min(FEVER_TARGET_LIKES, globalFeverLikes + count);
+  updateFeverHud();
+  if (globalFeverLikes >= FEVER_TARGET_LIKES) {
+    activateGlobalFeverMode(120);
+  }
+}
+
+function updateFeverHud() {
+  const fill = document.getElementById('feverBarFill');
+  const txt = document.getElementById('feverValText');
+  const badge = document.getElementById('feverStatusBadge');
+  if (!fill) return;
+
+  if (isFeverActive) {
+    const pct = Math.max(0, Math.min(100, (doublePointsSecondsLeft / 120) * 100));
+    fill.style.width = `${pct}%`;
+    if (txt) txt.textContent = `${doublePointsSecondsLeft}s`;
+    if (badge) badge.textContent = `🔥 HOÀNG ÂN HẠO ĐÃNG (X2 ĐIỂM) - ${doublePointsSecondsLeft}s`;
+  } else {
+    const pct = Math.max(0, Math.min(100, (globalFeverLikes / FEVER_TARGET_LIKES) * 100));
+    fill.style.width = `${pct}%`;
+    if (txt) txt.textContent = `${globalFeverLikes}/${FEVER_TARGET_LIKES}`;
+    if (badge) badge.textContent = `ĐỐT NHANG CẦU MAY (${Math.round(pct)}%)`;
+  }
+}
+
+function activateGlobalFeverMode(durationSec = 120) {
+  isFeverActive = true;
+  doublePointsSecondsLeft = durationSec;
+  currentScoreMultiplier = 2;
+  globalFeverLikes = 0;
+  updateFeverHud();
+  showImperialDecree(
+    '🔥 HOÀNG ÂN HẠO ĐÃNG 🔥',
+    'Toàn phòng đạt mốc Đốt Nhang Cầu May! Toàn bộ câu hỏi tiếp theo được NHÂN ĐÔI (X2) điểm công trạng trong 2 phút!'
+  );
+  speakImperial('Toàn dân chú ý! Hoàng Ân Hạo Đãng! Toàn bộ câu hỏi tiếp theo được nhân đôi điểm công trạng trong hai phút!', true);
+  if (fxEngine) {
+    fxEngine.triggerGrandCelebration(50, 30);
+    if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(35);
+  }
+}
+
+function updateRoyalTrioPodium(sorted) {
+  const top1El = document.getElementById('trioTop1');
+  if (!top1El) return;
+
+  const top1 = sorted[0];
+  const top2 = sorted[1];
+  const top3 = sorted[2];
+
+  // Soán Ngôi detection for Top 1
+  if (top1 && previousTop1Id && top1.uniqueId !== previousTop1Id) {
+    const oldWinner = players.get(previousTop1Id);
+    const oldName = oldWinner ? oldWinner.nickname : (previousTop1Name || 'Cựu Trạng Nguyên');
+
+    top1El.classList.remove('usurp-enter');
+    void top1El.offsetWidth; // force reflow
+    top1El.classList.add('usurp-enter');
+
+    playSound('gong');
+    if (fxEngine) {
+      fxEngine.triggerGrandCelebration(50, 25);
+      if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(40);
+    }
+    showImperialDecree('⚡ SOÁN NGÔI BẢNG VÀNG ⚡', `Sĩ tử ${top1.nickname} vừa vượt điểm, chính thức đoạt Ngôi Vị Top 1 của ${oldName}!`);
+    speakImperial(`Kính báo thiên hạ! Sĩ tử ${top1.nickname} vừa soán ngôi Bảng Vàng của ${oldName}!`, true);
+  }
+
+  if (top1) {
+    previousTop1Id = top1.uniqueId;
+    previousTop1Name = top1.nickname;
+  }
+
+  // Update Top 1
+  const t1Av = document.getElementById('trioTop1Avatar');
+  const t1Nm = document.getElementById('trioTop1Name');
+  const t1Sc = document.getElementById('trioTop1Score');
+  if (top1 && t1Av && t1Nm && t1Sc) {
+    t1Av.src = top1.avatar || getCatMemeAvatar(top1.tier, top1.uniqueId);
+    t1Nm.textContent = top1.nickname;
+    t1Sc.textContent = `${top1.score.toLocaleString()}đ`;
+  } else if (t1Av && t1Nm && t1Sc) {
+    t1Av.src = 'assets/avatars/cat_tier_4_trang_nguyen.png';
+    t1Nm.textContent = 'Đang trống';
+    t1Sc.textContent = '0đ';
+  }
+
+  // Update Top 2
+  const t2Av = document.getElementById('trioTop2Avatar');
+  const t2Nm = document.getElementById('trioTop2Name');
+  const t2Sc = document.getElementById('trioTop2Score');
+  if (top2 && t2Av && t2Nm && t2Sc) {
+    t2Av.src = top2.avatar || getCatMemeAvatar(top2.tier, top2.uniqueId);
+    t2Nm.textContent = top2.nickname;
+    t2Sc.textContent = `${top2.score.toLocaleString()}đ`;
+  } else if (t2Av && t2Nm && t2Sc) {
+    t2Av.src = 'assets/avatars/cat_tier_4_trang_nguyen.png';
+    t2Nm.textContent = 'Đang trống';
+    t2Sc.textContent = '0đ';
+  }
+
+  // Update Top 3
+  const t3Av = document.getElementById('trioTop3Avatar');
+  const t3Nm = document.getElementById('trioTop3Name');
+  const t3Sc = document.getElementById('trioTop3Score');
+  if (top3 && t3Av && t3Nm && t3Sc) {
+    t3Av.src = top3.avatar || getCatMemeAvatar(top3.tier, top3.uniqueId);
+    t3Nm.textContent = top3.nickname;
+    t3Sc.textContent = `${top3.score.toLocaleString()}đ`;
+  } else if (t3Av && t3Nm && t3Sc) {
+    t3Av.src = 'assets/avatars/cat_tier_4_trang_nguyen.png';
+    t3Nm.textContent = 'Đang trống';
+    t3Sc.textContent = '0đ';
+  }
+}
+
+function renderFirstBloodCard() {
+  const fbCard = document.getElementById('firstBloodCard');
+  const fbList = document.getElementById('fbList');
+  if (!fbCard || !fbList) return;
+  fbCard.classList.remove('hidden');
+  fbList.innerHTML = quizFirstBloodWinners.map(w => `
+    <div class="fb-item rank-${w.rank}">
+      <span class="fb-rank">#${w.rank}</span>
+      <img src="${w.avatar || 'assets/avatars/cat_tier_1_dong_sinh.png'}" class="fb-avatar" />
+      <span class="fb-name">${escapeHtml(w.nickname)}</span>
+      <span class="fb-time">⚡ ${w.reactionSec}s</span>
+      <span class="fb-bonus">+${w.bonus}đ</span>
+    </div>
+  `).join('');
+}
+
+function startBossRoundQuiz() {
+  specialBossRoundActive = true;
+  const hardQuiz = {
+    q: '👑 [ĐIỆN THÍ - BOSS ROUND (8 GIÂY)] Vị trạng nguyên nào là tác giả của bài biểu "Thảo Hịch Đánh Thoát Hoan" chấn động sử sách?',
+    options: { A: 'Trần Hưng Đạo', B: 'Mạc Đĩnh Chi', C: 'Nguyễn Hiền', D: 'Lê Văn Thịnh' },
+    correct: 'A'
+  };
+  triggerImperialQuiz(hardQuiz);
+  quizCountdown = 8;
+  const bTitle = document.getElementById('quizBadgeTitle');
+  if (bTitle) {
+    bTitle.textContent = '👹 ĐIỆN THÍ ĐỐI MẶT HOÀNG THƯỢNG (8 GIÂY - X3 ĐIỂM)';
+    bTitle.className = 'quiz-badge special-royal-badge';
+  }
+  showImperialDecree('👹 ĐIỆN THÍ HOÀNG CUNG 👹', 'Đối mặt Hoàng Thượng! Câu hỏi siêu khó, thời gian chỉ 8 giây! Đúng X3 điểm, sai bị trừ 100đ!');
+  speakImperial('Khai mở Điện Thí Hoàng Cung! Tám giây bắt đầu! Trả lời đúng nhân ba điểm, trả lời sai khi quân phạm thượng bị trừ một trăm điểm!', true);
+}
+
+function startPvpArenaEvent() {
+  pvpArenaState = {
+    active: true,
+    vanHp: 50,
+    voHp: 50,
+    timer: 25,
+    voters: new Map()
+  };
+  const arena = document.getElementById('specialEventArena');
+  const pvpBox = document.getElementById('pvpArenaBox');
+  const chestBox = document.getElementById('treasureEventBox');
+  if (arena) arena.classList.remove('hidden');
+  if (pvpBox) pvpBox.classList.remove('hidden');
+  if (chestBox) chestBox.classList.add('hidden');
+
+  updatePvpHud();
+  showImperialDecree('⚔️ ĐẤU TRƯỜNG VĂN CHƯƠNG ⚔️', 'Phân chia phe phái! Phe Văn Quan chọn A/B vs Phe Võ Tướng chọn C/D! Bên nào áp đảo sẽ giành kho vàng thưởng!');
+  speakImperial('Đấu trường Văn Chương khai mở! Phe Văn Quan gõ A hoặc B, phe Võ Tướng gõ C hoặc D! Trận chiến bắt đầu!', true);
+}
+
+function votePvpTeam(player, team) {
+  if (!pvpArenaState || !pvpArenaState.active) return;
+  pvpArenaState.voters.set(player.uniqueId, { player, team });
+  if (team === 'van') {
+    pvpArenaState.vanHp = Math.min(100, pvpArenaState.vanHp + 3);
+    pvpArenaState.voHp = Math.max(0, pvpArenaState.voHp - 3);
+    if (player.seatId) showFloatingToastOnSeat(player.seatId, '📜 Tiếp sức Văn Quan (+3 HP)', 'toast-right');
+  } else {
+    pvpArenaState.voHp = Math.min(100, pvpArenaState.voHp + 3);
+    pvpArenaState.vanHp = Math.max(0, pvpArenaState.vanHp - 3);
+    if (player.seatId) showFloatingToastOnSeat(player.seatId, '🗡️ Tiếp sức Võ Tướng (+3 HP)', 'toast-right');
+  }
+  updatePvpHud();
+}
+
+function updatePvpHud() {
+  if (!pvpArenaState) return;
+  const vanFill = document.getElementById('vanHpFill');
+  const voFill = document.getElementById('voHpFill');
+  const vanTxt = document.getElementById('vanScoreText');
+  const voTxt = document.getElementById('voScoreText');
+  if (vanFill) vanFill.style.width = `${pvpArenaState.vanHp}%`;
+  if (voFill) voFill.style.width = `${pvpArenaState.voHp}%`;
+  if (vanTxt) vanTxt.textContent = `${pvpArenaState.vanHp} HP`;
+  if (voTxt) voTxt.textContent = `${pvpArenaState.voHp} HP`;
+}
+
+function finishPvpArenaEvent() {
+  if (!pvpArenaState) return;
+  const winTeam = pvpArenaState.vanHp >= pvpArenaState.voHp ? 'van' : 'vo';
+  const winName = winTeam === 'van' ? 'VĂN QUAN' : 'VÕ TƯỚNG';
+
+  let winnersCount = 0;
+  pvpArenaState.voters.forEach(({ player, team }) => {
+    if (team === winTeam) {
+      player.score += 200;
+      winnersCount++;
+    }
+  });
+  reassignAllSeats();
+
+  showImperialDecree('🏆 CHIẾN THẮNG ĐẤU TRƯỜNG 🏆', `Phe ${winName} toàn thắng! ${winnersCount} sĩ tử phe thắng được thưởng +200 điểm công trạng!`);
+  speakImperial(`Trận chiến kết thúc! Phe ${winName} đã giành thắng lợi vang dội!`, true);
+  if (fxEngine) {
+    fxEngine.triggerGrandCelebration(50, 30);
+    if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(35);
+  }
+
+  const arena = document.getElementById('specialEventArena');
+  const pvpBox = document.getElementById('pvpArenaBox');
+  if (arena) arena.classList.add('hidden');
+  if (pvpBox) pvpBox.classList.add('hidden');
+  pvpArenaState = null;
+  nextAutoQuizCooldown = 20;
+}
+
+function startTreasureChestEvent() {
+  treasureChestState = {
+    active: true,
+    hp: 50,
+    maxHp: 50,
+    timer: 15,
+    lastHitUser: null
+  };
+  const arena = document.getElementById('specialEventArena');
+  const pvpBox = document.getElementById('pvpArenaBox');
+  const chestBox = document.getElementById('treasureEventBox');
+  if (arena) arena.classList.remove('hidden');
+  if (pvpBox) pvpBox.classList.add('hidden');
+  if (chestBox) chestBox.classList.remove('hidden');
+
+  updateTreasureChestHud();
+  showImperialDecree('🎁 CƯỚP LỘC ĐẦU XUÂN 🎁', 'Rương Châu Báu xuất hiện! Khán giả spam "phatloc" hoặc thả tim liên tục trong 15s để đập vỡ rương nhận Bão Điểm!');
+  speakImperial('Cướp lộc đầu xuân! Rương châu báu giáng trần! Quý vị hãy spam phát lộc hoặc thả tim liên tục để đập vỡ rương!', true);
+}
+
+function damageTreasureChest(player, dmg = 2) {
+  if (!treasureChestState || !treasureChestState.active) return;
+  treasureChestState.hp = Math.max(0, treasureChestState.hp - dmg);
+  treasureChestState.lastHitUser = player;
+  player.score += 15;
+  updateTreasureChestHud();
+
+  const graphic = document.getElementById('treasureChestGraphic');
+  if (graphic) {
+    graphic.classList.add('chest-hit');
+    setTimeout(() => graphic.classList.remove('chest-hit'), 150);
+  }
+
+  if (treasureChestState.hp <= 0) {
+    finishTreasureChestEvent(true);
+  }
+}
+
+function updateTreasureChestHud() {
+  if (!treasureChestState) return;
+  const fill = document.getElementById('treasureHpFill');
+  const txt = document.getElementById('treasureHpText');
+  const pct = Math.max(0, Math.min(100, (treasureChestState.hp / treasureChestState.maxHp) * 100));
+  if (fill) fill.style.width = `${pct}%`;
+  if (txt) txt.textContent = `Độ bền rương: ${treasureChestState.hp}/${treasureChestState.maxHp} (${treasureChestState.timer}s)`;
+}
+
+function finishTreasureChestEvent(isBroken = false) {
+  if (!treasureChestState) return;
+  const killer = treasureChestState.lastHitUser;
+  if (isBroken && killer) {
+    killer.score += 500;
+    showImperialDecree('💥 ĐẬP VỠ RƯƠNG BÁU! 💥', `Sĩ tử ${killer.nickname} tung đòn kết liễu, đập vỡ Rương Báu nhận Jackpot +500 điểm! Toàn trường thi chia lộc!`);
+    speakImperial(`Rương báu đã vỡ tung! Xin chúc mừng ${killer.nickname} tung đòn kết liễu nhận trọn kho báu năm trăm điểm!`, true);
+  } else {
+    showImperialDecree('🎁 HẾT GIỜ CƯỚP LỘC 🎁', 'Đã hết 15 giây cướp lộc! Toàn bộ sĩ tử tham gia đều được ban thưởng công trạng!');
+    speakImperial('Đã hết thời gian cướp lộc! Xin cảm ơn toàn thể sĩ tử đã nhiệt tình tham gia!', true);
+  }
+  players.forEach(p => { if (p.seatId) p.score += 50; });
+  reassignAllSeats();
+
+  if (fxEngine) {
+    fxEngine.triggerGrandCelebration(50, 45);
+    if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(50);
+  }
+
+  const arena = document.getElementById('specialEventArena');
+  const chestBox = document.getElementById('treasureEventBox');
+  if (arena) arena.classList.add('hidden');
+  if (chestBox) chestBox.classList.add('hidden');
+  treasureChestState = null;
+  nextAutoQuizCooldown = 20;
+}
 
 function renderGiftHud() {
   const fill = document.getElementById('binhBienFill');
@@ -1651,6 +1972,24 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
     }
   }
 
+  // Tự động chuyển đổi minigame đặc biệt mỗi 10 câu hỏi thường
+  if (!customQuizObj && !decreeEmpId) {
+    quizSessionCount++;
+    if (quizSessionCount % 10 === 0) {
+      const mode = (quizSessionCount / 10) % 3;
+      if (mode === 1) {
+        startBossRoundQuiz();
+        return;
+      } else if (mode === 2) {
+        startPvpArenaEvent();
+        return;
+      } else {
+        startTreasureChestEvent();
+        return;
+      }
+    }
+  }
+
   // Tắt ngay chiếu chỉ thánh chỉ cũ để không che mất câu hỏi
   const decreeEl = document.getElementById('imperialDecree');
   if (decreeEl) {
@@ -1658,7 +1997,7 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
     decreeEl.style.display = 'none';
   }
   clearTimeout(decreeTimeout);
-  decreeState = decreeEmpId ? { empId: decreeEmpId } : null; // Không ghi đè nếu đang trong 5 câu Quyết Đấu Đoạt Ngôi
+  decreeState = decreeEmpId ? { empId: decreeEmpId } : null;
   const quiz = customQuizObj || getNextRandomQuiz();
   activeQuiz = quiz;
   quizResolved = false;
@@ -1668,6 +2007,11 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   players.forEach(p => { p.doubleDown = false; });
   quizCorrectWinners = [];
   quizFirstWinner = null;
+  currentQuizStartTime = Date.now();
+  quizFirstBloodWinners = [];
+
+  const fbCard = document.getElementById('firstBloodCard');
+  if (fbCard) fbCard.classList.add('hidden');
 
   const qModalEl = document.getElementById('quizModal');
   const isSpecial = Math.random() < 0.22; // 22% xác suất kích hoạt Kỳ Thi Đặc Cách X3 điểm
@@ -1722,6 +2066,14 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
 
 function evaluateQuizComment(player, commentText) {
   if (!activeQuiz || quizResolved) return false;
+
+  // Nếu đang bị nhốt đại lao -> Không được phép trả lời câu hỏi!
+  if (player.jailedUntil && player.jailedUntil > Date.now()) {
+    if (player.seatId) {
+      showFloatingToastOnSeat(player.seatId, '⛓️ Đang bị nhốt đại lao, không thể thi cử! (Tặng 1 hoa hồng để thoát)', 'toast-wrong');
+    }
+    return true;
+  }
 
   const chosenKey = detectChosenOption(commentText, activeQuiz);
   if (!chosenKey) return false;
@@ -1885,23 +2237,44 @@ function evaluateQuizComment(player, commentText) {
 
     const rankIdx = quizCorrectWinners.length;
     const baseReward = getQuizRankReward(rankIdx);
+    const reward = baseReward;
     const isSpecialRoyal = Boolean(activeQuiz && activeQuiz.isSpecialRoyal);
-    const multi = isSpecialRoyal ? 3 : 1;
+    const multi = (isSpecialRoyal ? 3 : 1) * (specialBossRoundActive ? 3 : 1);
     let earnedPts = (baseReward.pts * multi) + streakBonus;
     if (player.doubleDown) { earnedPts *= 2; player.doubleDown = false; streakText += ' ⚡X2 QUÀ'; }
+
+    // FIRST BLOOD: TOP 3 TỐC ĐỘ PHẢN XẠ NHANH NHẤT
+    if (quizFirstBloodWinners.length < 3 && !quizFirstBloodWinners.some(w => w.uniqueId === player.uniqueId)) {
+      const reactionSec = ((Date.now() - currentQuizStartTime) / 1000).toFixed(2);
+      const fbRank = quizFirstBloodWinners.length + 1;
+      const fbBonus = fbRank === 1 ? 50 : (fbRank === 2 ? 30 : 20);
+      earnedPts += fbBonus;
+      quizFirstBloodWinners.push({
+        rank: fbRank,
+        uniqueId: player.uniqueId,
+        nickname: player.nickname,
+        avatar: player.avatar,
+        reactionSec,
+        bonus: fbBonus
+      });
+      renderFirstBloodCard();
+      if (fbRank === 1) {
+        speakImperial(`Xuất sắc! Sĩ tử ${player.nickname} giành First Blood chỉ trong ${reactionSec} giây!`, true);
+      }
+    }
 
     quizCorrectWinners.push({ player, pts: earnedPts, rank: rankIdx + 1 });
     if (!quizFirstWinner) quizFirstWinner = player;
 
     fb.className = 'quiz-live-feedback fb-right';
-    fb.innerHTML = `🏆 <b>${escapeHtml(player.nickname)}</b> đỗ <b>${baseReward.label}${isSpecialRoyal ? ' (X3 KỲ THI ĐẶC CÁCH)' : ''} (+${earnedPts}đ${streakText})</b>! (Đã có <b>${quizCorrectWinners.length}</b> người đúng • Còn <b>${quizCountdown}s</b>)`;
+    fb.innerHTML = `🏆 <b>${escapeHtml(player.nickname)}</b> đỗ <b>${baseReward.label}${isSpecialRoyal || specialBossRoundActive ? ' (X3 ĐẶC CÁCH)' : ''} (+${earnedPts}đ${streakText})</b>! (Đã có <b>${quizCorrectWinners.length}</b> người đúng • Còn <b>${quizCountdown}s</b>)`;
 
     player.score += earnedPts;
     player.lastActiveAt = Date.now();
     reassignAllSeats();
 
     if (player.seatId) {
-      showFloatingToastOnSeat(player.seatId, `🏆 Hạng #${rankIdx + 1} ĐÚNG! +${reward.pts}đ`, 'toast-right');
+      showFloatingToastOnSeat(player.seatId, `🏆 Hạng #${rankIdx + 1} ĐÚNG! +${earnedPts}đ`, 'toast-right');
       const seatObj = seats.find(s => s.id === player.seatId);
       if (seatObj && fxEngine) {
         fxEngine.triggerShockwave(seatObj.x, seatObj.y, rankIdx === 0 ? '#ffd700' : '#4ade80', rankIdx === 0 ? 200 : 140);
@@ -1914,16 +2287,23 @@ function evaluateQuizComment(player, commentText) {
     updateTopHighlightPill(
       player,
       `<b>${escapeHtml(player.nickname)}</b> đạt ${reward.label}!`,
-      `Trả lời đúng Đề Thi Đình • +${reward.pts} Công Trạng`,
+      `Trả lời đúng Đề Thi Đình • +${earnedPts} Công Trạng`,
       '🏆'
     );
-    addCompactCommentPill(player, `đáp đúng Hạng #${rankIdx + 1}`, `🏆 +${reward.pts}`);
+    addCompactCommentPill(player, `đáp đúng Hạng #${rankIdx + 1}`, `🏆 +${earnedPts}`);
     checkRivalryAlert(player);
     return true;
   }
 
   playSound('wrong');
   player.correctStreak = 0;
+  if (specialBossRoundActive) {
+    player.score = Math.max(0, player.score - 100);
+    reassignAllSeats();
+    if (player.seatId) {
+      showFloatingToastOnSeat(player.seatId, '❌ Khi quân phạm thượng! -100đ', 'toast-wrong');
+    }
+  }
   fb.className = 'quiz-live-feedback fb-wrong';
   fb.innerHTML = `❌ <b>${escapeHtml(player.nickname)}</b> chọn <b>${chosenKey}</b> chưa đúng! Hãy suy nghĩ & chọn lại!`;
 
@@ -2020,14 +2400,83 @@ function handleTikTokEvent(evt) {
     const player = getOrCreatePlayer(evt.uniqueId, evt.nickname, evt.avatar);
     player.lastActiveAt = Date.now();
 
+    const normCmd = normalizeVN(text);
+
+    // XỬ LÝ MINIGAME ĐẶC BIỆT: CƯỚP LỘC ĐẬU XUÂN & ĐẤU TRƯỜNG PVP
+    if (treasureChestState && treasureChestState.active) {
+      if (normCmd.includes('phatloc') || normCmd.includes('phat loc') || normCmd.includes('loc') || lower === '1') {
+        damageTreasureChest(player, 2);
+        return;
+      }
+    }
+    if (pvpArenaState && pvpArenaState.active) {
+      const opt = text.toUpperCase().trim();
+      if (opt === 'A' || opt === 'B') {
+        votePvpTeam(player, 'van');
+        return;
+      } else if (opt === 'C' || opt === 'D') {
+        votePvpTeam(player, 'vo');
+        return;
+      }
+    }
+
     if (activeQuiz && !quizResolved) {
       const handledByQuiz = evaluateQuizComment(player, text);
       if (handledByQuiz) return;
     }
 
-    const normCmd = normalizeVN(text);
-
     if (handleRandomEventComment(player, normCmd)) return;
+
+    // LỆNH QUYỀN LỰC QUAN LỚN CỦA TOP 1 HOẶC HOÀNG ĐẾ: /giam @tên hoặc /thuong @tên
+    const sorted = Array.from(players.values()).sort((a, b) => b.score - a.score);
+    const top1Player = sorted[0];
+    const isTop1OrEmperor = (top1Player && top1Player.uniqueId === player.uniqueId) || (currentEmperorId === player.uniqueId);
+
+    const jailMatch = text.match(/^(?:(?:\/|!)(?:giam|nhot))\s+@?(.+)$/i) ||
+                      normCmd.match(/^(?:(?:\/|!)(?:giam|nhot))\s+@?(.+)$/i);
+    if (jailMatch) {
+      if (!isTop1OrEmperor) {
+        if (player.seatId) showFloatingToastOnSeat(player.seatId, '⚠️ Chỉ Top 1 hoặc Hoàng Đế mới có quyền nhốt ngục!', 'toast-wrong');
+        return;
+      }
+      const targetQuery = jailMatch[1].trim();
+      const target = findTargetByQuery(Array.from(players.values()).filter(p => p.uniqueId !== player.uniqueId), targetQuery);
+      if (target) {
+        target.jailedUntil = Date.now() + 30000;
+        showImperialDecree('⛓️ ĐẠI LAO GIAM HÃM ⛓️', `${player.nickname} (Top 1) hạ lệnh nhốt ${target.nickname} vào ngục tối 30 giây!`);
+        speakImperial(`Đại nhân ${player.nickname} hạ lệnh: Nhốt sĩ tử ${target.nickname} vào ngục tối ba mươi giây!`, true);
+        if (target.seatId) {
+          showFloatingToastOnSeat(target.seatId, '⛓️ BỊ NHỐT NGỤC 30S! (Tặng 1 hoa hồng để thoát)', 'toast-wrong');
+        }
+        reassignAllSeats();
+      } else {
+        if (player.seatId) showFloatingToastOnSeat(player.seatId, `Không tìm thấy sĩ tử "${targetQuery}"!`, 'toast-wrong');
+      }
+      return;
+    }
+
+    const rewardMatch = text.match(/^(?:(?:\/|!)(?:thuong|banthuong))\s+@?(.+)$/i) ||
+                        normCmd.match(/^(?:(?:\/|!)(?:thuong|banthuong))\s+@?(.+)$/i);
+    if (rewardMatch) {
+      if (!isTop1OrEmperor) {
+        if (player.seatId) showFloatingToastOnSeat(player.seatId, '⚠️ Chỉ Top 1 hoặc Hoàng Đế mới có quyền ban thưởng!', 'toast-wrong');
+        return;
+      }
+      const targetQuery = rewardMatch[1].trim();
+      const target = findTargetByQuery(Array.from(players.values()).filter(p => p.uniqueId !== player.uniqueId), targetQuery);
+      if (target) {
+        target.score += 100;
+        showImperialDecree('🎁 BAN THƯỞNG CÔNG TRẠNG 🎁', `${player.nickname} (Top 1) ban thưởng cho ${target.nickname} +100 điểm công trạng!`);
+        speakImperial(`Đại nhân ${player.nickname} ban thưởng: Sĩ tử ${target.nickname} được cộng một trăm điểm công trạng!`, true);
+        if (target.seatId) {
+          showFloatingToastOnSeat(target.seatId, '🎁 ĐƯỢC TOP 1 BAN THƯỞNG +100Đ!', 'toast-right');
+        }
+        reassignAllSeats();
+      } else {
+        if (player.seatId) showFloatingToastOnSeat(player.seatId, `Không tìm thấy sĩ tử "${targetQuery}"!`, 'toast-wrong');
+      }
+      return;
+    }
 
     // LỆNH TRA CỨU ĐIỂM & THỨ HẠNG CÁ NHÂN: !diem / diem / hang / rank
     const scoreQueryMatch = normCmd.match(/^(?:!?\s*(?:diem|xem\s*diem|hang|rank))\b/i);
@@ -2157,6 +2606,15 @@ function handleTikTokEvent(evt) {
     const player = getOrCreatePlayer(evt.uniqueId, evt.nickname, evt.avatar);
     const pts = Math.max(6, Math.min(35, Math.round((evt.likeCount || 15) * 0.6))) * mult;
     player.score += pts;
+
+    // TÍCH CÔNG ĐỨC / ĐỐT NHANG CẦU MAY (GLOBAL FEVER BAR)
+    addFeverLikes(Math.max(1, Math.round((evt.likeCount || 15) * 0.4)));
+
+    // NẾU ĐANG TRONG MÀN MỞ RƯƠNG CHÂU BÁU -> THẢ TIM GÂY 1 SÁT THƯƠNG ĐẬP RƯƠNG!
+    if (treasureChestState && treasureChestState.active) {
+      damageTreasureChest(player, 1);
+    }
+
     if (currentEmperorId === player.uniqueId) {
       dragonQi = Math.min(100, dragonQi + 5);
     }
@@ -2207,6 +2665,37 @@ function handleTikTokEvent(evt) {
 
     if (evt.isShield) {
       player.shieldUntil = Date.now() + 3 * 60 * 1000;
+    }
+
+    // --- PAY-TO-WIN CƠ CHẾ QUÀ TẶNG THEO BẢN THIẾT KẾ CHI TIẾT ---
+    // 1. Hoa hồng (1-3 xu) - "Đút Lót Giám Khảo": Cứu thoát khỏi ngục tối ngay lập tức!
+    if (coins <= 3) {
+      if (player.jailedUntil && player.jailedUntil > Date.now()) {
+        player.jailedUntil = 0;
+        showFloatingToastOnSeat(player.seatId, '🌹 Đút lót thành công! Đã phá ngục!', 'toast-right');
+        speakImperial(`Sĩ tử ${player.nickname} dâng hoa hồng đút lót quan giám khảo, phá ngục thành công!`, true);
+      }
+    }
+    // 2. Quà trung bình (10 - 99 xu) - "Mua Quan Bán Chức": Thăng 1 bậc phẩm hàm hoặc khiên 3 câu
+    else if (coins >= 10 && coins < 100) {
+      player.shieldUntil = Date.now() + 3 * 60 * 1000;
+      if (player.tier < 5) {
+        const nextSeat = DEFAULT_SEATS.find(s => s.tier === player.tier + 1);
+        if (nextSeat) player.score = Math.max(player.score, nextSeat.minScore + 20);
+      }
+      showFloatingToastOnSeat(player.seatId, '🛡️ Mua Quan Bán Chức! Khiên Bất Tử 3 câu!', 'toast-right');
+      speakImperial(`Sĩ tử ${player.nickname} dâng lễ lớn, thăng cấp phẩm hàm và nhận khiên bảo vệ ba câu!`, true);
+      if (fxEngine && typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(25);
+    }
+    // 3. Quà lớn (100+ xu) - "Thánh Chỉ Giáng Lâm": Rồng bay rực rỡ, vinh danh 5 phút, x3 điểm toàn server!
+    else if (coins >= 100) {
+      showImperialDecree('🐲 THÁNH CHỈ GIÁNG LÂM 🐲', `${player.nickname} dâng đại lễ (${coins} xu)! Rồng vàng xuất hiện, vinh danh tột đỉnh & x3 điểm!`);
+      speakImperial(`Thánh chỉ giáng lâm! Sĩ tử ${player.nickname} dâng đại lễ, rồng vàng giáng thế, vinh danh toàn cõi!`, true);
+      if (fxEngine) {
+        fxEngine.triggerGrandCelebration(50, 35);
+        if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(60);
+      }
+      activateGlobalFeverMode(180);
     }
 
     player.score += addedScore;
@@ -2829,6 +3318,9 @@ function updateHUDAndTables() {
   }
 
   const sorted = Array.from(players.values()).sort((a, b) => b.score - a.score);
+  updateFeverHud();
+  updateRoyalTrioPodium(sorted);
+
   const totalEl = document.getElementById('totalPlayersCount');
   if (totalEl) totalEl.textContent = sorted.length;
 
@@ -3012,14 +3504,61 @@ setInterval(() => {
     }
   }
 
+  // Đếm lùi Minigame PvP Arena
+  if (pvpArenaState && pvpArenaState.active) {
+    pvpArenaState.timer--;
+    if (pvpArenaState.timer <= 0) {
+      finishPvpArenaEvent();
+    }
+  }
+
+  // Đếm lùi Minigame Cướp Lộc Rương Báu
+  if (treasureChestState && treasureChestState.active) {
+    treasureChestState.timer--;
+    updateTreasureChestHud();
+    if (treasureChestState.timer <= 0) {
+      finishTreasureChestEvent(false);
+    }
+  }
+
+  // Đếm lùi Fever Mode (Hoàng Ân Hạo Đãng)
+  if (isFeverActive) {
+    if (doublePointsSecondsLeft > 0) {
+      updateFeverHud();
+    } else {
+      isFeverActive = false;
+      currentScoreMultiplier = 1;
+      updateFeverHud();
+    }
+  }
+
   if (activeQuiz && !quizResolved) {
     quizCountdown = Math.max(0, quizCountdown - 1);
     document.getElementById('quizTimerBadge').textContent = `⏳ ${quizCountdown}s`;
+
+    // Hiệu ứng màu đồng hồ & viền chớp đỏ 3 giây cuối (Vignette Pulse)
+    const timerBadgeEl = document.getElementById('quizTimerBadge');
+    const vignetteEl = document.getElementById('vignettePulse');
+    if (timerBadgeEl) {
+      timerBadgeEl.classList.remove('timer-safe', 'timer-warn', 'timer-danger');
+      if (quizCountdown > 15) timerBadgeEl.classList.add('timer-safe');
+      else if (quizCountdown > 3) timerBadgeEl.classList.add('timer-warn');
+      else timerBadgeEl.classList.add('timer-danger');
+    }
+    if (vignetteEl) {
+      if (quizCountdown <= 3 && quizCountdown > 0) {
+        vignetteEl.classList.remove('hidden');
+      } else {
+        vignetteEl.classList.add('hidden');
+      }
+    }
 
     if (quizCountdown === 0 && throneDuelState) {
       handleThroneDuelTimeout();
     } else if (quizCountdown === 0) {
       quizResolved = true;
+      specialBossRoundActive = false;
+      if (vignetteEl) vignetteEl.classList.add('hidden');
       const rightKey = activeQuiz.correct;
       const rightText = activeQuiz.options[rightKey];
       const optBox = document.getElementById(`quizOpt_${rightKey}`);
@@ -3045,6 +3584,9 @@ setInterval(() => {
         processPendingCutscenes();
       }, 3500);
     }
+  } else {
+    const vignetteEl = document.getElementById('vignettePulse');
+    if (vignetteEl) vignetteEl.classList.add('hidden');
   }
 
   // [Đã cập nhật theo yêu cầu] Chỉ đoạt ngôi khi Thừa Tướng gõ đủ 50 lần câu 'đoạt ngôi' hoặc nạp đủ Binh Biến
@@ -3091,6 +3633,7 @@ class Celestial2DFXEngine {
     this.fireworks = [];
     this.skyLanterns = [];
     this.ascensionParticles = [];
+    this.coins = [];
 
     this.lastTime = performance.now();
     this.initAmbient();
@@ -3260,6 +3803,25 @@ class Celestial2DFXEngine {
     this.triggerSkyLanterns(7);
   }
 
+  triggerCoinRain(count = 45) {
+    if (!fx2dEnabled) return;
+    for (let i = 0; i < count; i++) {
+      this.coins.push({
+        x: Math.random() * this.W,
+        y: -30 - Math.random() * 300,
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 5 + 6,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() * 0.08 + 0.04) * (Math.random() > 0.5 ? 1 : -1),
+        scaleX: Math.random() * Math.PI * 2,
+        vScale: Math.random() * 0.12 + 0.08,
+        size: Math.random() * 10 + 16,
+        alpha: 1.0,
+        decay: 0.003
+      });
+    }
+  }
+
   startLoop() {
     const loop = (now) => {
       requestAnimationFrame(loop);
@@ -3378,6 +3940,20 @@ class Celestial2DFXEngine {
         this.ascensionParticles.splice(i, 1);
       }
     }
+
+    // 8. Mưa tiền xu cổ
+    for (let i = this.coins.length - 1; i >= 0; i--) {
+      const c = this.coins[i];
+      c.x += c.vx * (dt * 0.06);
+      c.y += c.vy * (dt * 0.06);
+      c.rot += c.vRot * (dt * 0.06);
+      c.scaleX += c.vScale * (dt * 0.06);
+      c.alpha -= c.decay * (dt * 0.06);
+
+      if (c.alpha <= 0 || c.y > this.H + 40) {
+        this.coins.splice(i, 1);
+      }
+    }
   }
 
   render() {
@@ -3477,7 +4053,42 @@ class Celestial2DFXEngine {
       for (const p of this.petals) {
         if (p.isFg) this.drawPetal(this.fgCtx, p);
       }
+
+      // 7. Mưa tiền xu cổ
+      for (const c of this.coins) {
+        if (c.alpha > 0.05) this.drawCoin(this.fgCtx, c);
+      }
     }
+  }
+
+  drawCoin(ctx, c) {
+    ctx.save();
+    ctx.translate(c.x, c.y);
+    ctx.rotate(c.rot);
+    ctx.scale(Math.cos(c.scaleX), 1);
+    ctx.globalAlpha = Math.max(0, Math.min(1, c.alpha));
+
+    // Vành đồng xu vàng cổ
+    ctx.fillStyle = '#ffd700';
+    ctx.shadowColor = 'rgba(255, 215, 0, 0.7)';
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(0, 0, c.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Viền trong đồng xu
+    ctx.strokeStyle = '#b8860b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(0, 0, c.size * 0.85, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Lỗ vuông đồng xu cổ
+    ctx.fillStyle = '#1a1005';
+    const hole = c.size * 0.38;
+    ctx.fillRect(-hole / 2, -hole / 2, hole, hole);
+
+    ctx.restore();
   }
 
   drawPetal(ctx, p) {
@@ -3752,6 +4363,26 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const eulerKeyInput = document.getElementById('eulerApiKeyInput');
+  const saveEulerKeyBtn = document.getElementById('saveEulerKeyBtn');
+  if (eulerKeyInput) {
+    const savedEulerKey = localStorage.getItem('tra_quan_euler_key') || '';
+    eulerKeyInput.value = savedEulerKey;
+    if (savedEulerKey && socket) {
+      socket.emit('set_euler_key', savedEulerKey);
+    }
+  }
+  if (saveEulerKeyBtn && eulerKeyInput) {
+    saveEulerKeyBtn.addEventListener('click', () => {
+      const key = eulerKeyInput.value.trim();
+      localStorage.setItem('tra_quan_euler_key', key);
+      if (socket) {
+        socket.emit('set_euler_key', key);
+      }
+      alert('Đã lưu EulerStream API Key!');
+    });
+  }
+
   if (ttInput) {
     ttInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -3942,8 +4573,92 @@ window.addEventListener('DOMContentLoaded', () => {
     celebration2dBtn.addEventListener('click', () => {
       if (fxEngine) {
         fxEngine.triggerGrandCelebration(50, 35);
+        if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(40);
         showImperialDecree('🌸 ĐẠI HỶ HOÀNG CUNG 🌸', 'Khai mở Lễ Hội Hoa Đào & Thả Khổng Minh Đăng chúc phúc trường thi!');
       }
+    });
+  }
+
+  // --- CÁC NÚT TEST CƠ CHẾ LIVE MỚI ---
+  const testFeverBtn = document.getElementById('testFeverBtn');
+  if (testFeverBtn) {
+    testFeverBtn.addEventListener('click', () => {
+      activateGlobalFeverMode(120);
+    });
+  }
+
+  const testFirstBloodBtn = document.getElementById('testFirstBloodBtn');
+  if (testFirstBloodBtn) {
+    testFirstBloodBtn.addEventListener('click', () => {
+      if (!activeQuiz) {
+        triggerImperialQuiz();
+      }
+      setTimeout(() => {
+        const scholars = Array.from(players.values()).slice(0, 3);
+        const correctOpt = activeQuiz ? activeQuiz.correct : 'A';
+        scholars.forEach((s, idx) => {
+          setTimeout(() => {
+            handleTikTokEvent({ type: 'chat', uniqueId: s.uniqueId, nickname: s.nickname, avatar: s.avatar, comment: correctOpt });
+          }, idx * 600);
+        });
+      }, 500);
+    });
+  }
+
+  const testJailBtn = document.getElementById('testJailBtn');
+  if (testJailBtn) {
+    testJailBtn.addEventListener('click', () => {
+      const candidates = Array.from(players.values());
+      if (candidates.length === 0) {
+        alert('Chưa có sĩ tử nào trong bàn! Hãy bật Auto Demo trước.');
+        return;
+      }
+      const target = candidates[Math.floor(Math.random() * candidates.length)];
+      target.jailedUntil = Date.now() + 30000;
+      showImperialDecree('⛓️ ĐẠI LAO GIAM HÃM ⛓️', `Top 1 hạ lệnh nhốt ${target.nickname} vào ngục tối 30 giây!`);
+      speakImperial(`Đại nhân hạ lệnh: Nhốt sĩ tử ${target.nickname} vào ngục tối ba mươi giây!`, true);
+      if (target.seatId) showFloatingToastOnSeat(target.seatId, '⛓️ BỊ NHỐT NGỤC 30S! (Tặng 1 hoa hồng để thoát)', 'toast-wrong');
+      reassignAllSeats();
+    });
+  }
+
+  const testUsurpDramaBtn = document.getElementById('testUsurpDramaBtn');
+  if (testUsurpDramaBtn) {
+    testUsurpDramaBtn.addEventListener('click', () => {
+      const all = Array.from(players.values());
+      if (all.length < 2) {
+        const u1 = getOrCreatePlayer('test_situ_new', 'Tân Trạng Nguyên', 'assets/avatars/cat_tier_4_trang_nguyen.png');
+        u1.score = 5000;
+        reassignAllSeats();
+        return;
+      }
+      const sorted = all.sort((a, b) => b.score - a.score);
+      const top2 = sorted[1];
+      if (top2) {
+        top2.score = sorted[0].score + 180;
+        reassignAllSeats();
+      }
+    });
+  }
+
+  const testBossRoundBtn = document.getElementById('testBossRoundBtn');
+  if (testBossRoundBtn) {
+    testBossRoundBtn.addEventListener('click', () => {
+      startBossRoundQuiz();
+    });
+  }
+
+  const testPvpArenaBtn = document.getElementById('testPvpArenaBtn');
+  if (testPvpArenaBtn) {
+    testPvpArenaBtn.addEventListener('click', () => {
+      startPvpArenaEvent();
+    });
+  }
+
+  const testTreasureEventBtn = document.getElementById('testTreasureEventBtn');
+  if (testTreasureEventBtn) {
+    testTreasureEventBtn.addEventListener('click', () => {
+      startTreasureChestEvent();
     });
   }
 

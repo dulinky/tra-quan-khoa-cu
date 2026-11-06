@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=34" />
+  <link rel="stylesheet" href="style.css?v=36" />
 </head>
 <body>
   <div class="app-wrapper" id="appWrapper">
@@ -36,6 +36,60 @@
               <div class="top-pill-line2" id="topPillLine2">BẢNG VÀNG ĐỀ DANH • Trả lời A/B/C/D nhận +150 Công Trạng</div>
             </div>
             <div class="top-pill-icon" id="topPillIcon">📜</div>
+          </div>
+
+          <!-- THANH NĂNG LƯỢNG TOÀN SERVER (ĐỐT NHANG CẦU MAY / TÍCH CÔNG ĐỨC) -->
+          <div class="server-fever-card" id="serverFeverCard">
+            <div class="fever-title-row">
+              <span class="fever-icon">🪔</span>
+              <span class="fever-label" id="feverLabel">ĐỐT NHANG CẦU MAY (THẢ TIM)</span>
+              <span class="fever-val" id="feverValText">0/500 Tim</span>
+            </div>
+            <div class="fever-bar-bg">
+              <div class="fever-bar-fill" id="feverBarFill" style="width: 0%;"></div>
+              <span class="fever-status-text" id="feverStatusText">🔥 Thả tim x2 điểm toàn phòng</span>
+            </div>
+          </div>
+
+          <!-- BỤC THƯỢNG ĐIỆN: TAM KHÔI TRIỀU ĐÌNH (TOP 1 - TOP 2 - TOP 3) -->
+          <div class="royal-trio-podium" id="royalTrioPodium">
+            <!-- Top 2: Bảng Nhãn -->
+            <div class="trio-seat seat-top-2" id="trioTop2">
+              <div class="trio-crown">🥈</div>
+              <div class="trio-avatar-wrap">
+                <img id="trioAvt2" src="https://api.dicebear.com/7.x/adventurer/svg?seed=BangNhan" alt="top2" />
+              </div>
+              <div class="trio-info">
+                <div class="trio-rank">Bảng Nhãn</div>
+                <div class="trio-name" id="trioName2">Đang trống</div>
+                <div class="trio-score" id="trioScore2">0đ</div>
+              </div>
+            </div>
+            <!-- Top 1: Trạng Nguyên / Hoàng Thượng (Ở giữa, cao hơn, hào quang xoay) -->
+            <div class="trio-seat seat-top-1" id="trioTop1">
+              <div class="trio-dragon-crest">🐉</div>
+              <div class="trio-crown king-crown">👑</div>
+              <div class="trio-avatar-wrap crown-aura">
+                <img id="trioAvt1" src="https://api.dicebear.com/7.x/adventurer/svg?seed=TrangNguyen" alt="top1" />
+              </div>
+              <div class="trio-info">
+                <div class="trio-rank king-rank">TRẠNG NGUYÊN</div>
+                <div class="trio-name king-name" id="trioName1">Ngai vàng đang trống</div>
+                <div class="trio-score king-score" id="trioScore1">0đ</div>
+              </div>
+            </div>
+            <!-- Top 3: Thám Hoa -->
+            <div class="trio-seat seat-top-3" id="trioTop3">
+              <div class="trio-crown">🥉</div>
+              <div class="trio-avatar-wrap">
+                <img id="trioAvt3" src="https://api.dicebear.com/7.x/adventurer/svg?seed=ThamHoa" alt="top3" />
+              </div>
+              <div class="trio-info">
+                <div class="trio-rank">Thám Hoa</div>
+                <div class="trio-name" id="trioName3">Đang trống</div>
+                <div class="trio-score" id="trioScore3">0đ</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -125,6 +179,47 @@
 
         <!-- CANVAS 2D HIỆU ỨNG TIỀN CẢNH: PHÁO HOA, SÓNG XUNG KÍCH, CÁNH HOA & ĐÈN LỒNG BAY (60FPS) -->
         <canvas id="fxCanvas" class="fx-canvas"></canvas>
+
+        <!-- VIỀN CHỚP ĐỎ KỊCH TÍNH (VIGNETTE PULSE 3S CUỐI) -->
+        <div class="vignette-pulse hidden" id="vignettePulse"></div>
+
+        <!-- BẢNG FIRST BLOOD: TỐC ĐỘ ĐÁP ĐÚNG NHANH NHẤT -->
+        <div class="first-blood-card hidden" id="firstBloodCard">
+          <div class="fb-badge">⚡ FIRST BLOOD: TOP 3 TỐC ĐỘ ⚡</div>
+          <div class="fb-items-row" id="firstBloodItemsRow"></div>
+        </div>
+
+        <!-- CÁC MÀN CHỨC NĂNG ĐẶC BIỆT (SPECIAL LIVE EVENTS) -->
+        <div class="special-event-arena hidden" id="specialEventArena">
+          <!-- 1. Màn Đấu Trường Văn Chương PvP (Văn Quan vs Võ Tướng) -->
+          <div class="pvp-arena-box hidden" id="pvpArenaBox">
+            <div class="pvp-header">⚔️ ĐẤU TRƯỜNG VĂN CHƯƠNG: VĂN QUAN vs VÕ TƯỚNG ⚔️</div>
+            <div class="pvp-teams-grid">
+              <div class="pvp-team team-van">
+                <div class="pvp-team-title">📜 VĂN QUAN (A/B)</div>
+                <div class="pvp-hp-bar"><div class="pvp-hp-fill van-hp" id="vanHpFill" style="width: 50%;"></div></div>
+                <div class="pvp-team-score" id="vanScoreText">50 HP</div>
+              </div>
+              <div class="pvp-vs-badge">VS</div>
+              <div class="pvp-team team-vo">
+                <div class="pvp-team-title">🗡️ VÕ TƯỚNG (C/D)</div>
+                <div class="pvp-hp-bar"><div class="pvp-hp-fill vo-hp" id="voHpFill" style="width: 50%;"></div></div>
+                <div class="pvp-team-score" id="voScoreText">50 HP</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Màn Cướp Lộc Đầu Xuân (Spam Event Mở Rương Châu Báu 15s) -->
+          <div class="treasure-event-box hidden" id="treasureEventBox">
+            <div class="treasure-header">🎁 CƯỚP LỘC ĐẦU XUÂN: PHÁ RƯƠNG CHÂU BÁU! 🎁</div>
+            <div class="treasure-sub">Gõ <b>phatloc</b> hoặc thả tim liên tục để đập vỡ rương nhận Bão Điểm!</div>
+            <div class="treasure-chest-graphic" id="treasureChestGraphic">📦</div>
+            <div class="treasure-hp-bar">
+              <div class="treasure-hp-fill" id="treasureHpFill" style="width: 100%;"></div>
+              <span class="treasure-hp-text" id="treasureHpText">Độ bền rương: 50/50</span>
+            </div>
+          </div>
+        </div>
 
         <!-- POPUP CÂU ĐỐ KHOA CỬ TRẮC NGHIỆM (HIỆN LÊN TRÊN, SẮC NÉT, CÁCH NHAU 30S) -->
         <div class="quiz-modal" id="quizModal">
@@ -227,6 +322,10 @@
         <div class="input-row">
           <input type="text" id="tiktokUsernameInput" value="cng.tn.uyn.nhi" placeholder="Nhập @username đang LIVE (vd: @cng.tn.uyn.nhi)" />
           <button class="btn btn-primary" id="connectTiktokBtn">Kết nối</button>
+        </div>
+        <div class="input-row" style="margin-top: 6px;">
+          <input type="text" id="eulerApiKeyInput" placeholder="EulerStream API Key (Tùy chọn nếu bị rate limit)" />
+          <button class="btn btn-outline" id="saveEulerKeyBtn">Lưu Key</button>
         </div>
         <div class="status-badge" id="tiktokStatusBadge">⚪ Đang chạy chế độ Giả lập Offline (Sẵn sàng test)</div>
       </div>
@@ -373,6 +472,13 @@
         <div class="admin-actions-grid" style="margin-top: 10px;">
           <button class="btn btn-gold" id="testCoronationBtn">👑 Test Tiến Hóa Lên Vua</button>
           <button class="btn btn-gold" id="trigger2dCelebrationBtn">🌸 Test Pháo Hoa & Thả Đèn Lồng 2D</button>
+          <button class="btn btn-warning" id="testFeverBtn">🔥 Kích hoạt Fever x2 (Hoàng Ân Hạo Đãng)</button>
+          <button class="btn btn-primary" id="testFirstBloodBtn">⚡ Test First Blood (+Top 3 Tốc Độ)</button>
+          <button class="btn btn-danger" id="testJailBtn">⛓️ Test Giam Ngục (/giam @tên)</button>
+          <button class="btn btn-success" id="testUsurpDramaBtn">👑 Test Soán Ngôi Bảng Vàng</button>
+          <button class="btn btn-gold" id="testBossRoundBtn">👹 Test Màn Điện Thí (Boss 8s)</button>
+          <button class="btn btn-primary" id="testPvpArenaBtn">⚔️ Test Đấu Trường PvP (Văn vs Võ)</button>
+          <button class="btn btn-warning" id="testTreasureEventBtn">🎁 Test Mở Rương Châu Báu (15s)</button>
           <button class="btn btn-outline" id="toggle2dFxBtn">✨ Hiệu Ứng 2D: BẬT</button>
           <button class="btn btn-danger" id="kingSmiteBtn">⚔️ Vua Hạ Lệnh Trảm</button>
           <button class="btn btn-warning" id="ministerUsurpBtn">⚡ Thừa Tướng Đoạt Ngôi</button>
@@ -416,7 +522,7 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="quizzes.js?v=22"></script>
-  <script src="app.js?v=50"></script>
+  <script src="app.js?v=52"></script>
 </body>
 </html>
 
