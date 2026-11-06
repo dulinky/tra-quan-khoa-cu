@@ -146,52 +146,53 @@ body {
    ========================================================================== */
 .top-hud {
   position: absolute;
-  top: 1.6%;
-  left: 4%;
-  right: 4%;
+  top: 0.8%;
+  left: 2%;
+  right: 2%;
   z-index: 70;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1cqw;
+  gap: 0.5cqw;
   pointer-events: none;
 }
 
 .clean-stage-title {
   text-align: center;
+  line-height: 1.1;
 }
 
 .main-title {
   font-family: 'Playfair Display', serif;
-  font-size: 5.2cqw;
+  font-size: 3.6cqw;
   font-weight: 900;
-  letter-spacing: 0.4cqw;
+  letter-spacing: 0.25cqw;
   background: linear-gradient(180deg, #ffffff 0%, #fff1a8 28%, #ffd700 58%, #d48806 88%, #874d00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0.5cqw 1.2cqw rgba(0, 0, 0, 0.95)) drop-shadow(0 0 2.2cqw rgba(255, 215, 0, 0.55));
+  filter: drop-shadow(0 0.4cqw 0.8cqw rgba(0, 0, 0, 0.95)) drop-shadow(0 0 1.5cqw rgba(255, 215, 0, 0.45));
 }
 
 .sub-title {
-  font-size: 2.1cqw;
+  font-size: 1.4cqw;
   color: #ffe58f;
   font-weight: 800;
-  letter-spacing: 0.35cqw;
-  margin-top: 0.15cqw;
-  text-shadow: 0 0.3cqw 1cqw #000, 0 0 1.8cqw rgba(255, 215, 0, 0.45);
+  letter-spacing: 0.2cqw;
+  margin-top: 0.1cqw;
+  text-shadow: 0 0.2cqw 0.6cqw #000, 0 0 1.2cqw rgba(255, 215, 0, 0.4);
 }
 
-/* Thanh Pill nổi bật trên đỉnh (Cố định chiều cao 45px, chống giật layout) */
+/* Thanh Pill nổi bật trên đỉnh (Cố định chiều cao 38px, chống giật layout) */
 .top-highlight-pill {
   display: flex;
   align-items: center;
-  gap: 1.8cqw;
-  width: 88%;
-  height: 45px !important;
-  min-height: 45px !important;
-  max-height: 45px !important;
+  gap: 1.2cqw;
+  width: 86%;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
   box-sizing: border-box !important;
-  padding: 0 2cqw 0 1.2cqw !important;
+  padding: 0 1.6cqw 0 1cqw !important;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(28, 20, 12, 0.94) 0%, rgba(45, 32, 14, 0.90) 100%);
   border: 0.35cqw solid #ffd666;
@@ -664,10 +665,10 @@ body {
 }
 
 .seat-occ-name {
-  font-size: 2.55cqw;
-  font-weight: 900;
+  font-size: 2.1cqw;
+  font-weight: 800;
   color: #ffffff;
-  max-width: 18.5cqw;
+  max-width: 25cqw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -681,9 +682,15 @@ body {
 }
 
 .seat-node.tier-6 .seat-occ-name {
-  font-size: 3.1cqw;
-  max-width: 32cqw;
+  font-size: 2.6cqw;
+  max-width: 36cqw;
   color: #fffbe6;
+}
+
+.seat-node.tier-5 .seat-occ-name,
+.seat-node.tier-4 .seat-occ-name {
+  font-size: 2.15cqw;
+  max-width: 28cqw;
 }
 
 .seat-occ-rank {
@@ -2028,13 +2035,13 @@ body.clean-live-mode .live-stage {
    1. GLOBAL FEVER BAR: ĐỐT NHANG CẦU MAY / TÍCH CÔNG ĐỨC (THẢ TIM)
    ========================================================================== */
 .server-fever-card {
-  width: 90%;
-  max-width: 92cqw;
+  width: 88%;
+  max-width: 90cqw;
   background: linear-gradient(90deg, rgba(30, 20, 10, 0.94) 0%, rgba(55, 30, 10, 0.92) 100%);
-  border: 0.3cqw solid #faad14;
+  border: 0.25cqw solid #faad14;
   border-radius: 999px;
-  padding: 0.5cqw 1.4cqw;
-  box-shadow: 0 0.5cqw 2cqw rgba(0, 0, 0, 0.85), 0 0 1.5cqw rgba(250, 173, 20, 0.35);
+  padding: 0.3cqw 1.2cqw;
+  box-shadow: 0 0.4cqw 1.5cqw rgba(0, 0, 0, 0.85), 0 0 1.2cqw rgba(250, 173, 20, 0.3);
   pointer-events: none;
   transition: all 0.3s ease;
 }
@@ -2109,10 +2116,26 @@ body.clean-live-mode .live-stage {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 2.2cqw;
-  width: 95%;
-  margin-top: 0.5cqw;
+  gap: 1.8cqw;
+  width: 96%;
+  margin-top: 0.2cqw;
   pointer-events: none;
+}
+
+.trio-podium-header {
+  font-size: 1.4cqw;
+  font-weight: 900;
+  color: #ffd700;
+  letter-spacing: 0.15cqw;
+  text-transform: uppercase;
+  background: rgba(15, 20, 35, 0.88);
+  padding: 0.15cqw 1.2cqw;
+  border-radius: 999px;
+  border: 0.18cqw solid rgba(255, 215, 0, 0.45);
+  text-shadow: 0 0.2cqw 0.4cqw #000;
+  margin-top: 0.1cqw;
+  margin-bottom: 0.15cqw;
+  box-shadow: 0 0.4cqw 1.2cqw rgba(0, 0, 0, 0.8);
 }
 
 .trio-seat {
@@ -2124,52 +2147,52 @@ body.clean-live-mode .live-stage {
 }
 
 .trio-seat.seat-top-1 {
-  transform: translateY(-0.8cqw) scale(1.12);
+  transform: translateY(-0.6cqw) scale(1.08);
   z-index: 10;
 }
 
 .trio-crown {
-  font-size: 2.8cqw;
+  font-size: 2.2cqw;
   line-height: 1;
-  filter: drop-shadow(0 0.3cqw 0.6cqw rgba(0,0,0,0.85));
+  filter: drop-shadow(0 0.2cqw 0.4cqw rgba(0,0,0,0.85));
 }
 
 .trio-crown.king-crown {
-  font-size: 3.6cqw;
+  font-size: 2.8cqw;
 }
 
 .trio-dragon-crest {
   position: absolute;
-  top: -3.6cqw;
-  font-size: 3.2cqw;
+  top: -2.8cqw;
+  font-size: 2.4cqw;
   animation: empHaloPulse 2s infinite ease-in-out;
 }
 
 .trio-avatar-wrap {
-  width: 8.5cqw;
-  height: 8.5cqw;
+  width: 7.2cqw;
+  height: 7.2cqw;
   border-radius: 50%;
-  border: 0.4cqw solid #d9d9d9;
+  border: 0.35cqw solid #d9d9d9;
   background: #101524;
-  box-shadow: 0 0.6cqw 1.8cqw rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0.5cqw 1.5cqw rgba(0, 0, 0, 0.9);
   position: relative;
 }
 
 .seat-top-1 .trio-avatar-wrap {
-  width: 10.5cqw;
-  height: 10.5cqw;
-  border: 0.55cqw solid #ffd700;
-  box-shadow: 0 0 3.5cqw rgba(255, 215, 0, 0.9), 0 0.8cqw 2.4cqw #000;
+  width: 8.8cqw;
+  height: 8.8cqw;
+  border: 0.45cqw solid #ffd700;
+  box-shadow: 0 0 2.5cqw rgba(255, 215, 0, 0.85), 0 0.6cqw 2cqw #000;
 }
 
 .crown-aura::after {
   content: '';
   position: absolute;
-  inset: -1.2cqw;
+  inset: -1.0cqw;
   border-radius: 50%;
   background: conic-gradient(#ffd700, #ff85c0, #36cfc9, #ffd700);
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.8cqw), #000 calc(100% - 0.8cqw));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 0.8cqw), #000 calc(100% - 0.8cqw));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.7cqw), #000 calc(100% - 0.7cqw));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 0.7cqw), #000 calc(100% - 0.7cqw));
   animation: frameSpin 3.6s linear infinite;
   pointer-events: none;
 }
@@ -2183,20 +2206,30 @@ body.clean-live-mode .live-stage {
 }
 
 .trio-info {
-  margin-top: 0.3cqw;
+  margin-top: 0.2cqw;
   text-align: center;
-  background: rgba(10, 15, 28, 0.88);
-  border: 0.2cqw solid rgba(255, 215, 0, 0.35);
+  background: rgba(10, 15, 28, 0.92);
+  border: 0.2cqw solid rgba(255, 215, 0, 0.4);
   border-radius: 999px;
-  padding: 0.2cqw 1cqw;
-  line-height: 1.1;
-  max-width: 18cqw;
+  padding: 0.15cqw 0.8cqw;
+  line-height: 1.15;
+  min-width: 20cqw;
+  max-width: 28cqw;
+  box-sizing: border-box;
+}
+
+.seat-top-1 .trio-info {
+  min-width: 24cqw;
+  max-width: 32cqw;
+  border-color: #ffd700;
+  background: rgba(30, 18, 5, 0.95);
 }
 
 .trio-rank {
-  font-size: 1.3cqw;
+  font-size: 1.2cqw;
   font-weight: 800;
   color: #ffd666;
+  white-space: nowrap;
 }
 
 .trio-rank.king-rank {
@@ -2205,19 +2238,29 @@ body.clean-live-mode .live-stage {
 }
 
 .trio-name {
-  font-size: 1.5cqw;
-  font-weight: 800;
+  font-size: 1.6cqw;
+  font-weight: 900;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-shadow: 0 0.2cqw 0.4cqw #000;
+  max-width: 26cqw;
+  display: block;
+  margin: 0 auto;
+}
+
+.seat-top-1 .trio-name {
+  font-size: 1.8cqw;
+  max-width: 30cqw;
+  color: #fffbe6;
 }
 
 .trio-score {
-  font-size: 1.25cqw;
+  font-size: 1.2cqw;
   font-weight: 800;
   color: #ffd666;
+  white-space: nowrap;
 }
 
 /* Hiệu ứng soán ngôi văng khỏi ghế */
@@ -2636,15 +2679,20 @@ body.clean-live-mode .live-stage {
    9. FIX LỖI ĐÈ CHỮ / XUNG ĐỘT UI (OVERFLOW & TEXT-TRUNCATE)
    ========================================================================== */
 .trio-info {
-  max-width: 26cqw !important;
+  max-width: 28cqw !important;
   width: max-content !important;
-  min-width: 16cqw !important;
+  min-width: 20cqw !important;
   overflow: hidden !important;
   box-sizing: border-box !important;
 }
 
+.seat-top-1 .trio-info {
+  max-width: 34cqw !important;
+  min-width: 24cqw !important;
+}
+
 .trio-name {
-  max-width: 22cqw !important;
+  max-width: 26cqw !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
@@ -2652,8 +2700,12 @@ body.clean-live-mode .live-stage {
   margin: 0 auto !important;
 }
 
+.seat-top-1 .trio-name {
+  max-width: 32cqw !important;
+}
+
 .trio-score {
-  max-width: 22cqw !important;
+  max-width: 26cqw !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
@@ -2662,7 +2714,7 @@ body.clean-live-mode .live-stage {
 }
 
 .seat-occ-name {
-  max-width: 16.5cqw !important;
+  max-width: 26cqw !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
@@ -2671,7 +2723,12 @@ body.clean-live-mode .live-stage {
 }
 
 .seat-node.tier-6 .seat-occ-name {
-  max-width: 26cqw !important;
+  max-width: 38cqw !important;
+}
+
+.seat-node.tier-5 .seat-occ-name,
+.seat-node.tier-4 .seat-occ-name {
+  max-width: 28cqw !important;
 }
 
 .fb-name {

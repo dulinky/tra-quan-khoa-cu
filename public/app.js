@@ -7,15 +7,17 @@
 // Khu vực trên (y: 28% - 38%) dành riêng cho VUA trên Ngai Vàng, Thừa Tướng và Tam Khôi!
 // Khung đề thi nằm ở giữa (y: 41.5% - 66%). Các hàng ghế sĩ tử ngồi thi ở nửa dưới (y: 72% - 91%)!
 const DEFAULT_SEATS = [
-  // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngự trên Ngai Vàng Hoàng Cung)
-  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 31.0, minScore: 3500 },
+  // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngự trên Ngai Vàng Hoàng Cung, trung tâm thềm điện)
+  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 29.5, minScore: 3500 },
 
-  // HÀNG 1 (y: 34% - 37.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (Hai bên cánh rồng thềm điện chầu)
-  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 18.0, y: 34.0, minScore: 1500 },
-  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 32.5, y: 35.5, minScore: 500 },
-  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 37.5, minScore: 500 },
-  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 67.5, y: 35.5, minScore: 500 },
-  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 82.0, y: 34.0, minScore: 1500 },
+  // HÀNG 1 (y: 34.0% - 35.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (Cánh cung thềm rồng hai bên Ngai Vàng)
+  // Tuyệt đối không xếp ghế ở x: 50% để tránh che Hoàng Đế!
+  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 13.5, y: 34.0, minScore: 1500 },
+  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 26.5, y: 35.0, minScore: 500 },
+  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 39.5, y: 35.5, minScore: 500 },
+  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 60.5, y: 35.5, minScore: 500 },
+  { id: 'T4_4', tier: 4, title: 'Đại Thần', hat: '🌺', x: 73.5, y: 35.0, minScore: 500 },
+  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 86.5, y: 34.0, minScore: 1500 },
 
   // HÀNG 2 (y: 72.5%): CỬ NHÂN (5 ghế đối xứng thềm sân chầu)
   { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 72.5, minScore: 200 },
@@ -722,6 +724,7 @@ function strikeSeatWithLight(seat, isEmperor = false) {
 // 5. QUẢN LÝ TỌA ĐỘ GHẾ & HIỂN THỊ AVATAR RIÊNG TỪNG SĨ TỬ SẮC NÉT
 // =========================================================================
 function resetSeatPositions() {
+  localStorage.removeItem('tra_quan_seats_v12');
   localStorage.removeItem('tra_quan_seats_v11');
   localStorage.removeItem('tra_quan_seats_v10');
   localStorage.removeItem('tra_quan_seats_v8');
@@ -735,12 +738,13 @@ window.resetSeatPositions = resetSeatPositions;
 
 function loadSeatsConfig() {
   try {
+    localStorage.removeItem('tra_quan_seats_v11');
     localStorage.removeItem('tra_quan_seats_v10');
     localStorage.removeItem('tra_quan_seats_v8');
     localStorage.removeItem('tra_quan_seats_v6');
     localStorage.removeItem('tra_quan_seats_v5');
     localStorage.removeItem('tra_quan_seats_v3');
-    const saved = localStorage.getItem('tra_quan_seats_v11');
+    const saved = localStorage.getItem('tra_quan_seats_v12');
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length === DEFAULT_SEATS.length) {
@@ -753,7 +757,7 @@ function loadSeatsConfig() {
 
 function saveSeatsConfig() {
   const clean = seats.map(({ occupantId, ...rest }) => rest);
-  localStorage.setItem('tra_quan_seats_v11', JSON.stringify(clean));
+  localStorage.setItem('tra_quan_seats_v12', JSON.stringify(clean));
 }
 
 function renderSeats() {
@@ -1100,14 +1104,31 @@ function updateRoyalTrioPodium(sorted) {
   const top1El = document.getElementById('trioTop1');
   if (!top1El) return;
 
-  const top1 = sorted[0];
-  const top2 = sorted[1];
-  const top3 = sorted[2];
+  // Lấy Top 3 Nạp (Đại Phú Hộ) nếu có quà tặng
+  const topDonors = Object.values(donorStore || {})
+    .filter(d => d && (d.coins > 0 || d.weekCoins > 0))
+    .sort((a, b) => ((b.coins || 0) + (b.weekCoins || 0)) - ((a.coins || 0) + (a.weekCoins || 0)))
+    .slice(0, 3);
+
+  const isDonorMode = topDonors.length > 0;
+
+  // Cập nhật Header Bảng Vàng
+  const headerEl = document.getElementById('trioPodiumHeader');
+  if (headerEl) {
+    headerEl.textContent = isDonorMode ? '🏛️ BẢNG VÀNG PHÚ HỘ (TOP NẠP)' : '🏵️ BẢNG VÀNG KHOA CỬ (TOP 3)';
+  }
+
+  // Dữ liệu Top 1, Top 2, Top 3
+  const d1 = isDonorMode ? topDonors[0] : sorted[0];
+  const d2 = isDonorMode ? topDonors[1] : sorted[1];
+  const d3 = isDonorMode ? topDonors[2] : sorted[2];
 
   // Soán Ngôi detection for Top 1
-  if (top1 && previousTop1Id && top1.uniqueId !== previousTop1Id) {
-    const oldWinner = players.get(previousTop1Id);
-    const oldName = oldWinner ? oldWinner.nickname : (previousTop1Name || 'Cựu Trạng Nguyên');
+  const curTop1Id = d1 ? (d1.uniqueId || d1.id) : null;
+  const curTop1Name = d1 ? d1.nickname : '';
+  if (curTop1Id && previousTop1Id && curTop1Id !== previousTop1Id) {
+    const oldWinner = players.get(previousTop1Id) || (donorStore && donorStore[previousTop1Id]);
+    const oldName = oldWinner ? oldWinner.nickname : (previousTop1Name || 'Cựu Top 1');
 
     top1El.classList.remove('usurp-enter');
     void top1El.offsetWidth; // force reflow
@@ -1118,55 +1139,62 @@ function updateRoyalTrioPodium(sorted) {
       fxEngine.triggerGrandCelebration(50, 25);
       if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(40);
     }
-    showImperialDecree('⚡ SOÁN NGÔI BẢNG VÀNG ⚡', `Sĩ tử ${top1.nickname} vừa vượt điểm, chính thức đoạt Ngôi Vị Top 1 của ${oldName}!`);
-    speakImperial(`Kính báo thiên hạ! Sĩ tử ${cleanUsernameForSpeech(top1.nickname)} vừa soán ngôi Bảng Vàng của ${cleanUsernameForSpeech(oldName)}!`, true);
+    const decreeTitle = isDonorMode ? '⚡ SOÁN NGÔI ĐẠI PHÚ HỘ ⚡' : '⚡ SOÁN NGÔI BẢNG VÀNG ⚡';
+    showImperialDecree(decreeTitle, `Sĩ tử ${curTop1Name} vừa vươn lên, chính thức đoạt Ngôi Vị Top 1 của ${oldName}!`);
+    speakImperial(`Kính báo thiên hạ! Sĩ tử ${cleanUsernameForSpeech(curTop1Name)} vừa soán ngôi Top 1 của ${cleanUsernameForSpeech(oldName)}!`, true);
   }
 
-  if (top1) {
-    previousTop1Id = top1.uniqueId;
-    previousTop1Name = top1.nickname;
+  if (curTop1Id) {
+    previousTop1Id = curTop1Id;
+    previousTop1Name = curTop1Name;
   }
 
-  // Update Top 1 (hỗ trợ cả trioAvt1 và trioTop1Avatar)
+  // Update Top 1
   const t1Av = document.getElementById('trioAvt1') || document.getElementById('trioTop1Avatar');
   const t1Nm = document.getElementById('trioName1') || document.getElementById('trioTop1Name');
   const t1Sc = document.getElementById('trioScore1') || document.getElementById('trioTop1Score');
-  if (top1 && t1Av && t1Nm && t1Sc) {
-    t1Av.src = top1.avatar || getCatMemeAvatar(top1.tier, top1.uniqueId);
-    t1Nm.textContent = top1.nickname;
-    t1Sc.textContent = `${top1.score.toLocaleString()}đ`;
+  const t1Rk = document.getElementById('trioRank1');
+  if (t1Rk) t1Rk.textContent = isDonorMode ? 'ĐẠI PHÚ HỘ' : 'TRẠNG NGUYÊN';
+  if (d1 && t1Av && t1Nm && t1Sc) {
+    t1Av.src = d1.avatar || getCatMemeAvatar(d1.tier || 6, d1.uniqueId);
+    t1Nm.textContent = d1.nickname;
+    t1Sc.textContent = isDonorMode ? `💎 ${(d1.coins || d1.weekCoins || 0).toLocaleString()} xu` : `${d1.score.toLocaleString()}đ`;
   } else if (t1Av && t1Nm && t1Sc) {
     t1Av.src = 'assets/avatars/cat_tier_4_trang_nguyen.png';
     t1Nm.textContent = 'Đang trống';
-    t1Sc.textContent = '0đ';
+    t1Sc.textContent = isDonorMode ? '0 xu' : '0đ';
   }
 
   // Update Top 2
   const t2Av = document.getElementById('trioAvt2') || document.getElementById('trioTop2Avatar');
   const t2Nm = document.getElementById('trioName2') || document.getElementById('trioTop2Name');
   const t2Sc = document.getElementById('trioScore2') || document.getElementById('trioTop2Score');
-  if (top2 && t2Av && t2Nm && t2Sc) {
-    t2Av.src = top2.avatar || getCatMemeAvatar(top2.tier, top2.uniqueId);
-    t2Nm.textContent = top2.nickname;
-    t2Sc.textContent = `${top2.score.toLocaleString()}đ`;
+  const t2Rk = document.getElementById('trioRank2');
+  if (t2Rk) t2Rk.textContent = isDonorMode ? 'Nhị Phú Hộ' : 'Bảng Nhãn';
+  if (d2 && t2Av && t2Nm && t2Sc) {
+    t2Av.src = d2.avatar || getCatMemeAvatar(d2.tier || 5, d2.uniqueId);
+    t2Nm.textContent = d2.nickname;
+    t2Sc.textContent = isDonorMode ? `💎 ${(d2.coins || d2.weekCoins || 0).toLocaleString()} xu` : `${d2.score.toLocaleString()}đ`;
   } else if (t2Av && t2Nm && t2Sc) {
     t2Av.src = 'assets/avatars/cat_tier_4_trang_nguyen.png';
     t2Nm.textContent = 'Đang trống';
-    t2Sc.textContent = '0đ';
+    t2Sc.textContent = isDonorMode ? '0 xu' : '0đ';
   }
 
   // Update Top 3
   const t3Av = document.getElementById('trioAvt3') || document.getElementById('trioTop3Avatar');
   const t3Nm = document.getElementById('trioName3') || document.getElementById('trioTop3Name');
   const t3Sc = document.getElementById('trioScore3') || document.getElementById('trioTop3Score');
-  if (top3 && t3Av && t3Nm && t3Sc) {
-    t3Av.src = top3.avatar || getCatMemeAvatar(top3.tier, top3.uniqueId);
-    t3Nm.textContent = top3.nickname;
-    t3Sc.textContent = `${top3.score.toLocaleString()}đ`;
+  const t3Rk = document.getElementById('trioRank3');
+  if (t3Rk) t3Rk.textContent = isDonorMode ? 'Tam Phú Hộ' : 'Thám Hoa';
+  if (d3 && t3Av && t3Nm && t3Sc) {
+    t3Av.src = d3.avatar || getCatMemeAvatar(d3.tier || 4, d3.uniqueId);
+    t3Nm.textContent = d3.nickname;
+    t3Sc.textContent = isDonorMode ? `💎 ${(d3.coins || d3.weekCoins || 0).toLocaleString()} xu` : `${d3.score.toLocaleString()}đ`;
   } else if (t3Av && t3Nm && t3Sc) {
     t3Av.src = 'assets/avatars/cat_tier_4_trang_nguyen.png';
     t3Nm.textContent = 'Đang trống';
-    t3Sc.textContent = '0đ';
+    t3Sc.textContent = isDonorMode ? '0 xu' : '0đ';
   }
 }
 

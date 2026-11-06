@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=40" />
+  <link rel="stylesheet" href="style.css?v=41" />
 </head>
 <body>
   <div class="app-wrapper" id="appWrapper">
@@ -51,43 +51,44 @@
             </div>
           </div>
 
-          <!-- BỤC THƯỢNG ĐIỆN: TAM KHÔI TRIỀU ĐÌNH (TOP 1 - TOP 2 - TOP 3) -->
+          <!-- BỤC THƯỢNG ĐIỆN: BẢNG VÀNG CÔNG THẦN (TOP NẠP / TOP 3) NẰM GỌN TRÊN CAO -->
+          <div class="trio-podium-header" id="trioPodiumHeader">🏛️ BẢNG VÀNG PHÚ HỘ (TOP NẠP)</div>
           <div class="royal-trio-podium" id="royalTrioPodium">
-            <!-- Top 2: Bảng Nhãn -->
+            <!-- Top 2: Nhị Phú Hộ / Bảng Nhãn -->
             <div class="trio-seat seat-top-2" id="trioTop2">
-              <div class="trio-crown">🥈</div>
+              <div class="trio-crown" id="trioCrown2">🥈</div>
               <div class="trio-avatar-wrap">
                 <img id="trioAvt2" src="https://api.dicebear.com/7.x/adventurer/svg?seed=BangNhan" alt="top2" />
               </div>
               <div class="trio-info">
-                <div class="trio-rank">Bảng Nhãn</div>
+                <div class="trio-rank" id="trioRank2">Nhị Phú Hộ</div>
                 <div class="trio-name" id="trioName2">Đang trống</div>
-                <div class="trio-score" id="trioScore2">0đ</div>
+                <div class="trio-score" id="trioScore2">0 xu</div>
               </div>
             </div>
-            <!-- Top 1: Trạng Nguyên / Hoàng Thượng (Ở giữa, cao hơn, hào quang xoay) -->
+            <!-- Top 1: Đại Phú Hộ / Trạng Nguyên (Ở giữa, cao hơn, hào quang xoay) -->
             <div class="trio-seat seat-top-1" id="trioTop1">
               <div class="trio-dragon-crest">🐉</div>
-              <div class="trio-crown king-crown">👑</div>
+              <div class="trio-crown king-crown" id="trioCrown1">👑</div>
               <div class="trio-avatar-wrap crown-aura">
                 <img id="trioAvt1" src="https://api.dicebear.com/7.x/adventurer/svg?seed=TrangNguyen" alt="top1" />
               </div>
               <div class="trio-info">
-                <div class="trio-rank king-rank">TRẠNG NGUYÊN</div>
-                <div class="trio-name king-name" id="trioName1">Ngai vàng đang trống</div>
-                <div class="trio-score king-score" id="trioScore1">0đ</div>
+                <div class="trio-rank king-rank" id="trioRank1">ĐẠI PHÚ HỘ</div>
+                <div class="trio-name king-name" id="trioName1">Đang trống</div>
+                <div class="trio-score king-score" id="trioScore1">0 xu</div>
               </div>
             </div>
-            <!-- Top 3: Thám Hoa -->
+            <!-- Top 3: Tam Phú Hộ / Thám Hoa -->
             <div class="trio-seat seat-top-3" id="trioTop3">
-              <div class="trio-crown">🥉</div>
+              <div class="trio-crown" id="trioCrown3">🥉</div>
               <div class="trio-avatar-wrap">
                 <img id="trioAvt3" src="https://api.dicebear.com/7.x/adventurer/svg?seed=ThamHoa" alt="top3" />
               </div>
               <div class="trio-info">
-                <div class="trio-rank">Thám Hoa</div>
+                <div class="trio-rank" id="trioRank3">Tam Phú Hộ</div>
                 <div class="trio-name" id="trioName3">Đang trống</div>
-                <div class="trio-score" id="trioScore3">0đ</div>
+                <div class="trio-score" id="trioScore3">0 xu</div>
               </div>
             </div>
           </div>
@@ -522,7 +523,7 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="quizzes.js?v=23"></script>
-  <script src="app.js?v=56"></script>
+  <script src="app.js?v=57"></script>
 </body>
 </html>
 
