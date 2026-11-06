@@ -354,9 +354,14 @@ if (express && Server) {
 
   server.listen(PORT, () => {
     printBanner(PORT);
-    setTimeout(() => {
-      connectToTikTokRoom('cng.tn.uyn.nhi');
-    }, 500);
+    const autoUser = process.env.TIKTOK_USERNAME || (process.env.RENDER ? null : 'cng.tn.uyn.nhi');
+    if (autoUser) {
+      setTimeout(() => {
+        connectToTikTokRoom(autoUser);
+      }, 1000);
+    } else {
+      console.log('💡 Server sẵn sàng. Vui lòng nhập @username TikTok trên giao diện hoặc cấu hình TIKTOK_USERNAME trong Environment Variables để kết nối phòng LIVE.');
+    }
   });
 }
 

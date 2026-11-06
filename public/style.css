@@ -859,7 +859,7 @@ body {
    ========================================================================== */
 .quiz-modal {
   position: absolute;
-  top: 24.5%;
+  top: 41.5%;
   left: 50%;
   transform: translateX(-50%) !important;
   width: 82%;
@@ -2348,6 +2348,15 @@ body.clean-live-mode .live-stage {
 /* ==========================================================================
    5. CÁC MÀN CHỨC NĂNG ĐẶC BIỆT: PVP VĂN QUAN vs VÕ TƯỚNG & PHÁ RƯƠNG
    ========================================================================== */
+.special-event-arena,
+#specialEventArena,
+.pvp-arena-box,
+#pvpArenaBox,
+.treasure-event-box,
+#treasureEventBox {
+  display: none !important;
+}
+
 .special-event-arena {
   position: absolute;
   top: 24.5%;
@@ -2497,35 +2506,35 @@ body.clean-live-mode .live-stage {
    Tối ưu hóa 100% không gian 9:16 tập trung vào Cuộn Giấy Trúc & 4 Đáp Án
    ========================================================================== */
 .live-stage.quiz-focused-mode #seatsLayer {
-  opacity: 0.12 !important;
-  filter: blur(5px) !important;
-  transform: scale(0.96) !important;
-  pointer-events: none !important;
-  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  transition: opacity 0.3s ease !important;
 }
 
 .live-stage.quiz-focused-mode #emperorStatusBar,
 .live-stage.quiz-focused-mode .corner-hud {
-  opacity: 0 !important;
-  transform: translateY(-20px) !important;
-  pointer-events: none !important;
+  opacity: 0.9 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
   transition: opacity 0.3s ease, transform 0.3s ease !important;
 }
 
 .live-stage.quiz-focused-mode .floating-gift-menu {
-  opacity: 0.1 !important;
-  filter: blur(3px) !important;
-  pointer-events: none !important;
+  opacity: 0.8 !important;
+  filter: none !important;
+  pointer-events: auto !important;
   transition: opacity 0.3s ease !important;
 }
 
 .live-stage.quiz-focused-mode .top-highlight-pill {
-  opacity: 0.25 !important;
+  opacity: 0.85 !important;
   transition: opacity 0.3s ease !important;
 }
 
 .live-stage.quiz-focused-mode .server-fever-card {
-  opacity: 0.65 !important;
+  opacity: 0.85 !important;
   transform: scale(0.96) !important;
   transition: all 0.3s ease !important;
 }
@@ -2535,9 +2544,9 @@ body.clean-live-mode .live-stage {
   transition: transform 0.35s ease !important;
 }
 
-/* Khung cuộn giấy trúc câu hỏi khi ở Focused Mode */
+/* Khung cuộn giấy trúc câu hỏi khi ở Focused Mode: Đặt ở giữa màn hình (top: 41.5%), chừa vị trí trên cho Vua & Thừa Tướng */
 .live-stage.quiz-focused-mode .quiz-modal {
-  top: 20% !important;
+  top: 41.5% !important;
   width: 90cqw !important;
   max-width: 92% !important;
   z-index: 120 !important;
@@ -2545,6 +2554,15 @@ body.clean-live-mode .live-stage {
   opacity: 1 !important;
   transform: translateX(-50%) scale(1) !important;
   animation: quizScrollPop 0.38s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
+}
+
+/* Thu nhỏ khung câu hỏi khi hết giờ thay vì biến mất hoàn toàn */
+.quiz-modal.quiz-minimized {
+  top: 43.5% !important;
+  transform: translateX(-50%) scale(0.85) !important;
+  opacity: 0.88 !important;
+  pointer-events: none !important;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
 }
 
 @keyframes quizScrollPop {
@@ -2692,7 +2710,7 @@ body.clean-live-mode .live-stage {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
-  top: 22% !important;
+  top: 41.5% !important;
   width: 90cqw !important;
   max-width: 92% !important;
 }

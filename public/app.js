@@ -4,38 +4,39 @@
 
 // 1. TỌA ĐỘ GHẾ THOÁNG ĐÃNG TRÊN SÂN CHẦU ĐIỆN THI ĐÌNH (KHÔNG CHỒNG CHÉO)
 // Cơ chế điểm chuẩn mới: Thăng quan đòi hỏi thực tài và kiên trì qua nhiều kỳ thi!
-// Toàn bộ ghế sĩ tử được neo vững chắc ở nửa dưới màn hình (y: 72% - 94%), giải phóng 100% không gian giữa cho Đề Thi!
+// Khu vực trên (y: 28% - 38%) dành riêng cho VUA trên Ngai Vàng, Thừa Tướng và Tam Khôi!
+// Khung đề thi nằm ở giữa (y: 41.5% - 66%). Các hàng ghế sĩ tử ngồi thi ở nửa dưới (y: 72% - 91%)!
 const DEFAULT_SEATS = [
-  // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngồi bục rồng sân chầu)
-  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 72.0, minScore: 3500 },
+  // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngự trên Ngai Vàng Hoàng Cung)
+  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 31.0, minScore: 3500 },
 
-  // HÀNG 1 (y: 73.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (5 ghế trải đều trên thềm điện chầu)
-  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 18.0, y: 73.5, minScore: 1500 },
-  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 34.0, y: 73.5, minScore: 500 },
-  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 73.5, minScore: 500 },
-  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 66.0, y: 73.5, minScore: 500 },
-  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 82.0, y: 73.5, minScore: 1500 },
+  // HÀNG 1 (y: 34% - 37.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (Hai bên cánh rồng thềm điện chầu)
+  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 18.0, y: 34.0, minScore: 1500 },
+  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 32.5, y: 35.5, minScore: 500 },
+  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 37.5, minScore: 500 },
+  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 67.5, y: 35.5, minScore: 500 },
+  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 82.0, y: 34.0, minScore: 1500 },
 
-  // HÀNG 2 (y: 80.5%): CỬ NHÂN (5 ghế đối xứng)
-  { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 80.5, minScore: 200 },
-  { id: 'T3_2', tier: 3, title: 'Cử Nhân', hat: '📘', x: 34.0, y: 80.5, minScore: 200 },
-  { id: 'T3_3', tier: 3, title: 'Cử Nhân', hat: '📘', x: 50.0, y: 80.5, minScore: 200 },
-  { id: 'T3_4', tier: 3, title: 'Cử Nhân', hat: '📘', x: 66.0, y: 80.5, minScore: 200 },
-  { id: 'T3_5', tier: 3, title: 'Cử Nhân', hat: '📘', x: 82.0, y: 80.5, minScore: 200 },
+  // HÀNG 2 (y: 72.5%): CỬ NHÂN (5 ghế đối xứng thềm sân chầu)
+  { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 72.5, minScore: 200 },
+  { id: 'T3_2', tier: 3, title: 'Cử Nhân', hat: '📘', x: 34.0, y: 72.5, minScore: 200 },
+  { id: 'T3_3', tier: 3, title: 'Cử Nhân', hat: '📘', x: 50.0, y: 72.5, minScore: 200 },
+  { id: 'T3_4', tier: 3, title: 'Cử Nhân', hat: '📘', x: 66.0, y: 72.5, minScore: 200 },
+  { id: 'T3_5', tier: 3, title: 'Cử Nhân', hat: '📘', x: 82.0, y: 72.5, minScore: 200 },
 
-  // HÀNG 3 (y: 87.5%): TÚ TÀI (5 ghế đối xứng)
-  { id: 'T2_1', tier: 2, title: 'Tú Tài', hat: '🍵', x: 18.0, y: 87.5, minScore: 60 },
-  { id: 'T2_2', tier: 2, title: 'Tú Tài', hat: '🍵', x: 34.0, y: 87.5, minScore: 60 },
-  { id: 'T2_3', tier: 2, title: 'Tú Tài', hat: '🍵', x: 50.0, y: 87.5, minScore: 60 },
-  { id: 'T2_4', tier: 2, title: 'Tú Tài', hat: '🍵', x: 66.0, y: 87.5, minScore: 60 },
-  { id: 'T2_5', tier: 2, title: 'Tú Tài', hat: '🍵', x: 82.0, y: 87.5, minScore: 60 },
+  // HÀNG 3 (y: 81.5%): TÚ TÀI (5 ghế đối xứng thềm giữa)
+  { id: 'T2_1', tier: 2, title: 'Tú Tài', hat: '🍵', x: 18.0, y: 81.5, minScore: 60 },
+  { id: 'T2_2', tier: 2, title: 'Tú Tài', hat: '🍵', x: 34.0, y: 81.5, minScore: 60 },
+  { id: 'T2_3', tier: 2, title: 'Tú Tài', hat: '🍵', x: 50.0, y: 81.5, minScore: 60 },
+  { id: 'T2_4', tier: 2, title: 'Tú Tài', hat: '🍵', x: 66.0, y: 81.5, minScore: 60 },
+  { id: 'T2_5', tier: 2, title: 'Tú Tài', hat: '🍵', x: 82.0, y: 81.5, minScore: 60 },
 
-  // HÀNG 4 (y: 94.0%): ĐỒNG SINH (5 ghế hàng đầu sân lát gạch chuẩn đối xứng)
-  { id: 'T1_1', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 18.0, y: 94.0, minScore: 0 },
-  { id: 'T1_2', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 34.0, y: 94.0, minScore: 0 },
-  { id: 'T1_3', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 50.0, y: 94.0, minScore: 0 },
-  { id: 'T1_4', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 66.0, y: 94.0, minScore: 0 },
-  { id: 'T1_5', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 82.0, y: 94.0, minScore: 0 }
+  // HÀNG 4 (y: 90.5%): ĐỒNG SINH (5 ghế hàng đầu sân lát gạch chuẩn đối xứng)
+  { id: 'T1_1', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 18.0, y: 90.5, minScore: 0 },
+  { id: 'T1_2', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 34.0, y: 90.5, minScore: 0 },
+  { id: 'T1_3', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 50.0, y: 90.5, minScore: 0 },
+  { id: 'T1_4', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 66.0, y: 90.5, minScore: 0 },
+  { id: 'T1_5', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 82.0, y: 90.5, minScore: 0 }
 ];
 
 // =========================================================================
@@ -389,12 +390,31 @@ function stopAllSpeech(broadcast = true) {
   }
 }
 
+function cleanPromptForSpeech(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/\[.*?\]/g, ' ') // Xóa thẻ trong ngoặc vuông như [ĐIỆN THÍ - BOSS ROUND]
+    .replace(/\bboss\s*round\b/gi, 'Điện Thí Hoàng Cung')
+    .replace(/\bboss\b/gi, 'Hoàng Thượng')
+    .replace(/\bround\b/gi, 'vòng thi')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 let isReadingQuiz = false;
 const imperialSpeechQueue = [];
 
-function speakImperial(text, priority = false, isQuizQuestion = false) {
-  if (isCleanLiveView) return;
-  if (!audioEnabled || !('speechSynthesis' in window)) return;
+function speakImperial(rawText, priority = false, isQuizQuestion = false, onComplete = null) {
+  if (isCleanLiveView) {
+    if (typeof onComplete === 'function') onComplete();
+    return;
+  }
+  if (!audioEnabled || !('speechSynthesis' in window)) {
+    if (typeof onComplete === 'function') onComplete();
+    return;
+  }
+
+  const text = cleanPromptForSpeech(rawText);
 
   // Nếu hệ thống đang đọc Câu hỏi thi và 4 đáp án A/B/C/D:
   // TUYỆT ĐỐI KHÔNG HỦY ĐỀ THI! Xếp vào hàng đợi để đọc ngay sau khi đọc xong đề bài!
@@ -429,6 +449,7 @@ function speakImperial(text, priority = false, isQuizQuestion = false) {
         applyBgmVolume();
         window.speechSynthesis.cancel();
         if (isQuizQuestion) isReadingQuiz = false;
+        if (typeof onComplete === 'function') onComplete();
         return;
       }
       if (idx >= chunks.length) {
@@ -436,10 +457,13 @@ function speakImperial(text, priority = false, isQuizQuestion = false) {
         applyBgmVolume();
         if (isQuizQuestion) {
           isReadingQuiz = false;
+          if (typeof onComplete === 'function') onComplete();
           if (imperialSpeechQueue.length > 0) {
             const nextItem = imperialSpeechQueue.shift();
             speakImperial(nextItem, false, false);
           }
+        } else {
+          if (typeof onComplete === 'function') onComplete();
         }
         return;
       }
@@ -464,6 +488,7 @@ function speakImperial(text, priority = false, isQuizQuestion = false) {
     speakNextChunk();
   } catch (e) {
     if (isQuizQuestion) isReadingQuiz = false;
+    if (typeof onComplete === 'function') onComplete();
   }
 }
 
@@ -697,6 +722,7 @@ function strikeSeatWithLight(seat, isEmperor = false) {
 // 5. QUẢN LÝ TỌA ĐỘ GHẾ & HIỂN THỊ AVATAR RIÊNG TỪNG SĨ TỬ SẮC NÉT
 // =========================================================================
 function resetSeatPositions() {
+  localStorage.removeItem('tra_quan_seats_v11');
   localStorage.removeItem('tra_quan_seats_v10');
   localStorage.removeItem('tra_quan_seats_v8');
   localStorage.removeItem('tra_quan_seats_v6');
@@ -709,11 +735,12 @@ window.resetSeatPositions = resetSeatPositions;
 
 function loadSeatsConfig() {
   try {
+    localStorage.removeItem('tra_quan_seats_v10');
     localStorage.removeItem('tra_quan_seats_v8');
     localStorage.removeItem('tra_quan_seats_v6');
     localStorage.removeItem('tra_quan_seats_v5');
     localStorage.removeItem('tra_quan_seats_v3');
-    const saved = localStorage.getItem('tra_quan_seats_v10');
+    const saved = localStorage.getItem('tra_quan_seats_v11');
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length === DEFAULT_SEATS.length) {
@@ -726,7 +753,7 @@ function loadSeatsConfig() {
 
 function saveSeatsConfig() {
   const clean = seats.map(({ occupantId, ...rest }) => rest);
-  localStorage.setItem('tra_quan_seats_v10', JSON.stringify(clean));
+  localStorage.setItem('tra_quan_seats_v11', JSON.stringify(clean));
 }
 
 function renderSeats() {
@@ -1159,22 +1186,50 @@ function renderFirstBloodCard() {
   `).join('');
 }
 
+let bossRoundTimerPaused = false;
+
 function startBossRoundQuiz() {
   specialBossRoundActive = true;
+  bossRoundTimerPaused = true;
+
+  // Tạm ẩn modal câu hỏi trong lúc hiện sắc phong thông báo
+  const qModalEl = document.getElementById('quizModal');
+  if (qModalEl) qModalEl.classList.add('hidden');
+
+  // Bước 1: Hiện Thánh Chỉ Sắc Phong Điện Thí Đối Mặt Hoàng Thượng
+  showImperialDecree(
+    '👑 ĐIỆN THÍ ĐỐI MẶT HOÀNG THƯỢNG 👑',
+    'Hoàng Đế thân chinh khảo thí! 8 giây quyết định! Trả lời đúng nhân ba điểm, trả lời sai khi quân phạm thượng bị trừ 100đ!'
+  );
+  speakImperial('Điện Thí Đối Mặt Hoàng Thượng! Hoàng Thượng thân chinh khảo thí!', true, false);
+
+  const hardPool = (typeof IMPERIAL_QUIZZES !== 'undefined' && IMPERIAL_QUIZZES.length > 50)
+    ? IMPERIAL_QUIZZES.slice(IMPERIAL_QUIZZES.length - 40)
+    : (typeof IMPERIAL_QUIZZES !== 'undefined' && IMPERIAL_QUIZZES.length > 0 ? IMPERIAL_QUIZZES : []);
+
+  const rawQuiz = (hardPool && hardPool.length > 0)
+    ? hardPool[Math.floor(Math.random() * hardPool.length)]
+    : {
+        q: 'Vị trạng nguyên nào là tác giả của bài biểu Thảo Hịch Đánh Thoát Hoan chấn động sử sách thời nhà Trần?',
+        options: { A: 'Trần Hưng Đạo', B: 'Mạc Đĩnh Chi', C: 'Nguyễn Hiền', D: 'Lê Văn Thịnh' },
+        correct: 'A'
+      };
+
   const hardQuiz = {
-    q: '👑 [ĐIỆN THÍ - BOSS ROUND (8 GIÂY)] Vị trạng nguyên nào là tác giả của bài biểu "Thảo Hịch Đánh Thoát Hoan" chấn động sử sách?',
-    options: { A: 'Trần Hưng Đạo', B: 'Mạc Đĩnh Chi', C: 'Nguyễn Hiền', D: 'Lê Văn Thịnh' },
-    correct: 'A'
+    ...rawQuiz,
+    q: rawQuiz.q.replace(/\[.*?\]/g, '').replace(/boss\s*round/gi, '').trim()
   };
-  triggerImperialQuiz(hardQuiz);
-  quizCountdown = 8;
-  const bTitle = document.getElementById('quizBadgeTitle');
-  if (bTitle) {
-    bTitle.textContent = '👹 ĐIỆN THÍ ĐỐI MẶT HOÀNG THƯỢNG (8 GIÂY - X3 ĐIỂM)';
-    bTitle.className = 'quiz-badge special-royal-badge';
-  }
-  showImperialDecree('👹 ĐIỆN THÍ HOÀNG CUNG 👹', 'Đối mặt Hoàng Thượng! Câu hỏi siêu khó, thời gian chỉ 8 giây! Đúng X3 điểm, sai bị trừ 100đ!');
-  speakImperial('Khai mở Điện Thí Hoàng Cung! Tám giây bắt đầu! Trả lời đúng nhân ba điểm, trả lời sai khi quân phạm thượng bị trừ một trăm điểm!', true);
+
+  // Bước 2: Sau khi thông báo xong (3.2 giây), hiện câu hỏi và CHỈ ĐỌC CÂU HỎI
+  setTimeout(() => {
+    const decreeEl = document.getElementById('imperialDecree');
+    if (decreeEl) {
+      decreeEl.classList.add('hidden');
+      decreeEl.style.display = 'none';
+    }
+
+    triggerImperialQuiz(hardQuiz, null, true /* isBossMode */);
+  }, 3200);
 }
 
 // =========================================================================
@@ -2176,7 +2231,7 @@ function getQuizRankReward(rankIndex) {
   return { pts: 10, label: `📜 Đỗ Đạt (#${rankIndex + 1})` };
 }
 
-function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
+function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null, isBossMode = false) {
   if (throneDuelState) {
     // Nếu trận quyết đấu đã bị treo quá lâu (> 120s), tự động hủy để không nghẽn câu hỏi
     if (Date.now() - (throneDuelState.startedAt || 0) > 120000) {
@@ -2187,7 +2242,7 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   }
 
   // Tự động chuyển đổi minigame đặc biệt mỗi 10 câu hỏi thường
-  if (!customQuizObj && !decreeEmpId) {
+  if (!customQuizObj && !decreeEmpId && !isBossMode) {
     quizSessionCount++;
     if (quizSessionCount % 10 === 0) {
       const mode = (quizSessionCount / 10) % 3;
@@ -2205,7 +2260,6 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   }
 
   // 1. KÍCH HOẠT MÀN HÌNH THI CHUYÊN BIỆT (FOCUSED QUIZ MODE)
-  // Làm mờ nhẹ sảnh chờ và ẩn bớt widget phụ để 100% người xem tập trung vào đề thi
   const liveStageEl = document.getElementById('liveStage');
   if (liveStageEl) liveStageEl.classList.add('quiz-focused-mode');
 
@@ -2223,7 +2277,8 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   const quiz = customQuizObj || getNextRandomQuiz();
   activeQuiz = quiz;
   quizResolved = false;
-  quizCountdown = 40;
+  quizCountdown = isBossMode ? 8 : 40;
+  bossRoundTimerPaused = Boolean(isBossMode); // Ở Boss mode: Tạm dừng đếm ngược cho đến khi đọc xong đề bài!
   nextAutoQuizCooldown = 30;
   quizAnsweredUsers.clear();
   players.forEach(p => { p.doubleDown = false; });
@@ -2239,12 +2294,15 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   if (fbCard) fbCard.classList.add('hidden');
 
   const qModalEl = document.getElementById('quizModal');
-  const isSpecial = Math.random() < 0.22; // 22% xác suất kích hoạt Kỳ Thi Đặc Cách X3 điểm
-  if (quiz) quiz.isSpecialRoyal = isSpecial;
+  const isSpecial = !isBossMode && Math.random() < 0.22; // 22% xác suất kích hoạt Kỳ Thi Đặc Cách X3 điểm
+  if (quiz) quiz.isSpecialRoyal = isSpecial || isBossMode;
 
   const badgeTitleEl = document.getElementById('quizBadgeTitle');
   if (badgeTitleEl) {
-    if (decreeState) {
+    if (isBossMode) {
+      badgeTitleEl.textContent = '👑 ĐIỆN THÍ ĐỐI MẶT HOÀNG THƯỢNG (8 GIÂY • X3 ĐIỂM)';
+      badgeTitleEl.className = 'quiz-badge special-royal-badge';
+    } else if (decreeState) {
       badgeTitleEl.textContent = '📜 THÁNH CHỈ: HOÀNG ĐẾ PHẢI TRẢ LỜI!';
       badgeTitleEl.className = 'quiz-badge';
     } else if (isSpecial) {
@@ -2260,7 +2318,8 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
     nextQuizSponsor = null;
   }
   if (qModalEl) {
-    qModalEl.classList.toggle('special-royal-modal', isSpecial);
+    qModalEl.classList.toggle('special-royal-modal', isSpecial || isBossMode);
+    qModalEl.classList.remove('quiz-minimized'); // Mở rộng lại kích thước đầy đủ khi có câu mới!
   }
   document.getElementById('quizQuestionText').textContent = quiz.q;
   document.getElementById('quizTimerBadge').textContent = `⏳ ${quizCountdown}s`;
@@ -2279,18 +2338,31 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
 
   const fb = document.getElementById('quizLiveFeedback');
   fb.className = 'quiz-live-feedback';
-  fb.innerHTML = `👉 Đua Top trả lời <b>A, B, C, D</b>: 🥇Trạng Nguyên <b>+40đ</b> • 🥈Bảng Nhãn <b>+25đ</b> • 🥉Thám Hoa <b>+18đ</b> • Đỗ Đạt <b>+10đ</b> (Sai <b>-10đ</b>)!`;
+  if (isBossMode) {
+    fb.innerHTML = `👉 <b>ĐIỆN THÍ HOÀNG CUNG</b>: Trả lời <b>A, B, C, D</b> • Đúng <b>X3 điểm</b>, sai phạt <b>-100đ</b>!`;
+  } else {
+    fb.innerHTML = `👉 Đua Top trả lời <b>A, B, C, D</b>: 🥇Trạng Nguyên <b>+40đ</b> • 🥈Bảng Nhãn <b>+25đ</b> • 🥉Thám Hoa <b>+18đ</b> • Đỗ Đạt <b>+10đ</b> (Sai <b>-10đ</b>)!`;
+  }
 
   const qmEl = document.getElementById('quizModal');
   if (qmEl) {
-    qmEl.classList.remove('hidden');
+    qmEl.classList.remove('hidden', 'quiz-minimized');
     qmEl.style.display = 'block';
     qmEl.style.opacity = '1';
     qmEl.style.visibility = 'visible';
   }
 
   playSound('gong');
-  speakImperial(`${quiz.q} Đáp án A: ${quiz.options.A}. B: ${quiz.options.B}. C: ${quiz.options.C}. D: ${quiz.options.D}.`, true, true);
+
+  if (isBossMode) {
+    // Chế độ Điện Thí: CHỈ ĐỌC CÂU HỎI (không đọc đáp án A, B, C, D), đọc xong MỚI TÍNH GIỜ 8s!
+    speakImperial(quiz.q, true, true, () => {
+      bossRoundTimerPaused = false; // Bắt đầu tính giờ 8 giây ngay khi đọc xong đề!
+    });
+  } else {
+    // Câu hỏi bình thường: Đọc đề bài và 4 đáp án A, B, C, D
+    speakImperial(`${quiz.q} Đáp án A: ${quiz.options.A}. B: ${quiz.options.B}. C: ${quiz.options.C}. D: ${quiz.options.D}.`, true, true);
+  }
 }
 
 function evaluateQuizComment(player, commentText) {
@@ -3740,10 +3812,6 @@ setInterval(() => {
       readRandomFeatureTipQuickly();
     }
 
-    if (nextAutoQuizCooldown === 12) {
-      triggerGoldenHourX2(15);
-      emitAdminAction({ kind: 'golden_hour', seconds: 15 });
-    }
     if (nextAutoQuizCooldown === 0) {
       nextAutoQuizCooldown = 30;
       const q = getNextRandomQuiz();
@@ -3790,7 +3858,7 @@ setInterval(() => {
     }
   }
 
-  if (activeQuiz && !quizResolved) {
+  if (activeQuiz && !quizResolved && !bossRoundTimerPaused) {
     quizCountdown = Math.max(0, quizCountdown - 1);
     document.getElementById('quizTimerBadge').textContent = `⏳ ${quizCountdown}s`;
 
@@ -3836,7 +3904,11 @@ setInterval(() => {
       }
 
       setTimeout(() => {
-        document.getElementById('quizModal').classList.add('hidden');
+        const qm = document.getElementById('quizModal');
+        if (qm) {
+          qm.classList.remove('hidden');
+          qm.classList.add('quiz-minimized'); // Thu nhỏ khung đề thi để không biến mất
+        }
         const stageEl = document.getElementById('liveStage');
         if (stageEl) stageEl.classList.remove('quiz-focused-mode');
         activeQuiz = null;
@@ -4480,16 +4552,12 @@ window.addEventListener('DOMContentLoaded', () => {
   initParticles();
   getCurrentSimUser();
 
-  // Đảm bảo câu hỏi đầu tiên hiển thị ngay trên màn hình không bị trễ
-  if (!activeQuiz) {
-    activeQuiz = (typeof IMPERIAL_QUIZZES !== 'undefined' && IMPERIAL_QUIZZES.length) ? IMPERIAL_QUIZZES[0] : null;
-    quizCountdown = 40;
-  }
-  const qModal = document.getElementById('quizModal');
-  if (qModal && activeQuiz) {
-    qModal.classList.remove('hidden');
-    qModal.style.display = 'block';
-  }
+  // Đảm bảo ở chế độ QUIZ mặc định, ẩn sạch sẽ các minigame arena đè lên câu hỏi
+  setScreenMode(SCREEN_MODES.QUIZ);
+
+  // Kích hoạt câu hỏi đầu tiên đầy đủ cả 4 đáp án A, B, C, D và đọc đề bài
+  const initialQuiz = (typeof IMPERIAL_QUIZZES !== 'undefined' && IMPERIAL_QUIZZES.length) ? IMPERIAL_QUIZZES[0] : getNextRandomQuiz();
+  triggerImperialQuiz(initialQuiz);
 
   if (isCleanLiveView) {
     document.body.classList.add('clean-live-mode');
