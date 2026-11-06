@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="t6_bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fffb8f" />
+      <stop offset="50%" stop-color="#ffa940" />
+      <stop offset="100%" stop-color="#d46b08" />
+    </radialGradient>
+    <linearGradient id="t6_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff1b8" />
+      <stop offset="50%" stop-color="#faad14" />
+      <stop offset="100%" stop-color="#874d00" />
+    </linearGradient>
+    <clipPath id="circleClip">
+      <circle cx="100" cy="100" r="95" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circleClip)">
+    <!-- Background Radiant Sunlight -->
+    <circle cx="100" cy="100" r="100" fill="url(#t6_bg)" />
+    <!-- Sunburst rays -->
+    <g opacity="0.25" stroke="#fff" stroke-width="4">
+      <line x1="100" y1="100" x2="10" y2="10" />
+      <line x1="100" y1="100" x2="100" y2="0" />
+      <line x1="100" y1="100" x2="190" y2="10" />
+      <line x1="100" y1="100" x2="200" y2="100" />
+      <line x1="100" y1="100" x2="0" y2="100" />
+      <line x1="100" y1="100" x2="30" y2="180" />
+      <line x1="100" y1="100" x2="170" y2="180" />
+    </g>
+
+    <!-- Imperial Robe (Hoang Bao) -->
+    <path d="M40,150 Q100,135 160,150 L175,205 L25,205 Z" fill="#faad14" stroke="#ad6800" stroke-width="3" />
+    <!-- Dragon Collar & Jade Medal -->
+    <path d="M70,145 Q100,165 130,145 L135,185 Q100,195 65,185 Z" fill="#cf1322" stroke="#fff" stroke-width="1.5" />
+    <circle cx="100" cy="175" r="12" fill="#52c41a" stroke="#fadb14" stroke-width="3" />
+    <circle cx="100" cy="175" r="4" fill="#fff" />
+
+    <!-- Cat Body & Chubby Head -->
+    <!-- Ears -->
+    <polygon points="50,60 30,15 75,40" fill="#fa8c16" stroke="#d4380d" stroke-width="3" />
+    <polygon points="50,55 38,25 70,42" fill="#ffccc7" />
+    <polygon points="150,60 170,15 125,40" fill="#fa8c16" stroke="#d4380d" stroke-width="3" />
+    <polygon points="150,55 162,25 130,42" fill="#ffccc7" />
+
+    <!-- Head -->
+    <ellipse cx="100" cy="98" rx="60" ry="50" fill="#ffbb96" stroke="#d4380d" stroke-width="3.5" />
+    <!-- Cheeks (Extra chubby Quàng Thượng) -->
+    <ellipse cx="65" cy="115" rx="22" ry="16" fill="#ffbb96" />
+    <ellipse cx="135" cy="115" rx="22" ry="16" fill="#ffbb96" />
+    <circle cx="60" cy="112" r="9" fill="#ff7875" opacity="0.6" />
+    <circle cx="140" cy="112" r="9" fill="#ff7875" opacity="0.6" />
+
+    <!-- Smug half-closed Eyes (Phán xét chúng sinh meme) -->
+    <ellipse cx="72" cy="95" rx="12" ry="7" fill="#fff" stroke="#5c2200" stroke-width="2.5" />
+    <ellipse cx="73" cy="95" rx="5" ry="6" fill="#262626" />
+    <circle cx="75" cy="93" r="2" fill="#fff" />
+    <!-- Smug eyelid fold -->
+    <path d="M60,90 Q72,83 85,92" fill="none" stroke="#5c2200" stroke-width="3" stroke-linecap="round" />
+
+    <ellipse cx="128" cy="95" rx="12" ry="7" fill="#fff" stroke="#5c2200" stroke-width="2.5" />
+    <ellipse cx="127" cy="95" rx="5" ry="6" fill="#262626" />
+    <circle cx="125" cy="93" r="2" fill="#fff" />
+    <path d="M115,92 Q128,83 140,90" fill="none" stroke="#5c2200" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Nose & Smug Mouth -->
+    <polygon points="96,105 104,105 100,111" fill="#d4380d" />
+    <path d="M90,115 Q100,120 100,111 Q100,120 110,115" fill="none" stroke="#5c2200" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Majestic Whiskers -->
+    <line x1="45" y1="108" x2="15" y2="105" stroke="#5c2200" stroke-width="2" stroke-linecap="round" />
+    <line x1="45" y1="116" x2="18" y2="119" stroke="#5c2200" stroke-width="2" stroke-linecap="round" />
+    <line x1="155" y1="108" x2="185" y2="105" stroke="#5c2200" stroke-width="2" stroke-linecap="round" />
+    <line x1="155" y1="116" x2="182" y2="119" stroke="#5c2200" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Grand Imperial Crown (Mũ Bình Thiên / Cửu Long Hoàng Đế) -->
+    <!-- Crown Board -->
+    <path d="M45,45 L155,45 L165,33 L35,33 Z" fill="url(#t6_gold)" stroke="#874d00" stroke-width="2.5" />
+    <rect x="70" y="42" width="60" height="22" rx="4" fill="#cf1322" stroke="#874d00" stroke-width="2" />
+    <!-- Ruby Gem on Crown -->
+    <circle cx="100" cy="53" r="7" fill="#f5222d" stroke="#fff" stroke-width="1.5" />
+    <!-- Pearls dangling in front of imperial eyes -->
+    <g fill="#ffe58f" stroke="#874d00" stroke-width="1">
+      <circle cx="55" cy="50" r="3" /><circle cx="55" cy="58" r="3" />
+      <circle cx="75" cy="50" r="3" /><circle cx="75" cy="60" r="3" />
+      <circle cx="100" cy="50" r="3" /><circle cx="100" cy="62" r="3" />
+      <circle cx="125" cy="50" r="3" /><circle cx="125" cy="60" r="3" />
+      <circle cx="145" cy="50" r="3" /><circle cx="145" cy="58" r="3" />
+    </g>
+  </g>
+
+  <!-- Golden Imperial Ring Border -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#t6_gold)" stroke-width="8" />
+  <circle cx="100" cy="100" r="91" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.7" />
+  <!-- Mini Crown Emblem at top -->
+  <text x="100" y="24" font-size="20" text-anchor="middle" dominant-baseline="central">👑</text>
+</svg>

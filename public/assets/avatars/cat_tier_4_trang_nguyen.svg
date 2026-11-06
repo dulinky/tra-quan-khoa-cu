@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="t4_bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fff1f0" />
+      <stop offset="60%" stop-color="#ff7875" />
+      <stop offset="100%" stop-color="#a8071a" />
+    </radialGradient>
+    <linearGradient id="t4_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffb8f" />
+      <stop offset="50%" stop-color="#d48806" />
+      <stop offset="100%" stop-color="#613400" />
+    </linearGradient>
+    <clipPath id="circleClip4">
+      <circle cx="100" cy="100" r="95" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circleClip4)">
+    <circle cx="100" cy="100" r="100" fill="url(#t4_bg)" />
+
+    <!-- Scarlet Silk Robe (Áo Gấm Đỏ Trạng Nguyên) -->
+    <path d="M40,150 Q100,135 160,150 L175,205 L25,205 Z" fill="#cf1322" stroke="#fadb14" stroke-width="3" />
+    <path d="M80,146 L100,175 L120,146 Z" fill="#fadb14" />
+
+    <!-- Ears -->
+    <polygon points="50,60 30,20 75,40" fill="#d46b08" stroke="#873800" stroke-width="2.5" />
+    <polygon points="50,55 38,28 70,42" fill="#ffccc7" />
+    <polygon points="150,60 170,20 125,40" fill="#262626" stroke="#000" stroke-width="2.5" />
+    <polygon points="150,55 162,28 130,42" fill="#ffccc7" />
+
+    <!-- Calico White Head with Calico Patches -->
+    <ellipse cx="100" cy="102" rx="58" ry="48" fill="#fff" stroke="#5c2200" stroke-width="3" />
+    <!-- Calico Orange Patch on Left -->
+    <path d="M44,80 Q65,65 80,82 Q75,110 50,115 Z" fill="#fa8c16" />
+    <!-- Calico Black Patch on Right -->
+    <path d="M156,80 Q135,65 125,82 Q130,105 152,112 Z" fill="#262626" />
+
+    <!-- Laughing Eyes (Cười tít mắt siêu vui mừng đậu thủ khoa) -->
+    <path d="M62,96 Q74,84 86,96" fill="none" stroke="#262626" stroke-width="4" stroke-linecap="round" />
+    <path d="M114,96 Q126,84 138,96" fill="none" stroke="#262626" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Rosy Happy Cheeks -->
+    <ellipse cx="60" cy="110" rx="12" ry="8" fill="#ff7875" opacity="0.7" />
+    <ellipse cx="140" cy="110" rx="12" ry="8" fill="#ff7875" opacity="0.7" />
+
+    <!-- Big Happy Open Mouth -->
+    <polygon points="96,104 104,104 100,109" fill="#ff4d4f" />
+    <path d="M86,114 Q100,135 114,114 Z" fill="#a8071a" stroke="#262626" stroke-width="2" />
+    <path d="M92,124 Q100,135 108,124 Z" fill="#ff7875" />
+
+    <!-- Joyful Whiskers -->
+    <line x1="45" y1="108" x2="15" y2="105" stroke="#262626" stroke-width="2" stroke-linecap="round" />
+    <line x1="45" y1="116" x2="20" y2="120" stroke="#262626" stroke-width="2" stroke-linecap="round" />
+    <line x1="155" y1="108" x2="185" y2="105" stroke="#262626" stroke-width="2" stroke-linecap="round" />
+    <line x1="155" y1="116" x2="180" y2="120" stroke="#262626" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Scholar Hat with 2 Red Flowers (Mũ Cánh Chuồn Cài Hoa Trạng Nguyên) -->
+    <!-- Wing left -->
+    <ellipse cx="28" cy="54" rx="26" ry="6" transform="rotate(-8 28 54)" fill="#1f1f1f" stroke="#fadb14" stroke-width="2" />
+    <!-- Wing right -->
+    <ellipse cx="172" cy="54" rx="26" ry="6" transform="rotate(8 172 54)" fill="#1f1f1f" stroke="#fadb14" stroke-width="2" />
+    <!-- Hat body -->
+    <path d="M68,58 Q100,34 132,58 L126,68 Q100,56 74,68 Z" fill="#1f1f1f" stroke="#fadb14" stroke-width="2.5" />
+    <rect x="70" y="58" width="60" height="10" rx="3" fill="#cf1322" stroke="#fadb14" stroke-width="1.5" />
+    <!-- Two Red Roses on Hat! -->
+    <circle cx="68" cy="54" r="8" fill="#f5222d" stroke="#fff" stroke-width="1.5" />
+    <circle cx="68" cy="54" r="4" fill="#ff7875" />
+    <circle cx="132" cy="54" r="8" fill="#f5222d" stroke="#fff" stroke-width="1.5" />
+    <circle cx="132" cy="54" r="4" fill="#ff7875" />
+  </g>
+
+  <!-- Festive Red-Gold Border -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#t4_gold)" stroke-width="8" />
+  <circle cx="100" cy="100" r="91" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.7" />
+  <text x="100" y="24" font-size="18" text-anchor="middle" dominant-baseline="central">🌺</text>
+</svg>

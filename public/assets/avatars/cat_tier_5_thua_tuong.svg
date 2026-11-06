@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="t5_bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#b37feb" />
+      <stop offset="60%" stop-color="#531dab" />
+      <stop offset="100%" stop-color="#22075e" />
+    </radialGradient>
+    <linearGradient id="t5_border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#efdbff" />
+      <stop offset="50%" stop-color="#9254de" />
+      <stop offset="100%" stop-color="#391085" />
+    </linearGradient>
+    <clipPath id="circleClip5">
+      <circle cx="100" cy="100" r="95" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circleClip5)">
+    <!-- Purple Royal Night Background -->
+    <circle cx="100" cy="100" r="100" fill="url(#t5_bg)" />
+
+    <!-- Robe (Tử Bào Quan Đại Thần) -->
+    <path d="M40,150 Q100,135 160,150 L175,205 L25,205 Z" fill="#391085" stroke="#9254de" stroke-width="3" />
+    <!-- Mandarin Square / Bổ Tử Phẩm Cấp -->
+    <rect x="75" y="152" width="50" height="42" rx="4" fill="#ffd666" stroke="#b37feb" stroke-width="2" />
+    <text x="100" y="174" font-size="18" text-anchor="middle" dominant-baseline="central">🦅</text>
+
+    <!-- Ears (Siamese dark points) -->
+    <polygon points="50,60 30,20 75,40" fill="#261b17" stroke="#000" stroke-width="2.5" />
+    <polygon points="50,55 38,28 70,42" fill="#594339" />
+    <polygon points="150,60 170,20 125,40" fill="#261b17" stroke="#000" stroke-width="2.5" />
+    <polygon points="150,55 162,28 130,42" fill="#594339" />
+
+    <!-- Siamese Cream Body & Head -->
+    <ellipse cx="100" cy="100" rx="58" ry="48" fill="#f5e8d0" stroke="#43281c" stroke-width="3" />
+    <!-- Siamese Dark Mask (Mặt xám đen đặc trưng) -->
+    <path d="M68,85 Q100,75 132,85 Q145,115 125,128 Q100,135 75,128 Q55,115 68,85 Z" fill="#3d2b1f" />
+
+    <!-- Scheming Side-Eye (Mắt liếc xéo sắc lẹm màu xanh lam) -->
+    <!-- Left Eye looking sharp right -->
+    <ellipse cx="78" cy="98" rx="14" ry="10" fill="#e6f7ff" stroke="#000" stroke-width="2" />
+    <ellipse cx="85" cy="98" rx="6" ry="8" fill="#096dd9" />
+    <ellipse cx="87" cy="98" rx="3" ry="5" fill="#001529" />
+    <circle cx="88" cy="95" r="2" fill="#fff" />
+    <!-- Scheming Eyebrow -->
+    <path d="M66,88 Q78,82 92,90" fill="none" stroke="#d4b106" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Right Eye looking sharp right -->
+    <ellipse cx="122" cy="98" rx="14" ry="10" fill="#e6f7ff" stroke="#000" stroke-width="2" />
+    <ellipse cx="129" cy="98" rx="6" ry="8" fill="#096dd9" />
+    <ellipse cx="131" cy="98" rx="3" ry="5" fill="#001529" />
+    <circle cx="132" cy="95" r="2" fill="#fff" />
+    <path d="M110,90 Q124,82 136,88" fill="none" stroke="#d4b106" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Nose & Mischievous Smirk -->
+    <polygon points="97,112 103,112 100,117" fill="#1f1105" />
+    <path d="M92,122 Q100,126 100,118 Q102,125 114,120" fill="none" stroke="#f5e8d0" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Scheming long whiskers -->
+    <line x1="50" y1="115" x2="15" y2="120" stroke="#f5e8d0" stroke-width="2" stroke-linecap="round" />
+    <line x1="50" y1="122" x2="20" y2="132" stroke="#f5e8d0" stroke-width="2" stroke-linecap="round" />
+    <line x1="150" y1="115" x2="185" y2="120" stroke="#f5e8d0" stroke-width="2" stroke-linecap="round" />
+    <line x1="150" y1="122" x2="180" y2="132" stroke="#f5e8d0" stroke-width="2" stroke-linecap="round" />
+
+    <!-- High Minister Winged Hat (Mũ Cánh Chuồn Thừa Tướng) -->
+    <!-- Wing left -->
+    <ellipse cx="30" cy="52" rx="28" ry="7" transform="rotate(-10 30 52)" fill="#22075e" stroke="#b37feb" stroke-width="2" />
+    <!-- Wing right -->
+    <ellipse cx="170" cy="52" rx="28" ry="7" transform="rotate(10 170 52)" fill="#22075e" stroke="#b37feb" stroke-width="2" />
+    <!-- Cap Dome -->
+    <path d="M65,58 Q100,30 135,58 L128,68 Q100,55 72,68 Z" fill="#22075e" stroke="#b37feb" stroke-width="2.5" />
+    <!-- Cap Base Band -->
+    <rect x="68" y="58" width="64" height="12" rx="3" fill="#9254de" stroke="#efdbff" stroke-width="1.5" />
+    <circle cx="100" cy="64" r="4" fill="#ffd666" />
+  </g>
+
+  <!-- Regal Purple Ring Border -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#t5_border)" stroke-width="8" />
+  <circle cx="100" cy="100" r="91" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6" />
+  <text x="100" y="24" font-size="18" text-anchor="middle" dominant-baseline="central">🗡️</text>
+</svg>

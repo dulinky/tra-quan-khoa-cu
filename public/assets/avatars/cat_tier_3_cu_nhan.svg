@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="t3_bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#bae7ff" />
+      <stop offset="60%" stop-color="#2f54eb" />
+      <stop offset="100%" stop-color="#030852" />
+    </radialGradient>
+    <linearGradient id="t3_border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#91d5ff" />
+      <stop offset="50%" stop-color="#1890ff" />
+      <stop offset="100%" stop-color="#003a8c" />
+    </linearGradient>
+    <clipPath id="circleClip3">
+      <circle cx="100" cy="100" r="95" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circleClip3)">
+    <circle cx="100" cy="100" r="100" fill="url(#t3_bg)" />
+
+    <!-- Scholar Blue Robe -->
+    <path d="M40,150 Q100,135 160,150 L175,205 L25,205 Z" fill="#10239e" stroke="#69c0ff" stroke-width="3" />
+    <path d="M85,145 L100,175 L115,145 Z" fill="#bae7ff" />
+
+    <!-- Grey Cat Ears -->
+    <polygon points="50,60 30,20 75,40" fill="#8c8c8c" stroke="#434343" stroke-width="2.5" />
+    <polygon points="50,55 38,28 70,42" fill="#ffccc7" />
+    <polygon points="150,60 170,20 125,40" fill="#8c8c8c" stroke="#434343" stroke-width="2.5" />
+    <polygon points="150,55 162,28 130,42" fill="#ffccc7" />
+
+    <!-- Grey Chubby Cat Head -->
+    <ellipse cx="100" cy="102" rx="58" ry="48" fill="#bfbfbf" stroke="#434343" stroke-width="3" />
+    <!-- Cheeks -->
+    <ellipse cx="65" cy="116" rx="20" ry="14" fill="#bfbfbf" />
+    <ellipse cx="135" cy="116" rx="20" ry="14" fill="#bfbfbf" />
+    <circle cx="62" cy="115" r="8" fill="#ffadd2" opacity="0.6" />
+    <circle cx="138" cy="115" r="8" fill="#ffadd2" opacity="0.6" />
+
+    <!-- Eyes Behind Round Glasses -->
+    <circle cx="75" cy="98" r="9" fill="#fff" />
+    <circle cx="77" cy="98" r="5" fill="#262626" />
+    <circle cx="79" cy="96" r="2" fill="#fff" />
+
+    <circle cx="125" cy="98" r="9" fill="#fff" />
+    <circle cx="123" cy="98" r="5" fill="#262626" />
+    <circle cx="121" cy="96" r="2" fill="#fff" />
+
+    <!-- GIANT ROUND NERD GLASSES (Kính tri thức) -->
+    <circle cx="75" cy="98" r="17" fill="none" stroke="#141414" stroke-width="3.5" />
+    <circle cx="125" cy="98" r="17" fill="none" stroke="#141414" stroke-width="3.5" />
+    <line x1="92" y1="98" x2="108" y2="98" stroke="#141414" stroke-width="4" />
+    <!-- Glasses glare -->
+    <path d="M65,90 L75,85" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M115,90 L125,85" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Serious Studious Nose & Mouth -->
+    <polygon points="97,108 103,108 100,113" fill="#ff85c0" />
+    <path d="M92,118 Q100,122 100,115 Q100,122 108,118" fill="none" stroke="#262626" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Whiskers -->
+    <line x1="45" y1="112" x2="15" y2="112" stroke="#262626" stroke-width="2" />
+    <line x1="45" y1="120" x2="20" y2="125" stroke="#262626" stroke-width="2" />
+    <line x1="155" y1="112" x2="185" y2="112" stroke="#262626" stroke-width="2" />
+    <line x1="155" y1="120" x2="180" y2="125" stroke="#262626" stroke-width="2" />
+
+    <!-- Confucian Scholar Cap (Mũ Nho Sinh Vuông Vắn) -->
+    <polygon points="70,62 100,38 130,62" fill="#002766" stroke="#40a9ff" stroke-width="2.5" />
+    <rect x="72" y="60" width="56" height="10" rx="3" fill="#1890ff" stroke="#bae7ff" stroke-width="1.5" />
+    <!-- Book in Paws -->
+    <rect x="80" y="155" width="40" height="28" rx="3" fill="#f6ffed" stroke="#52c41a" stroke-width="2" />
+    <line x1="100" y1="155" x2="100" y2="183" stroke="#52c41a" stroke-width="1.5" />
+    <line x1="85" y1="162" x2="95" y2="162" stroke="#8c8c8c" stroke-width="1" />
+    <line x1="85" y1="168" x2="95" y2="168" stroke="#8c8c8c" stroke-width="1" />
+    <line x1="105" y1="162" x2="115" y2="162" stroke="#8c8c8c" stroke-width="1" />
+    <line x1="105" y1="168" x2="115" y2="168" stroke="#8c8c8c" stroke-width="1" />
+  </g>
+
+  <!-- Blue Border -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="url(#t3_border)" stroke-width="8" />
+  <circle cx="100" cy="100" r="91" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.7" />
+  <text x="100" y="24" font-size="18" text-anchor="middle" dominant-baseline="central">📜</text>
+</svg>

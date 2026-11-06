@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Trà Quán Khoa Cử - Đường Lên Ngôi Vương (TikTok Live Interactive)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=34" />
+</head>
+<body>
+  <div class="app-wrapper" id="appWrapper">
+    
+    <!-- ================= MÀN HÌNH CHÍNH 9:16 (DÙNG ĐỂ QUAY TIKTOK LIVE) ================= -->
+    <div class="live-stage-container">
+      <div class="live-stage" id="liveStage">
+        <!-- Ảnh nền Điện Thi Đình Hoàng Cung sắc nét, thoáng đãng -->
+        <img src="assets/bg_clean.jpg" id="stageBgImg" alt="Điện Thi Đình Khoa Cử" class="stage-bg" />
+
+        <!-- Hiệu ứng hạt đèn lồng & pháo hoa đăng cơ -->
+        <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+        <!-- HEADER THOÁNG ĐÃNG PHONG CÁCH TU TIÊN / KHOA CỬ ONLINE -->
+        <div class="top-hud">
+          <div class="clean-stage-title">
+            <div class="main-title">TRÀ QUÁN KHOA CỬ</div>
+            <div class="sub-title" id="cycleTimerText">– ĐIỆN THI ĐÌNH • 15:00 –</div>
+          </div>
+
+          <!-- Thanh Pill thông báo nổi bật trên đỉnh (Giống "Dthinhh tặng Tụ Khí Đan x8") -->
+          <div class="top-highlight-pill" id="topHighlightPill">
+            <img id="topPillAvatar" src="https://api.dicebear.com/7.x/adventurer/svg?seed=TrangNguyen" alt="avt" class="top-pill-avatar" />
+            <div class="top-pill-content">
+              <div class="top-pill-line1" id="topPillLine1">Gõ <b>!thi</b> để nhận bàn Khoa Cử!</div>
+              <div class="top-pill-line2" id="topPillLine2">BẢNG VÀNG ĐỀ DANH • Trả lời A/B/C/D nhận +150 Công Trạng</div>
+            </div>
+            <div class="top-pill-icon" id="topPillIcon">📜</div>
+          </div>
+        </div>
+
+        <!-- THANH TRẠNG THÁI TRIỀU ĐÌNH (GÓC TRÊN BÊN TRÁI GỌN GÀNG, KHÔNG CHE SÂN KHẤU) -->
+        <div class="emperor-progress-card corner-hud" id="emperorStatusBar">
+          <div class="emp-prog-header">
+            <span class="emp-prog-bolt">👑</span>
+            <span id="currentEmpName">Ngai Vàng Đang Trống</span>
+            <span class="emp-prog-score" id="currentEmpScore">≥ 2,500đ</span>
+          </div>
+          <div class="dragon-qi-bar-bg">
+            <div class="dragon-qi-bar-fill" id="dragonQiFill" style="width: 25%;"></div>
+            <span class="dragon-qi-text" id="dragonQiText">Long Khí: 100%</span>
+          </div>
+          <div class="binh-bien-bar-bg" id="binhBienBarBg">
+            <div id="binhBienFill" class="binh-bien-bar-fill" style="width: 0%;"></div>
+            <span id="binhBienText" class="binh-bien-bar-text">⚔️ Đoạt Ngôi: 0/50 lần</span>
+          </div>
+          <div id="giftBoardText" class="gift-board-text">💰 Đại Phú Hộ: chưa có ai tặng quà</div>
+          <div class="gift-goal-bar-bg">
+            <div id="giftGoalFill" class="gift-goal-bar-fill" style="width: 0%;"></div>
+            <span id="giftGoalText" class="gift-goal-bar-text">🌧️ Mưa Lộc: 0/100 xu</span>
+          </div>
+          <div id="eventCountdownText" class="gift-board-text">⏳ Đề thi kế tiếp sau 30s • 🏆 Chốt chu kỳ 15:00</div>
+          <div id="eventExtraText" class="gift-board-text">💰 Giờ Vàng Nạp sau 04:00<br>👑 Đấu giá ngai sau 07:00<br>⚡ Sự kiện bất ngờ sau 05:00</div>
+          <div id="donorHallText" class="gift-board-text">🏛️ Bảng Vàng Công Thần: chưa có ai</div>
+        </div>
+
+        <!-- DANH SÁCH QUÀ TẶNG NỔI GỌN BÊN PHẢI (GIỐNG MẪU TU TIÊN ONLINE) -->
+        <div class="floating-gift-menu">
+          <div class="fg-item">
+            <span class="fg-icon">🌹</span>
+            <div class="fg-text">
+              <span class="fg-name">hoa hồng (1 xu)</span>
+              <span class="fg-sub">lên Tú Tài</span>
+            </div>
+          </div>
+          <div class="fg-item">
+            <span class="fg-icon">🧋</span>
+            <div class="fg-text">
+              <span class="fg-name">trà sữa (5 xu)</span>
+              <span class="fg-sub">lên Cử Nhân</span>
+            </div>
+          </div>
+          <div class="fg-item">
+            <span class="fg-icon">🗡️</span>
+            <div class="fg-text">
+              <span class="fg-name">bảo kiếm (10 xu)</span>
+              <span class="fg-sub">Hồi Lệnh Trảm Vua</span>
+            </div>
+          </div>
+          <div class="fg-item">
+            <span class="fg-icon">🛡️</span>
+            <div class="fg-text">
+              <span class="fg-name">hộ thân phù (15 xu)</span>
+              <span class="fg-sub">Miễn Trảm 5 phút</span>
+            </div>
+          </div>
+          <div class="fg-item">
+            <span class="fg-icon">🦢</span>
+            <div class="fg-text">
+              <span class="fg-name">thiên nga (50 xu)</span>
+              <span class="fg-sub">Thừa Tướng • Đại Xá</span>
+            </div>
+          </div>
+          <div class="fg-item">
+            <span class="fg-icon">🎆</span>
+            <div class="fg-text">
+              <span class="fg-name">pháo hoa (100 xu)</span>
+              <span class="fg-sub">X3 Điểm Toàn Phòng</span>
+            </div>
+          </div>
+          <div class="fg-item fg-king">
+            <span class="fg-icon">🦁</span>
+            <div class="fg-text">
+              <span class="fg-name">sư tử vàng (300 xu)</span>
+              <span class="fg-sub">👑 LÀM VUA NGAY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- KHU VỰC CHỨA GHẾ NGỒI CỦA SĨ TỬ (ĐƯỢC RENDER TỪ JS) -->
+        <div class="seats-layer" id="seatsLayer"></div>
+
+        <!-- LỚP HIỆU ỨNG BAY THĂNG CẤP & CỘT SÁNG KIM QUANG (NẰM TRÊN GHẾ) -->
+        <div class="fx-layer" id="fxLayer"></div>
+
+        <!-- CANVAS 2D HIỆU ỨNG TIỀN CẢNH: PHÁO HOA, SÓNG XUNG KÍCH, CÁNH HOA & ĐÈN LỒNG BAY (60FPS) -->
+        <canvas id="fxCanvas" class="fx-canvas"></canvas>
+
+        <!-- POPUP CÂU ĐỐ KHOA CỬ TRẮC NGHIỆM (HIỆN LÊN TRÊN, SẮC NÉT, CÁCH NHAU 30S) -->
+        <div class="quiz-modal" id="quizModal">
+          <div class="quiz-scroll">
+            <div class="quiz-top-bar">
+              <span class="quiz-badge" id="quizBadgeTitle">📜 KHẢO THÍ TRIỀU ĐÌNH (+500 CÔNG TRẠNG)</span>
+              <span class="quiz-timer" id="quizTimerBadge">⏳ 40s</span>
+            </div>
+            <div class="quiz-question" id="quizQuestionText">Năm 111 TCN, nhà Tây Hán dưới thời Hán Vũ Đế đã sai hai tướng nào sang thôn tính Nam Việt?</div>
+            <div class="quiz-options-grid" id="quizOptionsGrid">
+              <div class="quiz-opt-box" id="quizOpt_A"><span class="quiz-opt-key">A</span><span class="quiz-opt-text">Lộ Bác Đức và Dương Bộc</span></div>
+              <div class="quiz-opt-box" id="quizOpt_B"><span class="quiz-opt-key">B</span><span class="quiz-opt-text">Mã Viện và Lưu Long</span></div>
+              <div class="quiz-opt-box" id="quizOpt_C"><span class="quiz-opt-key">C</span><span class="quiz-opt-text">Lưu Phương và Dương Tố</span></div>
+              <div class="quiz-opt-box" id="quizOpt_D"><span class="quiz-opt-key">D</span><span class="quiz-opt-text">Tích Quang và Nhâm Diên</span></div>
+            </div>
+            <div class="quiz-live-feedback" id="quizLiveFeedback">
+              👉 Đua Top trả lời <b>A, B, C, D</b>: 🥇Hạng 1 <b>+500đ</b> • 🥈Hạng 2 <b>+350đ</b> • 🥉Hạng 3 <b>+250đ</b>!
+            </div>
+          </div>
+        </div>
+
+        <!-- THÁNH CHỈ / LỆNH TRẢM & SẮC PHONG -->
+        <div class="imperial-decree hidden" id="imperialDecree">
+          <div class="decree-inner">
+            <div class="decree-title" id="decreeTitle">🐉 THÁNH CHỈ ĐẾN 🐉</div>
+            <div class="decree-body" id="decreeBody">Chúc mừng Tân Hoàng Đế đăng cơ!</div>
+          </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- MÀN HÌNH CHUYỂN CẢNH "TIẾN HÓA PHẨM HÀM" (STYLE DIGIMON EVOLUTION) -->
+        <!-- =================================================================== -->
+        <div class="digivolve-stage hidden" id="digivolveStage">
+          <div class="evo-speed-lines"></div>
+          <div class="evo-flash-white" id="evoFlashWhite"></div>
+
+          <div class="evo-magic-circle" id="evoMagicCircle">
+            <div class="evo-ring-outer">☯ 乾 坤 震 巽 坎 離 艮 兌 ☯</div>
+            <div class="evo-ring-inner">★ KHOA CỬ ĐĂNG ĐÀI • KIM BẢNG ĐỀ DANH ★</div>
+          </div>
+
+          <div class="evo-dragons hidden" id="evoDragons">
+            <div class="evo-dragon left">🐉</div>
+            <div class="evo-dragon right">🐉</div>
+          </div>
+
+          <div class="evo-center-box">
+            <div class="evo-royal-frame">
+              <div class="evo-corner corner-tl">⚜️</div>
+              <div class="evo-corner corner-tr">⚜️</div>
+              <div class="evo-corner corner-bl">⚜️</div>
+              <div class="evo-corner corner-br">⚜️</div>
+            </div>
+
+            <div class="evo-header-tag" id="evoHeaderTag">⚡ THĂNG QUAN TIẾN CHỨC ⚡</div>
+            <div class="evo-player-name" id="evoPlayerName">Nguyễn Hiền</div>
+
+            <div class="evo-avatar-stage" id="evoAvatarStage">
+              <div class="evo-sunburst-beams"></div>
+              <div class="evo-energy-aura" id="evoEnergyAura"></div>
+              <div class="evo-hat-icon" id="evoHatIcon">📜</div>
+              <img id="evoAvatarImg" src="" alt="avatar" class="evo-avatar-img" />
+              <div class="evo-seal-stamp hidden" id="evoSealStamp">ĐỖ ĐẠT</div>
+            </div>
+
+            <div class="evo-transform-bar">
+              <span class="evo-old-rank" id="evoOldRank">Đồng Sinh</span>
+              <span class="evo-arrow">⚡➔⚡</span>
+              <span class="evo-new-rank" id="evoNewRank">CỬ NHÂN</span>
+            </div>
+
+            <div class="evo-sub-caption" id="evoSubCaption">
+              Kim bảng đề danh • Bước lên bậc cao mới!
+            </div>
+          </div>
+        </div>
+
+        <!-- KHUNG ĐỌC BÌNH LUẬN GỌN GÀNG Ở GÓC DƯỚI BÊN PHẢI (GIỐNG HỆT MẪU TU TIÊN ONLINE) -->
+        <!-- Để trống hoàn toàn góc dưới bên trái cho khung chat gốc của TikTok! -->
+        <div class="compact-comment-pills" id="stageFeedBox"></div>
+
+      </div>
+    </div>
+
+    <!-- ================= BẢNG ĐIỀU KHIỂN & GIẢ LẬP TEST (BÊN PHẢI) ================= -->
+    <aside class="control-panel" id="controlPanel">
+      <div class="cp-header">
+        <div>
+          <h2>⚙️ ĐIỀU KHIỂN & TEST GAME</h2>
+          <p>Giao diện Điện Thi Đình HD • Thoáng đãng & Avatar riêng từng Sĩ Tử</p>
+        </div>
+        <button class="btn btn-outline btn-sm" id="toggleCleanModeBtn" title="Ẩn bảng điều khiển để quay màn hình">
+          📺 Chế độ Quay Live
+        </button>
+      </div>
+
+      <!-- 1. KẾT NỐI TIKTOK LIVE THẬT -->
+      <div class="cp-card">
+        <h3>📡 1. Kết nối TikTok LIVE thật</h3>
+        <div class="input-row">
+          <input type="text" id="tiktokUsernameInput" value="cng.tn.uyn.nhi" placeholder="Nhập @username đang LIVE (vd: @cng.tn.uyn.nhi)" />
+          <button class="btn btn-primary" id="connectTiktokBtn">Kết nối</button>
+        </div>
+        <div class="status-badge" id="tiktokStatusBadge">⚪ Đang chạy chế độ Giả lập Offline (Sẵn sàng test)</div>
+      </div>
+
+      <!-- 2. BỘ GIẢ LẬP NGƯỜI XEM (TEST NGAY KHÔNG CẦN LIVE) -->
+      <div class="cp-card">
+        <div class="card-title-row">
+          <h3>🎮 2. Thêm Người Xem / Giả lập Tương Tác</h3>
+          <button class="btn btn-accent btn-sm" id="autoBotBtn">🤖 Bật Auto Demo (Giữ nhịp 8–12 Sĩ Tử)</button>
+        </div>
+
+        <div class="sim-user-bar">
+          <div class="sim-user-info">
+            <img id="simAvatarPreview" src="https://api.dicebear.com/7.x/adventurer/svg?seed=KFCTruongSa" alt="avatar" />
+            <input type="text" id="simNicknameInput" value="KFC TRƯỜNG SA" placeholder="Nhập tên người xem thật..." />
+          </div>
+          <button class="btn btn-outline btn-sm" id="randomUserBtn">🎲 Đổi người khác</button>
+        </div>
+
+        <!-- Giả lập Comment -->
+        <div class="sim-section-label">💬 Gõ Bình luận (Vào bàn hoặc Trả lời câu đố A/B/C/D):</div>
+        <div class="input-row">
+          <input type="text" id="simCommentInput" placeholder="Gõ !thi, A, B, C, D hoặc !tram @ten..." value="!thi" />
+          <button class="btn btn-success" id="sendCommentBtn">Gửi Comment</button>
+        </div>
+        <div class="quick-btns">
+          <button class="chip-btn" data-comment="!thi">Gõ "!thi" (Vào bàn)</button>
+          <button class="chip-btn" id="simLikeBtn">❤️ Thả 100 Tim (+15đ)</button>
+          <button class="chip-btn" id="simShareBtn">↗️ Chia sẻ Live (+20đ)</button>
+          <button class="chip-btn" data-comment="đoạt ngôi">⚔️ Gõ "đoạt ngôi" (+1/50)</button>
+          <button class="chip-btn" data-comment="!diem">📜 Gõ "!diem"</button>
+          <button class="chip-btn" data-comment="!vua">👑 Gõ "!vua"</button>
+          <button class="chip-btn" data-comment="!help">❓ Gõ "!help"</button>
+        </div>
+
+        <!-- Giả lập Tặng Quà (Kích hoạt Tiến Hóa Digimon) -->
+        <div class="sim-section-label">🎁 Tặng Quà (Kích hoạt Màn Hình Tiến Hóa Phẩm Hàm):</div>
+        <div class="quick-btns">
+          <button class="chip-btn" id="startBoostBtn">💰 Mở Giờ Vàng Nạp (60s)</button>
+          <button class="chip-btn" id="startAuctionBtn">👑 Mở Đấu Giá Ngai (90s)</button>
+          <button class="chip-btn" id="startRandomEventBtn">⚡ Mở Sự Kiện Bất Ngờ</button>
+          <button class="chip-btn" id="exportLeaderboardBtn">📸 Xuất Ảnh Bảng Xếp Hạng</button>
+        </div>
+        <div class="gift-grid">
+          <button class="gift-btn" data-gift="Hoa Hồng" data-coins="5" data-icon="🌹">
+            <span class="g-icon">🌹</span>
+            <span class="g-name">Hoa Hồng</span>
+            <span class="g-pts">Tiến hóa Tú Tài</span>
+          </button>
+          <button class="gift-btn" data-gift="Trà Sữa" data-coins="20" data-icon="🧋">
+            <span class="g-icon">🧋</span>
+            <span class="g-name">Trà Sữa</span>
+            <span class="g-pts">Tiến hóa Cử Nhân</span>
+          </button>
+          <button class="gift-btn" data-gift="Bảo Kiếm" data-coins="10" data-icon="🗡️" data-sword="1">
+            <span class="g-icon">🗡️</span>
+            <span class="g-name">Bảo Kiếm</span>
+            <span class="g-pts">Hồi Trảm & Xóa Cooldown</span>
+          </button>
+          <button class="gift-btn shield-btn" data-gift="Hộ Thân Phù" data-coins="15" data-icon="🛡️" data-shield="1">
+            <span class="g-icon">🛡️</span>
+            <span class="g-name">Hộ Thân Phù</span>
+            <span class="g-pts">Khiên Miễn Trảm 5p</span>
+          </button>
+          <button class="gift-btn" data-gift="Thiên Nga" data-coins="50" data-icon="🦢">
+            <span class="g-icon">🦢</span>
+            <span class="g-name">Thiên Nga</span>
+            <span class="g-pts">Thừa Tướng • Đại Xá</span>
+          </button>
+          <button class="gift-btn" data-gift="Pháo Hoa" data-coins="100" data-icon="🎆" data-firework="1">
+            <span class="g-icon">🎆</span>
+            <span class="g-name">Pháo Hoa</span>
+            <span class="g-pts">X3 Điểm Toàn Phòng</span>
+          </button>
+          <button class="gift-btn" data-gift="Rương Kho Báu" data-coins="20" data-icon="🎁" data-chest="1">
+            <span class="g-icon">🎁</span>
+            <span class="g-name">Rương Kho Báu</span>
+            <span class="g-pts">Quay gacha ngẫu nhiên</span>
+          </button>
+          <button class="gift-btn king-btn" data-gift="Sư Tử Vàng" data-coins="300" data-icon="🦁">
+            <span class="g-icon">🦁</span>
+            <span class="g-name">Sư Tử Vàng</span>
+            <span class="g-pts">👑 SIÊU TIẾN HÓA VUA!</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. ĐIỀU KHIỂN KỲ THI ĐÌNH (383 CÂU HỎI THUẦN SỬ HỌC CẤP ĐỘ KHÓ & CHUYÊN SÂU) -->
+      <div class="cp-card">
+        <div class="card-title-row">
+          <h3>📜 3. Ngân Hàng 383 Câu Sử Học Đại Khoa (100% Đề Khó)</h3>
+          <button class="btn btn-warning btn-sm" id="triggerQuizBtn">🔔 Phát Đề Ngẫu Nhiên</button>
+        </div>
+
+        <div class="sim-section-label">🎯 Chọn câu hỏi cụ thể để phát lên màn hình:</div>
+        <div class="input-row">
+          <select id="quizBankSelect" class="quiz-select"></select>
+          <button class="btn btn-primary btn-sm" id="launchSelectedQuizBtn">Phát câu này</button>
+        </div>
+
+        <div class="sim-section-label">⚡ Test nhanh khán giả trả lời Trắc Nghiệm (A / B / C / D):</div>
+        <div class="quick-btns">
+          <button class="chip-btn quiz-ans-chip" data-comment="A">Khán giả chọn <b>A</b></button>
+          <button class="chip-btn quiz-ans-chip" data-comment="B">Khán giả chọn <b>B</b></button>
+          <button class="chip-btn quiz-ans-chip" data-comment="C">Khán giả chọn <b>C</b></button>
+          <button class="chip-btn quiz-ans-chip" data-comment="D">Khán giả chọn <b>D</b></button>
+          <button class="chip-btn btn-wrong-test" id="simWrongAnswerBtn">❌ Test Trả lời SAI</button>
+          <button class="chip-btn btn-right-test" id="simRightAnswerBtn">✅ Test Trả lời ĐÚNG</button>
+        </div>
+
+        <details class="custom-quiz-details">
+          <summary>➕ Tự soạn câu hỏi trắc nghiệm mới</summary>
+          <div class="custom-quiz-form">
+            <input type="text" id="customQText" placeholder="Nhập câu hỏi..." />
+            <div class="custom-opts-row">
+              <input type="text" id="customOptA" placeholder="Đáp án A..." />
+              <input type="text" id="customOptB" placeholder="Đáp án B..." />
+              <input type="text" id="customOptC" placeholder="Đáp án C..." />
+              <input type="text" id="customOptD" placeholder="Đáp án D..." />
+            </div>
+            <div class="input-row" style="margin-bottom:0;">
+              <select id="customCorrectSelect" class="quiz-select" style="max-width:140px;">
+                <option value="A">Đáp án đúng: A</option>
+                <option value="B">Đáp án đúng: B</option>
+                <option value="C">Đáp án đúng: C</option>
+                <option value="D">Đáp án đúng: D</option>
+              </select>
+              <button class="btn btn-success btn-sm" id="addCustomQuizBtn">Lưu & Phát Ngay</button>
+            </div>
+          </div>
+        </details>
+
+        <div class="bgm-control-bar" style="margin-top: 12px; padding: 10px 12px; background: rgba(245, 196, 81, 0.08); border: 1px solid rgba(245, 196, 81, 0.3); border-radius: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+          <button class="btn btn-gold btn-sm" id="toggleBgmBtn" style="flex: 1 1 210px;">🎵 Nhạc nền: Yume to Hazakura (BẬT)</button>
+          <div style="display: flex; align-items: center; gap: 6px; flex: 1 1 160px;">
+            <span style="font-size: 12px; color: #f5c451; white-space: nowrap;">🔉 Âm lượng:</span>
+            <input type="range" id="bgmVolumeSlider" min="0" max="100" value="45" style="flex: 1; cursor: pointer;" />
+            <span id="bgmVolumeLabel" style="font-size: 12px; font-weight: 700; min-width: 34px;">45%</span>
+          </div>
+          <button class="btn btn-outline btn-sm" id="chooseCustomMp3Btn" title="Chọn file nhạc MP3 bất kỳ từ máy tính của bạn">📂 Đổi file MP3 khác</button>
+          <input type="file" id="customMp3Input" accept="audio/*" style="display: none;" />
+        </div>
+
+        <div class="admin-actions-grid" style="margin-top: 10px;">
+          <button class="btn btn-gold" id="testCoronationBtn">👑 Test Tiến Hóa Lên Vua</button>
+          <button class="btn btn-gold" id="trigger2dCelebrationBtn">🌸 Test Pháo Hoa & Thả Đèn Lồng 2D</button>
+          <button class="btn btn-outline" id="toggle2dFxBtn">✨ Hiệu Ứng 2D: BẬT</button>
+          <button class="btn btn-danger" id="kingSmiteBtn">⚔️ Vua Hạ Lệnh Trảm</button>
+          <button class="btn btn-warning" id="ministerUsurpBtn">⚡ Thừa Tướng Đoạt Ngôi</button>
+          <button class="btn btn-outline" id="toggleBgBtn">🏯 Đổi Nền (Điện Thi / Trà Quán)</button>
+          <button class="btn btn-outline" id="toggleEditSeatsBtn">📍 Kéo thả chỉnh vị trí ghế</button>
+          <button class="btn btn-outline" id="toggleAudioBtn">🔊 Âm thanh & Giọng đọc: BẬT</button>
+          <button class="btn btn-outline" id="resetSeatsBtn">🔄 Khôi phục vị trí ghế chuẩn</button>
+          <button class="btn btn-outline" id="resetGameBtn">🧹 Mở Khoa Thi Mới (Reset)</button>
+        </div>
+      </div>
+
+      <!-- 4. DANH SÁCH SĨ TỬ ĐANG TRONG BÀN -->
+      <div class="cp-card">
+        <h3>📋 Danh sách Sĩ Tử trong Trường Thi (<span id="totalPlayersCount">0</span>)</h3>
+        <div class="players-table-wrap">
+          <table class="players-table">
+            <thead>
+              <tr>
+                <th>Hạng</th>
+                <th>Sĩ Tử</th>
+                <th>Phẩm Hàm</th>
+                <th>Công Trạng</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="playersTableBody">
+              <tr><td colspan="5" style="text-align:center; opacity:0.6;">Chưa có sĩ tử nào vào bàn</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Nút nổi để mở lại bảng điều khiển khi đang ở chế độ Quay Live -->
+    <button class="floating-restore-btn hidden" id="restoreCpBtn">⚙️ Hiện Bảng Điều Khiển</button>
+  </div>
+
+  <!-- Nhạc nền Cổ Phong: Yume to Hazakura (Không lời - Đàn Tranh & Sáo Trúc) -->
+  <audio id="bgmAudio" src="assets/yume_to_hazakura.wav" loop preload="auto"></audio>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="quizzes.js?v=22"></script>
+  <script src="app.js?v=50"></script>
+</body>
+</html>
+
+
