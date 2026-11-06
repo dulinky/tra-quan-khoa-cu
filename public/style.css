@@ -2472,3 +2472,184 @@ body.clean-live-mode .live-stage {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-0.3cqw); }
 }
+
+/* ==========================================================================
+   7. MÀN HÌNH THI CHUYÊN BIỆT (DEDICATED QUIZ VIEW / FOCUSED MODE)
+   Tối ưu hóa 100% không gian 9:16 tập trung vào Cuộn Giấy Trúc & 4 Đáp Án
+   ========================================================================== */
+.live-stage.quiz-focused-mode #seatsLayer {
+  opacity: 0.12 !important;
+  filter: blur(5px) !important;
+  transform: scale(0.96) !important;
+  pointer-events: none !important;
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease !important;
+}
+
+.live-stage.quiz-focused-mode #emperorStatusBar,
+.live-stage.quiz-focused-mode .corner-hud {
+  opacity: 0 !important;
+  transform: translateY(-20px) !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+.live-stage.quiz-focused-mode .floating-gift-menu {
+  opacity: 0.1 !important;
+  filter: blur(3px) !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.live-stage.quiz-focused-mode .top-highlight-pill {
+  opacity: 0.25 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.live-stage.quiz-focused-mode .server-fever-card {
+  opacity: 0.65 !important;
+  transform: scale(0.96) !important;
+  transition: all 0.3s ease !important;
+}
+
+.live-stage.quiz-focused-mode .royal-trio-podium {
+  transform: translateY(-0.5cqw) scale(0.98) !important;
+  transition: transform 0.35s ease !important;
+}
+
+/* Khung cuộn giấy trúc câu hỏi khi ở Focused Mode */
+.live-stage.quiz-focused-mode .quiz-modal {
+  top: 20% !important;
+  width: 90cqw !important;
+  max-width: 92% !important;
+  z-index: 120 !important;
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(-50%) scale(1) !important;
+  animation: quizScrollPop 0.38s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
+}
+
+@keyframes quizScrollPop {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.88); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+.live-stage.quiz-focused-mode .quiz-scroll {
+  padding: 1.6cqw 2.2cqw !important;
+  border-width: 0.45cqw !important;
+  box-shadow: 0 1.5cqw 4.5cqw rgba(0, 0, 0, 0.96), 0 0 3.5cqw rgba(255, 215, 0, 0.55), inset 0 0 2cqw rgba(255, 215, 0, 0.18) !important;
+}
+
+.live-stage.quiz-focused-mode .quiz-question {
+  font-size: 2.7cqw !important;
+  line-height: 1.35 !important;
+  margin-bottom: 1.4cqw !important;
+}
+
+.live-stage.quiz-focused-mode .quiz-options-grid {
+  gap: 1.1cqw !important;
+}
+
+.live-stage.quiz-focused-mode .quiz-opt-box {
+  padding: 1.1cqw 1.3cqw !important;
+  border-radius: 1.6cqw !important;
+  font-size: 2.3cqw !important;
+}
+
+/* ==========================================================================
+   8. TIẾN ĐỘ BÌNH CHỌN A B C D THEO THỜI GIAN THỰC (LIVE CROWD VOTE)
+   ========================================================================== */
+.quiz-opt-box {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.opt-vote-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.28) 0%, rgba(255, 215, 0, 0.08) 100%);
+  transition: width 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.opt-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.9cqw;
+}
+
+.opt-vote-count {
+  margin-left: auto;
+  font-size: 1.7cqw;
+  font-weight: 800;
+  color: #ffd666;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 0.1cqw 0.7cqw;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   9. FIX LỖI ĐÈ CHỮ / XUNG ĐỘT UI (OVERFLOW & TEXT-TRUNCATE)
+   ========================================================================== */
+.trio-info {
+  max-width: 26cqw !important;
+  width: max-content !important;
+  min-width: 16cqw !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.trio-name {
+  max-width: 22cqw !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.trio-score {
+  max-width: 22cqw !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.seat-occ-name {
+  max-width: 16.5cqw !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.seat-node.tier-6 .seat-occ-name {
+  max-width: 26cqw !important;
+}
+
+.fb-name {
+  max-width: 36cqw !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
+
+.top-pill-line1,
+.top-pill-line2 {
+  max-width: 58cqw !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: block !important;
+}

@@ -3832,5 +3832,559 @@ window.IMPERIAL_QUIZ_BANK = [
       "D": "Quá trình Lên men"
     },
     "correct": "B"
+  },
+
+  // =========================================================================
+  // BỘ 55 CÂU HỎI LỊCH SỬ & ĐỊA LÝ CỔ ĐẠI VIỆT SIÊU KHÓ (ĐẠI KHOA CỬ & ĐỊA CHÍ)
+  // =========================================================================
+  {
+    "q": "Khoa thi Nho học đầu tiên trong lịch sử khoa cử Việt Nam được tổ chức vào năm Ất Mão 1075 dưới triều vua Lý Nhân Tông có tên gọi chính thức là gì?",
+    "options": {
+      "A": "Thi Hương",
+      "B": "Thi Hội",
+      "C": "Minh kinh bác học và Nho học tam trường",
+      "D": "Điện thí chọn Tam khôi"
+    },
+    "correct": "C"
+  },
+  {
+    "q": "Ai là vị Thủ khoa đầu tiên đỗ đầu khoa thi 'Minh kinh bác học' năm 1075, sau này làm quan tới chức Thái sư phụ chính triều Lý?",
+    "options": {
+      "A": "Lê Văn Thịnh",
+      "B": "Mạc Đĩnh Chi",
+      "C": "Nguyễn Hiền",
+      "D": "Bùi Quốc Khái"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Khoa thi đầu tiên trong lịch sử Việt Nam chính thức lấy học vị 'Trạng nguyên, Bảng nhãn, Thám hoa' (Tam Khôi) diễn ra vào năm Đinh Mùi 1247 dưới triều vua nào?",
+    "options": {
+      "A": "Lý Thái Tông",
+      "B": "Trần Thái Tông",
+      "C": "Trần Thánh Tông",
+      "D": "Lê Thánh Tông"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Vị Trạng nguyên trẻ tuổi nhất trong lịch sử khoa cử Việt Nam đỗ Tam khôi khi mới 13 tuổi (khoa thi năm 1247) là bậc danh thần nào?",
+    "options": {
+      "A": "Nguyễn Hiền",
+      "B": "Lê Quý Đôn",
+      "C": "Phạm Đôn Lễ",
+      "D": "Vũ Duệ"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Bia tiến sĩ đầu tiên tại Văn Miếu - Quốc Tử Giám (Hà Nội) được vua Lê Thánh Tông cho dựng vào năm Giáp Thìn 1484 ghi lại danh tính các vị đỗ đại khoa của khoa thi năm nào?",
+    "options": {
+      "A": "Khoa thi năm Nhâm Tuất 1442",
+      "B": "Khoa thi năm Canh Tuất 1490",
+      "C": "Khoa thi năm Giáp Dần 1434",
+      "D": "Khoa thi năm Đinh Mùi 1427"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Câu danh ngôn bất hủ khắc trên tấm bia tiến sĩ khoa thi năm 1442: 'Hiền tài là nguyên khí của quốc gia, nguyên khí thịnh thì thế nước mạnh...' do danh sĩ nào phụng mệnh soạn thảo?",
+    "options": {
+      "A": "Ngô Sĩ Liên",
+      "B": "Thân Nhân Trung",
+      "C": "Lương Thế Vinh",
+      "D": "Đỗ Nhuận"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Dưới triều Hậu Lê, quy chế thi Đình (Điện thí) phân định thứ bậc các vị đỗ Tiến sĩ thành 'Tam giáp'. Ba bậc Tam giáp theo thứ tự cao xuống thấp là gì?",
+    "options": {
+      "A": "Tiến sĩ xuất thân, Đồng tiến sĩ xuất thân, Khảo thí",
+      "B": "Đệ nhất giáp tiến sĩ cập đệ, Đệ nhị giáp tiến sĩ xuất thân, Đệ tam giáp đồng tiến sĩ xuất thân",
+      "C": "Tam khôi, Cử nhân, Tú tài",
+      "D": "Bác sĩ, Thạc sĩ, Tiến sĩ triều đình"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Địa danh 'Cửa biển Thần Phù' nổi tiếng hiểm trở sóng gió trong câu ca dao 'Lênh đênh qua cửa Thần Phù / Khéo tu thì nổi, vụng tu thì chìm' thuộc ranh giới cổ giữa hai tỉnh nào ngày nay?",
+    "options": {
+      "A": "Ninh Bình và Thanh Hóa",
+      "B": "Quảng Bình và Hà Tĩnh",
+      "C": "Nam Định và Thái Bình",
+      "D": "Nghệ An và Hà Tĩnh"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Dãy đèo hiểm yếu ngăn cách vùng đồng bằng Bắc Bộ với Thanh Hóa, nơi vua Quang Trung đóng quân hội kiến Ngô Thì Nhậm trước khi tiến quân ra Bắc diệt 29 vạn quân Mãn Thanh là đèo nào?",
+    "options": {
+      "A": "Đèo Ngang",
+      "B": "Đèo Ba Dội (Đèo Tam Điệp)",
+      "C": "Đèo Hải Vân",
+      "D": "Đèo Cù Mông"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Chiến lũy quân sự kiên cố do Đào Duy Từ chỉ huy xây dựng năm 1631 giúp Chúa Nguyễn Đàng Trong chặn đứng 7 lần tấn công của quân Trịnh Đàng Ngoài là thành lũy nào?",
+    "options": {
+      "A": "Lũy Thầy (Lũy Nhật Lệ / Lũy Định Mười)",
+      "B": "Thành Cổ Loa",
+      "C": "Thành Bản Phủ",
+      "D": "Thành Gia Định"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Bộ địa chí quốc gia quy mô đồ sộ bậc nhất triều Nguyễn gồm 85 quyển mô tả địa lý, thổ sản, phong tục toàn cõi Việt Nam do Quốc sử quán triều Nguyễn biên soạn có tên là gì?",
+    "options": {
+      "A": "Đại Nam Nhất Thống Chí",
+      "B": "Gia Định Thành Thông Chí",
+      "C": "Phủ Biên Tạp Lục",
+      "D": "Nam Triều Công Nghiệp Diễn Chí"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Bộ sách địa lý hành chính đầu tiên còn lưu giữ tương đối toàn vẹn của nước ta do danh thần Nguyễn Trãi dâng lên vua Lê Thái Tông năm 1435 có tên là gì?",
+    "options": {
+      "A": "Ức Trai thi tập",
+      "B": "Dư Địa Chí (Dư Địa Chí - Bình Ngô đại cáo phụ lục)",
+      "C": "Lam Sơn thực lục",
+      "D": "Vân Đài loại ngữ"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Địa danh 'Ải Chi Lăng' lịch sử nơi nghĩa quân Lam Sơn chém đầu Liễu Thăng vào năm 1427 hiện nay thuộc địa phận tỉnh nào?",
+    "options": {
+      "A": "Lạng Sơn",
+      "B": "Cao Bằng",
+      "C": "Bắc Giang",
+      "D": "Quảng Ninh"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ai là tác giả của 'Gia Định Thành Thông Chí' - tác phẩm địa lý, lịch sử vô giá miêu tả chi tiết miền đất Nam Bộ thời khai hoang mở cõi?",
+    "options": {
+      "A": "Trịnh Hoài Đức",
+      "B": "Lê Quý Đôn",
+      "C": "Nguyễn Cư Trinh",
+      "D": "Phan Thanh Giản"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Hội thề Đông Quan năm Đinh Mùi 1427 diễn ra ở phía nam thành Đông Quan (Thăng Long), giữa thủ lĩnh nghĩa quân Lam Sơn Lê Lợi và viên Tổng binh giặc Minh nào?",
+    "options": {
+      "A": "Liễu Thăng",
+      "B": "Vương Thông",
+      "C": "Mộc Thạnh",
+      "D": "Trương Phụ"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Trong cuộc chiến tranh Trịnh - Nguyễn phân tranh (1627 - 1672), con sông nào được lấy làm ranh giới chia cắt Đàng Ngoài (Vua Lê - Chúa Trịnh) và Đàng Trong (Chúa Nguyễn)?",
+    "options": {
+      "A": "Sông Bến Hải",
+      "B": "Sông Gianh (Linh Giang)",
+      "C": "Sông Nhật Lệ",
+      "D": "Sông Thạch Hãn"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Vị nữ Trạng nguyên duy nhất trong lịch sử các triều đại phong kiến Việt Nam (đỗ Trạng nguyên thời nhà Mạc năm 1574) là ai?",
+    "options": {
+      "A": "Nguyễn Thị Lộ",
+      "B": "Nguyễn Thị Duệ (bà chúa Me, ngụy trang nam trang đi thi)",
+      "C": "Đoàn Thị Điểm",
+      "D": "Hồ Xuân Hương"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Dưới triều vua Nguyễn nào, nhà nước phong kiến Việt Nam bãi bỏ học vị 'Trạng nguyên', thay vào đó chỉ lấy cao nhất là Đình nguyên Thám hoa hoặc Bảng nhãn để tránh thần quyền lấn áp?",
+    "options": {
+      "A": "Vua Gia Long",
+      "B": "Vua Minh Mạng",
+      "C": "Vua Tự Đức",
+      "D": "Vua Thiệu Trị"
+    },
+    "correct": "B"
+  },
+  {
+    "q": "Vua Quang Trung Nguyễn Huệ từng hạ lệnh xây dựng một kinh đô mới ở chân núi Dũng Quyết (nay thuộc TP Vinh, Nghệ An). Kinh đô đó tên là gì?",
+    "options": {
+      "A": "Phượng Hoàng Trung Đô",
+      "B": "Lam Kinh",
+      "C": "Tây Đô",
+      "D": "Vạn Lại - Yên Trường"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Trận thủy chiến Rạch Gầm - Xoài Mút năm 1785 đánh tan 5 vạn quân Xiêm La của Nguyễn Huệ diễn ra trên đoạn sông Tiền thuộc địa phận tỉnh nào ngày nay?",
+    "options": {
+      "A": "Tiền Giang",
+      "B": "Bến Tre",
+      "C": "Vĩnh Long",
+      "D": "Đồng Tháp"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ai là vị Thám hoa nổi tiếng triều Trần từng soạn thảo bộ quốc sử đầu tiên của nước Đại Việt mang tên 'Đại Việt Sử Ký' gồm 30 quyển (hoàn thành năm 1272)?",
+    "options": {
+      "A": "Lê Văn Hưu",
+      "B": "Ngô Sĩ Liên",
+      "C": "Trần Khắc Chung",
+      "D": "Trương Hán Siêu"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Cửa biển Bạch Đằng lịch sử - nơi diễn ra ba chiến thắng thủy chiến oanh liệt năm 938, 981 và 1288 - nằm giáp ranh giữa thành phố Hải Phòng và tỉnh nào?",
+    "options": {
+      "A": "Quảng Ninh",
+      "B": "Hải Dương",
+      "C": "Thái Bình",
+      "D": "Bắc Ninh"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Thành Tây Đô (Thành nhà Hồ) - công trình kiến trúc đá độc nhất vô nhị ở Đông Nam Á được xây dựng vào năm 1397 dưới thời Hồ Quý Ly thuộc tỉnh nào?",
+    "options": {
+      "A": "Thanh Hóa (huyện Vĩnh Lộc)",
+      "B": "Ninh Bình",
+      "C": "Hà Tĩnh",
+      "D": "Nghệ An"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Vị danh thần nào thời Lê Sơ được phong làm Trạng nguyên Toán học, là tác giả của cuốn sách giáo khoa toán học đầu tiên của Việt Nam 'Đại thành toán pháp'?",
+    "options": {
+      "A": "Lương Thế Vinh",
+      "B": "Vũ Hữu",
+      "C": "Lê Quý Đôn",
+      "D": "Phan Huy Chú"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Khoa thi Hội cuối cùng trong lịch sử chế độ phong kiến Việt Nam được tổ chức vào năm nào dưới triều vua Khải Định?",
+    "options": {
+      "A": "Năm Kỷ Mùi 1919",
+      "B": "Năm Ất Mão 1915",
+      "C": "Năm Mậu Thân 1908",
+      "D": "Năm Giáp Tý 1924"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ai là vị Tiến sĩ đỗ Thủ khoa khoa thi Hội năm Kỷ Mùi 1919 - cũng là vị quan đỗ đại khoa cuối cùng trong chế độ khoa cử Hán học nghìn năm của nước Việt?",
+    "options": {
+      "A": "Nguyễn Phong Di",
+      "B": "Phan Bội Châu",
+      "C": "Nguyễn Sinh Sắc",
+      "D": "Huỳnh Thúc Kháng"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Trong cuộc kháng chiến chống quân xâm lược Tống lần thứ hai (1077), phòng tuyến sông Như Nguyệt được Thái úy Lý Thường Kiệt xây dựng dọc bờ nam dòng sông nào ngày nay?",
+    "options": {
+      "A": "Sông Cầu",
+      "B": "Sông Đuống",
+      "C": "Sông Thương",
+      "D": "Sông Lục Nam"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Vùng đất 'Vạn Kiếp' - căn cứ đại bản doanh quân sự hiểm yếu của Quốc công Tiết chế Hưng Đạo Đại Vương Trần Quốc Tuấn - nay thuộc địa phận thành phố nào?",
+    "options": {
+      "A": "TP Chí Linh, tỉnh Hải Dương",
+      "B": "TP Bắc Ninh, tỉnh Bắc Ninh",
+      "C": "TP Uông Bí, tỉnh Quảng Ninh",
+      "D": "TP Thái Nguyên, tỉnh Thái Nguyên"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Bộ bách khoa toàn thư đồ sộ đầu tiên của Việt Nam gồm 49 quyển chia thành 10 chí (Hiến chương loại chí) do danh nho nào dành 10 năm trước tác?",
+    "options": {
+      "A": "Phan Huy Chú",
+      "B": "Lê Quý Đôn",
+      "C": "Nguyễn Trãi",
+      "D": "Bùi Huy Bích"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Trong kỳ thi Nho học thời Lê - Nguyễn, các sĩ tử phải vượt qua 'Tứ trường'. Trường thứ nhất (Nhất trường) thường khảo hạch nội dung gì?",
+    "options": {
+      "A": "Kinh nghĩa (Tứ thư, Ngũ kinh)",
+      "B": "Chiếu, biểu, dụ (soạn văn bản quan phương)",
+      "C": "Thơ, phú (văn vần)",
+      "D": "Văn sách (chính trị, thời sự, kế sách trị quốc)"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Trong Tứ trường thời phong kiến, trường thi thứ tư (Tứ trường) được coi là phân định tài năng kinh bang tế thế cao nhất vì thi nội dung gì?",
+    "options": {
+      "A": "Văn sách (Đề ra về đạo trị nước, kế sách an dân, mưu lược)",
+      "B": "Chép lại kinh sách thuộc lòng",
+      "C": "Làm thơ Đường luật thất ngôn",
+      "D": "Viết chữ Hán kiểu Khảo thư"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ngôi đền Kiếp Bạc thờ Hưng Đạo Đại Vương nằm ở ngã ba Lục Đầu Giang. Tên gọi 'Lục Đầu Giang' chỉ nơi hội tụ của 6 con sông lớn nào?",
+    "options": {
+      "A": "Sông Cầu, Sông Thương, Sông Lục Nam, Sông Đuống, Sông Kinh Thầy, Sông Thái Bình",
+      "B": "Sông Hồng, Sông Đà, Sông Lô, Sông Đáy, Sông Cầu, Sông Mã",
+      "C": "Sông Gianh, Sông Nhật Lệ, Sông Thạch Hãn, Sông Lam, Sông La, Sông Chu",
+      "D": "Sông Tiền, Sông Hậu, Sông Vàm Cỏ Đông, Sông Vàm Cỏ Tây, Sông Bé, Sông Đồng Nai"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Chiến lũy Tam Điệp - Biện Sơn do ai hiến kế cho Ngô Thì Nhậm và Ngô Văn Sở tạm rút quân bảo toàn lực lượng trước sức mạnh của 29 vạn quân Thanh năm 1788?",
+    "options": {
+      "A": "Ngô Thì Nhậm",
+      "B": "Nguyễn Thiếp (La Sơn Phu Tử)",
+      "C": "Trần Danh Án",
+      "D": "Phan Huy Ích"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Kênh đào nhân tạo đầu tiên trong lịch sử khai phá Nam Bộ dưới triều Nguyễn nối liền Hà Tiên với Châu Đốc do Thoại Ngọc Hầu chỉ huy đào đắp mang tên là gì?",
+    "options": {
+      "A": "Kênh Vĩnh Tế",
+      "B": "Kênh Thoại Hà",
+      "C": "Kênh Chợ Gạo",
+      "D": "Kênh Xáng Xà No"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Nhà bác học lỗi lạc thời Lê Trung Hưng được mệnh danh là 'túi khôn của thời đại', tác giả của 'Kiến văn tiểu lục', 'Phủ biên tạp lục' là ai?",
+    "options": {
+      "A": "Lê Quý Đôn",
+      "B": "Lê Hữu Trác",
+      "C": "Phan Huy Chú",
+      "D": "Phùng Khắc Khoan"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ai là tác giả của bộ danh bạ y học vĩ đại 'Hải Thượng Y Tông Tâm Lĩnh' gồm 66 quyển, được coi là ông tổ ngành y dược cổ truyền Việt Nam?",
+    "options": {
+      "A": "Hải Thượng Lãn Ông - Lê Hữu Trác",
+      "B": "Tuệ Tĩnh thiền sư",
+      "C": "Chu Văn An",
+      "D": "Nguyễn Gia Thiều"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Địa danh 'Cố đô Hoa Lư' - kinh đô đầu tiên của nhà nước phong kiến tập quyền Đại Cồ Việt dưới triều Đinh và Tiền Lê nằm trọn trong vùng cảnh quan thuộc huyện nào của Ninh Bình?",
+    "options": {
+      "A": "Huyện Hoa Lư",
+      "B": "Huyện Gia Viễn",
+      "C": "Huyện Nho Quan",
+      "D": "Huyện Kim Sơn"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Trong cuộc kháng chiến chống quân Nguyên Mông lần thứ hai (1285), sự kiện viên tướng giặc Toa Đô bị chém đầu đền tội diễn ra tại trận đánh vang dội nào?",
+    "options": {
+      "A": "Trận Tây Kết",
+      "B": "Trận Hàm Tử",
+      "C": "Trận Chương Dương",
+      "D": "Trận Vạn Kiếp"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Hai câu thơ hào sảng kết thúc chiến dịch đánh tan Toa Đô và Thoát Hoan: 'Đoạt sáo Chương Dương độ / Cầm Hồ Hàm Tử quan' là trước tác của vị danh tướng triều Trần nào?",
+    "options": {
+      "A": "Thái sư Thượng phụ Trần Quang Khải",
+      "B": "Hưng Đạo Đại Vương Trần Quốc Tuấn",
+      "C": "Nhân Huệ Vương Trần Khánh Dư",
+      "D": "Hoài Văn Hầu Trần Quốc Toản"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Dưới triều Gia Long và Minh Mạng, Đội Hoàng Sa kiêm quản Đội Bắc Hải được nhà Nguyễn cắt cử ra tuần tra, đo đạc hải trình và cắm mốc chủ quyền tại hai quần đảo nào?",
+    "options": {
+      "A": "Hoàng Sa và Trường Sa",
+      "B": "Côn Đảo và Phú Quốc",
+      "C": "Thổ Chu và Hòn Khoai",
+      "D": "Cát Bà và Bạch Long Vĩ"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ai là vị Thượng thư bộ Binh kiêm Phó sứ sang Pháp chuộc 3 tỉnh miền Đông Nam Kỳ năm 1863, sau này tuẫn tiết tại thành Hà Nội năm 1873?",
+    "options": {
+      "A": "Nguyễn Tri Phương",
+      "B": "Phan Thanh Giản",
+      "C": "Hoàng Diệu",
+      "D": "Trương Định"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Tổng đốc thành Hà Nội thề sống chết với thành lũy, thắt cổ tự vẫn tại Võ Miếu khi quân Pháp do Đại úy Henri Rivière tấn công chiếm thành Hà Nội năm 1882 là ai?",
+    "options": {
+      "A": "Hoàng Diệu",
+      "B": "Nguyễn Tri Phương",
+      "C": "Lưu Vĩnh Phúc",
+      "D": "Nguyễn Cao"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Hiệp ước đầu tiên triều đình nhà Nguyễn chính thức ký với thực dân Pháp cắt nhượng 3 tỉnh miền Đông Nam Kỳ (Gia Định, Định Tường, Biên Hòa) và đảo Côn Lôn là hiệp ước nào?",
+    "options": {
+      "A": "Hiệp ước Nhâm Tuất 1862",
+      "B": "Hiệp ước Giáp Tuất 1874",
+      "C": "Hiệp ước Quý Mùi (Hác-măng) 1883",
+      "D": "Hiệp ước Giáp Thân (Pa-tơ-nốt) 1884"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Khu di tích lịch sử 'Lam Kinh' - nơi an nghỉ vĩnh hằng và đặt điện miếu lăng tẩm của các vị hoàng đế vương hậu triều Hậu Lê nằm ở huyện nào của Thanh Hóa?",
+    "options": {
+      "A": "Huyện Thọ Xuân",
+      "B": "Huyện Hà Trung",
+      "C": "Huyện Đông Sơn",
+      "D": "Huyện Vĩnh Lộc"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Tác phẩm quân sự lý luận kinh điển 'Binh Thư Yếu Lược' do danh nhân kiệt xuất nào biên soạn để dạy bảo chư tướng triều Trần chuẩn bị kháng chiến chống Nguyên Mông?",
+    "options": {
+      "A": "Hưng Đạo Đại Vương Trần Quốc Tuấn",
+      "B": "Thái sư Trần Thủ Độ",
+      "C": "Thượng tướng Thái sư Trần Quang Khải",
+      "D": "Chiêu Minh Đại Vương Trần Quang Triều"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Danh xưng 'Tam Đảo' của dãy núi nổi tiếng miền Bắc bắt nguồn từ ba đỉnh núi hùng vĩ nào nhô lên giữa biển mây?",
+    "options": {
+      "A": "Đỉnh Thạch Bàn, Đỉnh Thiên Thị, Đỉnh Phù Nghĩa",
+      "B": "Đỉnh Phan Xi Păng, Đỉnh Tà Lùa, Đỉnh Pu Si Lung",
+      "C": "Đỉnh Ba Vì, Đỉnh Mẫu Sơn, Đỉnh Tây Côn Lĩnh",
+      "D": "Đỉnh Yên Tử, Đỉnh Ngọa Vân, Đỉnh Bảo Đài"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Cao nguyên đá Đồng Văn - Công viên địa chất toàn cầu UNESCO đầu tiên của Việt Nam (được công nhận năm 2010) thuộc địa phận tỉnh nào?",
+    "options": {
+      "A": "Hà Giang",
+      "B": "Lào Cai",
+      "C": "Lai Châu",
+      "D": "Yên Bái"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Hồ nước ngọt tự nhiên trên núi đá vôi lớn nhất Việt Nam nằm ở tỉnh Bắc Kạn có tên là gì?",
+    "options": {
+      "A": "Hồ Ba Bể",
+      "B": "Hồ Thác Bà",
+      "C": "Hồ Núi Cốc",
+      "D": "Hồ Tơ Nưng"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Ngọn thác tự nhiên nằm trên đường biên giới quốc tế Việt - Trung có quy mô nước đổ và cảnh quan kỳ vĩ bậc nhất Đông Nam Á là thác nào?",
+    "options": {
+      "A": "Thác Bản Giốc (tỉnh Cao Bằng)",
+      "B": "Thác Cam Ly",
+      "C": "Thác Dambri",
+      "D": "Thác Pongour"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Cực Đông trên đất liền của nước Cộng hòa Xã hội Chủ nghĩa Việt Nam (nơi đón ánh bình minh sớm nhất trên đất liền) nằm tại Mũi Đôi thuộc tỉnh nào?",
+    "options": {
+      "A": "Khánh Hòa (bán đảo Hòn Gốm, Vạn Ninh)",
+      "B": "Phú Yên (Mũi Đại Lãnh)",
+      "C": "Bình Thuận (Mũi Kê Gà)",
+      "D": "Ninh Thuận (Mũi Dinh)"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Cực Tây trên đất liền của Việt Nam - nơi 'một tiếng gà gáy ba nước cùng nghe' (Việt Nam - Lào - Trung Quốc) nằm tại A Pa Chải thuộc tỉnh nào?",
+    "options": {
+      "A": "Điện Biên (xã Sín Thầu, huyện Mường Nhé)",
+      "B": "Lai Châu",
+      "C": "Sơn La",
+      "D": "Lào Cai"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Đỉnh đèo hiểm trở được mệnh danh là 'Đệ nhất hùng quan' ngự trên dãy núi Bạch Mã chia cách ranh giới khí hậu giữa tỉnh Thừa Thiên Huế và TP Đà Nẵng là đèo nào?",
+    "options": {
+      "A": "Đèo Hải Vân",
+      "B": "Đèo Cù Mông",
+      "C": "Đèo Ngang",
+      "D": "Đèo An Khê"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Hệ thống hang động tự nhiên lớn nhất thế giới được khám phá năm 2009 nằm trong Vườn quốc gia Phong Nha - Kẻ Bàng (Quảng Bình) có tên là gì?",
+    "options": {
+      "A": "Hang Sơn Đoòng",
+      "B": "Hang Én",
+      "C": "Động Thiên Đường",
+      "D": "Hang Va"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Con sông duy nhất của miền Bắc Việt Nam có hướng chảy đặc biệt từ Đông Nam lên Tây Bắc (ngược lại hoàn toàn với quy luật hướng Tây Bắc - Đông Nam) là sông nào?",
+    "options": {
+      "A": "Sông Kỳ Cùng (Lạng Sơn)",
+      "B": "Sông Lô",
+      "C": "Sông Gâm",
+      "D": "Sông Chảy"
+    },
+    "correct": "A"
+  },
+  {
+    "q": "Vịnh Hạ Long được UNESCO hai lần công nhận là Di sản Thiên nhiên Thế giới nhờ những giá trị nổi bật toàn cầu nào?",
+    "options": {
+      "A": "Giá trị thẩm mỹ (cảnh quan tự nhiên) và Giá trị địa chất - địa mạo",
+      "B": "Giá trị lịch sử cổ đại và Khảo cổ học tiền sử",
+      "C": "Giá trị văn hóa Nho giáo và Di sản kiến trúc",
+      "D": "Giá trị lâm sinh và Trữ lượng khoáng sản than đá"
+    },
+    "correct": "A"
   }
 ];

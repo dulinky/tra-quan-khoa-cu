@@ -3,30 +3,31 @@
 // =========================================================================
 
 // 1. TỌA ĐỘ GHẾ THOÁNG ĐÃNG TRÊN SÂN CHẦU ĐIỆN THI ĐÌNH (KHÔNG CHỒNG CHÉO)
+// Cơ chế điểm chuẩn mới: Thăng quan đòi hỏi thực tài và kiên trì qua nhiều kỳ thi!
 const DEFAULT_SEATS = [
   // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngồi chính giữa Ngai Vàng phát sáng trên bục rồng)
-  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 41.5, minScore: 2500 },
+  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 41.5, minScore: 3500 },
 
   // HÀNG 1 (y: 52.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (5 ghế trải đều trên thềm điện chầu)
-  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 17.0, y: 52.8, minScore: 900 },
-  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 33.5, y: 52.8, minScore: 300 },
-  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 51.5, minScore: 300 },
-  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 66.5, y: 52.8, minScore: 300 },
-  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 83.0, y: 52.8, minScore: 900 },
+  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 17.0, y: 52.8, minScore: 1500 },
+  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 33.5, y: 52.8, minScore: 500 },
+  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 51.5, minScore: 500 },
+  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 66.5, y: 52.8, minScore: 500 },
+  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 83.0, y: 52.8, minScore: 1500 },
 
   // HÀNG 2 (y: 63.5%): CỬ NHÂN (5 ghế đối xứng thẳng hàng sân thượng)
-  { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 63.5, minScore: 100 },
-  { id: 'T3_2', tier: 3, title: 'Cử Nhân', hat: '📘', x: 34.0, y: 63.5, minScore: 100 },
-  { id: 'T3_3', tier: 3, title: 'Cử Nhân', hat: '📘', x: 50.0, y: 63.5, minScore: 100 },
-  { id: 'T3_4', tier: 3, title: 'Cử Nhân', hat: '📘', x: 66.0, y: 63.5, minScore: 100 },
-  { id: 'T3_5', tier: 3, title: 'Cử Nhân', hat: '📘', x: 82.0, y: 63.5, minScore: 100 },
+  { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 63.5, minScore: 200 },
+  { id: 'T3_2', tier: 3, title: 'Cử Nhân', hat: '📘', x: 34.0, y: 63.5, minScore: 200 },
+  { id: 'T3_3', tier: 3, title: 'Cử Nhân', hat: '📘', x: 50.0, y: 63.5, minScore: 200 },
+  { id: 'T3_4', tier: 3, title: 'Cử Nhân', hat: '📘', x: 66.0, y: 63.5, minScore: 200 },
+  { id: 'T3_5', tier: 3, title: 'Cử Nhân', hat: '📘', x: 82.0, y: 63.5, minScore: 200 },
 
   // HÀNG 3 (y: 74.0%): TÚ TÀI (5 ghế thềm giữa sân chầu)
-  { id: 'T2_1', tier: 2, title: 'Tú Tài', hat: '🍵', x: 18.0, y: 74.0, minScore: 25 },
-  { id: 'T2_2', tier: 2, title: 'Tú Tài', hat: '🍵', x: 34.0, y: 74.0, minScore: 25 },
-  { id: 'T2_3', tier: 2, title: 'Tú Tài', hat: '🍵', x: 50.0, y: 74.0, minScore: 25 },
-  { id: 'T2_4', tier: 2, title: 'Tú Tài', hat: '🍵', x: 66.0, y: 74.0, minScore: 25 },
-  { id: 'T2_5', tier: 2, title: 'Tú Tài', hat: '🍵', x: 82.0, y: 74.0, minScore: 25 },
+  { id: 'T2_1', tier: 2, title: 'Tú Tài', hat: '🍵', x: 18.0, y: 74.0, minScore: 60 },
+  { id: 'T2_2', tier: 2, title: 'Tú Tài', hat: '🍵', x: 34.0, y: 74.0, minScore: 60 },
+  { id: 'T2_3', tier: 2, title: 'Tú Tài', hat: '🍵', x: 50.0, y: 74.0, minScore: 60 },
+  { id: 'T2_4', tier: 2, title: 'Tú Tài', hat: '🍵', x: 66.0, y: 74.0, minScore: 60 },
+  { id: 'T2_5', tier: 2, title: 'Tú Tài', hat: '🍵', x: 82.0, y: 74.0, minScore: 60 },
 
   // HÀNG 4 (y: 84.5%): ĐỒNG SINH (5 ghế hàng đầu sân lát gạch chuẩn đối xứng)
   { id: 'T1_1', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 18.0, y: 84.5, minScore: 0 },
@@ -242,6 +243,133 @@ function playSound(type) {
     }
   } catch (e) {}
 }
+
+// =========================================================================
+// 1. BỘ LỌC TÊN NGƯỜI DÙNG CHO GIỌNG ĐỌC AI (TTS CLEANER)
+// Loại bỏ 100% ký tự lạ, emoji, chuỗi vô nghĩa để giọng đọc trôi chảy, tự nhiên
+// =========================================================================
+function cleanUsernameForSpeech(rawName) {
+  if (!rawName) return 'sĩ tử';
+  let str = String(rawName).trim();
+
+  // 1. Loại bỏ tiền tố kỹ thuật nếu có (bot_, situ_, user...)
+  str = str.replace(/^(?:bot_|situ_|user_?)/i, '');
+
+  // 2. Loại bỏ toàn bộ emoji và biểu tượng unicode đồ họa
+  str = str.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F900}-\u{1F9FF}\u{1FA70}-\u{1FAFF}]/gu, '');
+
+  // 3. Loại bỏ ký tự đặc biệt, dấu câu, gạch chân, a còng, chấm phẩy
+  str = str.replace(/[@#\-_.*~|\\/+=<>()[\]{}!?:;"'`^&$%]/g, ' ');
+
+  // 4. Loại bỏ các chuỗi số dài vô nghĩa (ví dụ: "nam98721345" -> "nam")
+  str = str.replace(/\d{3,}/g, '');
+
+  // 5. Loại bỏ các từ viết tắt lặp cụm vô nghĩa (như "cf", "fp", "ff", "vn", "tiktok")
+  str = str.replace(/\b(?:cf|fp|ff|vn|tt|fb|yt|id|acc|live|tv)\b/gi, ' ');
+
+  // 6. Gộp nhiều khoảng trắng thành 1
+  str = str.replace(/\s+/g, ' ').trim();
+
+  // 7. Nếu tên sau khi lọc quá ngắn (< 2 ký tự) hoặc chỉ toàn số: gán danh xưng cổ phong
+  if (!str || str.length < 2 || /^\d+$/.test(str)) {
+    return 'sĩ tử';
+  }
+
+  // Giới hạn độ dài để giọng đọc ngắn gọn, dứt khoát (tối đa 3 từ)
+  const words = str.split(' ').filter(Boolean).slice(0, 3);
+  return words.join(' ');
+}
+
+// BỘ HIỆU ỨNG ÂM THANH NGẮN (SFX) THUẦN WEB AUDIO API (KHÔNG TRỄ, KHÔNG CẦN TẢI FILE)
+const AudioFX = {
+  ctx: null,
+  init() {
+    if (!this.ctx && typeof window !== 'undefined') {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume().catch(() => {});
+    }
+  },
+  // Tiếng lật trang giấy trúc sột soạt tự nhiên khi ra câu hỏi mới
+  playPaperFlip() {
+    if (!audioEnabled) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const bufferSize = Math.floor(this.ctx.sampleRate * 0.18);
+      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
+      }
+      const noise = this.ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1400, now);
+      filter.frequency.exponentialRampToValueAtTime(700, now + 0.18);
+      filter.Q.value = 2.0;
+
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.linearRampToValueAtTime(0.01, now + 0.18);
+
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+      noise.start(now);
+    } catch (e) {}
+  },
+  // Tiếng chuông ngân vàng trong trẻo khi đáp đúng
+  playBellDing() {
+    if (!audioEnabled) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      [880, 1320, 1760].forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+
+        const initialVol = 0.22 / (idx + 1);
+        gain.gain.setValueAtTime(initialVol, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + (idx === 0 ? 0.9 : 0.45));
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.95);
+      });
+    } catch (e) {}
+  },
+  // Tiếng gõ mõ sai trầm dứt khoát
+  playWrongBuzz() {
+    if (!audioEnabled) return;
+    try {
+      this.init();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(160, now);
+      osc.frequency.exponentialRampToValueAtTime(75, now + 0.22);
+
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.24);
+    } catch (e) {}
+  }
+};
 
 let currentSpeechToken = 0;
 
@@ -928,7 +1056,7 @@ function updateRoyalTrioPodium(sorted) {
       if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(40);
     }
     showImperialDecree('⚡ SOÁN NGÔI BẢNG VÀNG ⚡', `Sĩ tử ${top1.nickname} vừa vượt điểm, chính thức đoạt Ngôi Vị Top 1 của ${oldName}!`);
-    speakImperial(`Kính báo thiên hạ! Sĩ tử ${top1.nickname} vừa soán ngôi Bảng Vàng của ${oldName}!`, true);
+    speakImperial(`Kính báo thiên hạ! Sĩ tử ${cleanUsernameForSpeech(top1.nickname)} vừa soán ngôi Bảng Vàng của ${cleanUsernameForSpeech(oldName)}!`, true);
   }
 
   if (top1) {
@@ -936,10 +1064,10 @@ function updateRoyalTrioPodium(sorted) {
     previousTop1Name = top1.nickname;
   }
 
-  // Update Top 1
-  const t1Av = document.getElementById('trioTop1Avatar');
-  const t1Nm = document.getElementById('trioTop1Name');
-  const t1Sc = document.getElementById('trioTop1Score');
+  // Update Top 1 (hỗ trợ cả trioAvt1 và trioTop1Avatar)
+  const t1Av = document.getElementById('trioAvt1') || document.getElementById('trioTop1Avatar');
+  const t1Nm = document.getElementById('trioName1') || document.getElementById('trioTop1Name');
+  const t1Sc = document.getElementById('trioScore1') || document.getElementById('trioTop1Score');
   if (top1 && t1Av && t1Nm && t1Sc) {
     t1Av.src = top1.avatar || getCatMemeAvatar(top1.tier, top1.uniqueId);
     t1Nm.textContent = top1.nickname;
@@ -951,9 +1079,9 @@ function updateRoyalTrioPodium(sorted) {
   }
 
   // Update Top 2
-  const t2Av = document.getElementById('trioTop2Avatar');
-  const t2Nm = document.getElementById('trioTop2Name');
-  const t2Sc = document.getElementById('trioTop2Score');
+  const t2Av = document.getElementById('trioAvt2') || document.getElementById('trioTop2Avatar');
+  const t2Nm = document.getElementById('trioName2') || document.getElementById('trioTop2Name');
+  const t2Sc = document.getElementById('trioScore2') || document.getElementById('trioTop2Score');
   if (top2 && t2Av && t2Nm && t2Sc) {
     t2Av.src = top2.avatar || getCatMemeAvatar(top2.tier, top2.uniqueId);
     t2Nm.textContent = top2.nickname;
@@ -965,9 +1093,9 @@ function updateRoyalTrioPodium(sorted) {
   }
 
   // Update Top 3
-  const t3Av = document.getElementById('trioTop3Avatar');
-  const t3Nm = document.getElementById('trioTop3Name');
-  const t3Sc = document.getElementById('trioTop3Score');
+  const t3Av = document.getElementById('trioAvt3') || document.getElementById('trioTop3Avatar');
+  const t3Nm = document.getElementById('trioName3') || document.getElementById('trioTop3Name');
+  const t3Sc = document.getElementById('trioScore3') || document.getElementById('trioTop3Score');
   if (top3 && t3Av && t3Nm && t3Sc) {
     t3Av.src = top3.avatar || getCatMemeAvatar(top3.tier, top3.uniqueId);
     t3Nm.textContent = top3.nickname;
@@ -1955,11 +2083,25 @@ let ministerUsurpChantsByUser = new Map();
 let throneDuelState = null; // Trạng thái Quyết Đấu 5 Câu Siêu Khó & Siêu Nhanh (Vua vs Thừa Tướng)
 let pendingUsurpQuote = false; // Cờ phát câu thoại "Ngươi lên ngôi chỉ vì may mắn!" khi Thừa Tướng cướp ngôi
 
+let quizOptionVotes = { A: 0, B: 0, C: 0, D: 0 };
+let quizTotalVotes = 0;
+
+function updateQuizOptionVoteDisplay() {
+  ['A', 'B', 'C', 'D'].forEach(key => {
+    const cnt = quizOptionVotes[key] || 0;
+    const pct = quizTotalVotes > 0 ? Math.round((cnt / quizTotalVotes) * 100) : 0;
+    const fillEl = document.getElementById(`voteFill_${key}`);
+    const countEl = document.getElementById(`voteCount_${key}`);
+    if (fillEl) fillEl.style.width = `${pct}%`;
+    if (countEl) countEl.textContent = cnt > 0 ? `${cnt} (${pct}%)` : '';
+  });
+}
+
 function getQuizRankReward(rankIndex) {
-  if (rankIndex === 0) return { pts: 500, label: '🥇 Trạng Nguyên Đáp Nhanh (#1)' };
-  if (rankIndex === 1) return { pts: 350, label: '🥈 Bảng Nhãn Đáp Nhanh (#2)' };
-  if (rankIndex === 2) return { pts: 250, label: '🥉 Thám Hoa Đáp Nhanh (#3)' };
-  return { pts: 150, label: `📜 Đỗ Đạt (#${rankIndex + 1})` };
+  if (rankIndex === 0) return { pts: 40, label: '🥇 Trạng Nguyên (#1)' };
+  if (rankIndex === 1) return { pts: 25, label: '🥈 Bảng Nhãn (#2)' };
+  if (rankIndex === 2) return { pts: 18, label: '🥉 Thám Hoa (#3)' };
+  return { pts: 10, label: `📜 Đỗ Đạt (#${rankIndex + 1})` };
 }
 
 function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
@@ -1990,6 +2132,14 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
     }
   }
 
+  // 1. KÍCH HOẠT MÀN HÌNH THI CHUYÊN BIỆT (FOCUSED QUIZ MODE)
+  // Làm mờ nhẹ sảnh chờ và ẩn bớt widget phụ để 100% người xem tập trung vào đề thi
+  const liveStageEl = document.getElementById('liveStage');
+  if (liveStageEl) liveStageEl.classList.add('quiz-focused-mode');
+
+  // Phát tiếng lật giấy sột soạt cổ phong
+  AudioFX.playPaperFlip();
+
   // Tắt ngay chiếu chỉ thánh chỉ cũ để không che mất câu hỏi
   const decreeEl = document.getElementById('imperialDecree');
   if (decreeEl) {
@@ -2009,6 +2159,8 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   quizFirstWinner = null;
   currentQuizStartTime = Date.now();
   quizFirstBloodWinners = [];
+  quizOptionVotes = { A: 0, B: 0, C: 0, D: 0 };
+  quizTotalVotes = 0;
 
   const fbCard = document.getElementById('firstBloodCard');
   if (fbCard) fbCard.classList.add('hidden');
@@ -2043,14 +2195,18 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   const grid = document.getElementById('quizOptionsGrid');
   grid.innerHTML = ['A', 'B', 'C', 'D'].map(key => `
     <div class="quiz-opt-box" id="quizOpt_${key}">
-      <span class="quiz-opt-key">${key}</span>
-      <span class="quiz-opt-text">${escapeHtml(quiz.options[key])}</span>
+      <div class="opt-vote-fill" id="voteFill_${key}" style="width: 0%;"></div>
+      <div class="opt-content">
+        <span class="quiz-opt-key">${key}</span>
+        <span class="quiz-opt-text">${escapeHtml(quiz.options[key])}</span>
+        <span class="opt-vote-count" id="voteCount_${key}"></span>
+      </div>
     </div>
   `).join('');
 
   const fb = document.getElementById('quizLiveFeedback');
   fb.className = 'quiz-live-feedback';
-  fb.innerHTML = `👉 Đua Top trả lời <b>A, B, C, D</b>: 🥇Hạng 1 <b>+500đ</b> • 🥈Hạng 2 <b>+350đ</b> • 🥉Hạng 3 <b>+250đ</b>!`;
+  fb.innerHTML = `👉 Đua Top trả lời <b>A, B, C, D</b>: 🥇Trạng Nguyên <b>+40đ</b> • 🥈Bảng Nhãn <b>+25đ</b> • 🥉Thám Hoa <b>+18đ</b> • Đỗ Đạt <b>+10đ</b> (Sai <b>-10đ</b>)!`;
 
   const qmEl = document.getElementById('quizModal');
   if (qmEl) {
@@ -2078,6 +2234,11 @@ function evaluateQuizComment(player, commentText) {
   const chosenKey = detectChosenOption(commentText, activeQuiz);
   if (!chosenKey) return false;
 
+  // Cập nhật số người bình chọn A, B, C, D theo thời gian thực lên màn hình thi
+  quizOptionVotes[chosenKey] = (quizOptionVotes[chosenKey] || 0) + 1;
+  quizTotalVotes++;
+  updateQuizOptionVoteDisplay();
+
   const fb = document.getElementById('quizLiveFeedback');
 
   // --- THÁNH CHỈ: chỉ Hoàng Đế được đáp ---
@@ -2104,6 +2265,8 @@ function evaluateQuizComment(player, commentText) {
     reassignAllSeats();
     setTimeout(() => {
       document.getElementById('quizModal').classList.add('hidden');
+      const stageEl = document.getElementById('liveStage');
+      if (stageEl) stageEl.classList.remove('quiz-focused-mode');
       activeQuiz = null;
       decreeState = null;
       nextAutoQuizCooldown = 30;
@@ -2215,25 +2378,27 @@ function evaluateQuizComment(player, commentText) {
   if (chosenKey === activeQuiz.correct) {
     quizAnsweredUsers.add(player.uniqueId);
 
-    // CHUỖI ĐỖ ĐẠT LIÊN TIẾP (STREAK SYSTEM)
+    // CHUỖI ĐỖ ĐẠT LIÊN TIẾP (STREAK SYSTEM MỚI CÂN BẰNG)
     player.correctStreak = (player.correctStreak || 0) + 1;
     let streakBonus = 0;
     let streakText = '';
     if (player.correctStreak >= 5) {
-      streakBonus = 250;
-      streakText = ` 🔥 x${player.correctStreak} BẤT BẠI (+250đ)`;
+      streakBonus = 20;
+      streakText = ` 🔥 x${player.correctStreak} BẤT BẠI (+20đ)`;
       playSound('streak');
     } else if (player.correctStreak >= 3) {
-      streakBonus = 120;
-      streakText = ` ⚡ x${player.correctStreak} LIÊN ĐỖ (+120đ)`;
+      streakBonus = 10;
+      streakText = ` ⚡ x${player.correctStreak} LIÊN ĐỖ (+10đ)`;
       playSound('streak');
     } else if (player.correctStreak === 2) {
-      streakBonus = 60;
-      streakText = ` 🔥 x2 STREAK (+60đ)`;
+      streakBonus = 5;
+      streakText = ` 🔥 x2 STREAK (+5đ)`;
       playSound('streak');
     } else {
       playSound('promote');
     }
+
+    AudioFX.playBellDing();
 
     const rankIdx = quizCorrectWinners.length;
     const baseReward = getQuizRankReward(rankIdx);
@@ -2243,11 +2408,11 @@ function evaluateQuizComment(player, commentText) {
     let earnedPts = (baseReward.pts * multi) + streakBonus;
     if (player.doubleDown) { earnedPts *= 2; player.doubleDown = false; streakText += ' ⚡X2 QUÀ'; }
 
-    // FIRST BLOOD: TOP 3 TỐC ĐỘ PHẢN XẠ NHANH NHẤT
+    // FIRST BLOOD: TOP 3 TỐC ĐỘ PHẢN XẠ NHANH NHẤT (+15đ, +10đ, +5đ)
     if (quizFirstBloodWinners.length < 3 && !quizFirstBloodWinners.some(w => w.uniqueId === player.uniqueId)) {
       const reactionSec = ((Date.now() - currentQuizStartTime) / 1000).toFixed(2);
       const fbRank = quizFirstBloodWinners.length + 1;
-      const fbBonus = fbRank === 1 ? 50 : (fbRank === 2 ? 30 : 20);
+      const fbBonus = fbRank === 1 ? 15 : (fbRank === 2 ? 10 : 5);
       earnedPts += fbBonus;
       quizFirstBloodWinners.push({
         rank: fbRank,
@@ -2259,7 +2424,7 @@ function evaluateQuizComment(player, commentText) {
       });
       renderFirstBloodCard();
       if (fbRank === 1) {
-        speakImperial(`Xuất sắc! Sĩ tử ${player.nickname} giành First Blood chỉ trong ${reactionSec} giây!`, true);
+        speakImperial(`Xuất sắc! Sĩ tử ${cleanUsernameForSpeech(player.nickname)} giành First Blood chỉ trong ${reactionSec} giây!`, true);
       }
     }
 
@@ -2295,24 +2460,19 @@ function evaluateQuizComment(player, commentText) {
     return true;
   }
 
+  // TRẢ LỜI SAI: BỊ TRỪ ĐIỂM (-10đ, Boss Round -30đ) VÀ RESET CHUỖI ĐỖ ĐẠT
+  AudioFX.playWrongBuzz();
   playSound('wrong');
   player.correctStreak = 0;
-  if (specialBossRoundActive) {
-    player.score = Math.max(0, player.score - 100);
-    reassignAllSeats();
-    if (player.seatId) {
-      showFloatingToastOnSeat(player.seatId, '❌ Khi quân phạm thượng! -100đ', 'toast-wrong');
-    }
-  }
-  fb.className = 'quiz-live-feedback fb-wrong';
-  fb.innerHTML = `❌ <b>${escapeHtml(player.nickname)}</b> chọn <b>${chosenKey}</b> chưa đúng! Hãy suy nghĩ & chọn lại!`;
+  const penalty = specialBossRoundActive ? 30 : 10;
+  player.score = Math.max(0, player.score - penalty);
+  reassignAllSeats();
 
-  player.lastActiveAt = Date.now();
-  if (!player.seatId) {
-    reassignAllSeats();
-  }
+  fb.className = 'quiz-live-feedback fb-wrong';
+  fb.innerHTML = `❌ <b>${escapeHtml(player.nickname)}</b> chọn <b>${chosenKey}</b> CHƯA ĐÚNG (-${penalty}đ)! Hãy suy nghĩ kỹ & chọn lại!`;
+
   if (player.seatId) {
-    showFloatingToastOnSeat(player.seatId, `❌ Chọn ${chosenKey}: Chưa đúng!`, 'toast-wrong');
+    showFloatingToastOnSeat(player.seatId, `❌ Chọn ${chosenKey}: Chưa đúng (-${penalty}đ)!`, 'toast-wrong');
   }
 
   addCompactCommentPill(player, `chọn đáp án ${chosenKey} (Sai)`, '❌ Thử lại');
@@ -2585,7 +2745,7 @@ function handleTikTokEvent(evt) {
     }
 
     const isJoinCmd = lower.includes('!thi') || lower === 'thi' || lower === '1';
-    const gained = (isJoinCmd ? 15 : 8) * mult;
+    const gained = (isJoinCmd ? 4 : 2) * mult;
     player.score += gained;
     reassignAllSeats();
 
@@ -2604,7 +2764,7 @@ function handleTikTokEvent(evt) {
   else if (evt.type === 'like') {
     const wasAlreadySeated = players.has(evt.uniqueId) && players.get(evt.uniqueId).seatId;
     const player = getOrCreatePlayer(evt.uniqueId, evt.nickname, evt.avatar);
-    const pts = Math.max(6, Math.min(35, Math.round((evt.likeCount || 15) * 0.6))) * mult;
+    const pts = Math.max(1, Math.min(3, Math.round((evt.likeCount || 15) * 0.1))) * mult;
     player.score += pts;
 
     // TÍCH CÔNG ĐỨC / ĐỐT NHANG CẦU MAY (GLOBAL FEVER BAR)
@@ -3211,6 +3371,8 @@ function finishThroneDuel() {
   throneDuelState = null;
 
   document.getElementById('quizModal').classList.add('hidden');
+  const stageEl = document.getElementById('liveStage');
+  if (stageEl) stageEl.classList.remove('quiz-focused-mode');
   activeQuiz = null;
   quizResolved = true;
   nextAutoQuizCooldown = 20; // 20s sau khi đấu đoạt ngôi xong mới ra đề mới
@@ -3578,6 +3740,8 @@ setInterval(() => {
 
       setTimeout(() => {
         document.getElementById('quizModal').classList.add('hidden');
+        const stageEl = document.getElementById('liveStage');
+        if (stageEl) stageEl.classList.remove('quiz-focused-mode');
         activeQuiz = null;
         decreeState = null;
         nextAutoQuizCooldown = 30; // Nghỉ đúng 30 giây giữa các câu hỏi theo yêu cầu
