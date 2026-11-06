@@ -4,37 +4,38 @@
 
 // 1. TỌA ĐỘ GHẾ THOÁNG ĐÃNG TRÊN SÂN CHẦU ĐIỆN THI ĐÌNH (KHÔNG CHỒNG CHÉO)
 // Cơ chế điểm chuẩn mới: Thăng quan đòi hỏi thực tài và kiên trì qua nhiều kỳ thi!
+// Toàn bộ ghế sĩ tử được neo vững chắc ở nửa dưới màn hình (y: 72% - 94%), giải phóng 100% không gian giữa cho Đề Thi!
 const DEFAULT_SEATS = [
-  // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngồi chính giữa Ngai Vàng phát sáng trên bục rồng)
-  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 41.5, minScore: 3500 },
+  // TẦNG 6: CỬU NGŨ CHÍ TÔN - HOÀNG ĐẾ (Ngồi bục rồng sân chầu)
+  { id: 'T6_1', tier: 6, title: 'HOÀNG ĐẾ', hat: '👑', x: 50.0, y: 72.0, minScore: 3500 },
 
-  // HÀNG 1 (y: 52.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (5 ghế trải đều trên thềm điện chầu)
-  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 17.0, y: 52.8, minScore: 1500 },
-  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 33.5, y: 52.8, minScore: 500 },
-  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 51.5, minScore: 500 },
-  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 66.5, y: 52.8, minScore: 500 },
-  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 83.0, y: 52.8, minScore: 1500 },
+  // HÀNG 1 (y: 73.5%): ĐẠI THẦN THỪA TƯỚNG & TAM KHÔI (5 ghế trải đều trên thềm điện chầu)
+  { id: 'T5_1', tier: 5, title: 'Tả Thừa Tướng', hat: '🟣', x: 18.0, y: 73.5, minScore: 1500 },
+  { id: 'T4_2', tier: 4, title: 'Bảng Nhãn', hat: '🌺', x: 34.0, y: 73.5, minScore: 500 },
+  { id: 'T4_1', tier: 4, title: 'Trạng Nguyên', hat: '🏵️', x: 50.0, y: 73.5, minScore: 500 },
+  { id: 'T4_3', tier: 4, title: 'Thám Hoa', hat: '🌸', x: 66.0, y: 73.5, minScore: 500 },
+  { id: 'T5_2', tier: 5, title: 'Hữu Thừa Tướng', hat: '🟣', x: 82.0, y: 73.5, minScore: 1500 },
 
-  // HÀNG 2 (y: 63.5%): CỬ NHÂN (5 ghế đối xứng thẳng hàng sân thượng)
-  { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 63.5, minScore: 200 },
-  { id: 'T3_2', tier: 3, title: 'Cử Nhân', hat: '📘', x: 34.0, y: 63.5, minScore: 200 },
-  { id: 'T3_3', tier: 3, title: 'Cử Nhân', hat: '📘', x: 50.0, y: 63.5, minScore: 200 },
-  { id: 'T3_4', tier: 3, title: 'Cử Nhân', hat: '📘', x: 66.0, y: 63.5, minScore: 200 },
-  { id: 'T3_5', tier: 3, title: 'Cử Nhân', hat: '📘', x: 82.0, y: 63.5, minScore: 200 },
+  // HÀNG 2 (y: 80.5%): CỬ NHÂN (5 ghế đối xứng)
+  { id: 'T3_1', tier: 3, title: 'Cử Nhân', hat: '📘', x: 18.0, y: 80.5, minScore: 200 },
+  { id: 'T3_2', tier: 3, title: 'Cử Nhân', hat: '📘', x: 34.0, y: 80.5, minScore: 200 },
+  { id: 'T3_3', tier: 3, title: 'Cử Nhân', hat: '📘', x: 50.0, y: 80.5, minScore: 200 },
+  { id: 'T3_4', tier: 3, title: 'Cử Nhân', hat: '📘', x: 66.0, y: 80.5, minScore: 200 },
+  { id: 'T3_5', tier: 3, title: 'Cử Nhân', hat: '📘', x: 82.0, y: 80.5, minScore: 200 },
 
-  // HÀNG 3 (y: 74.0%): TÚ TÀI (5 ghế thềm giữa sân chầu)
-  { id: 'T2_1', tier: 2, title: 'Tú Tài', hat: '🍵', x: 18.0, y: 74.0, minScore: 60 },
-  { id: 'T2_2', tier: 2, title: 'Tú Tài', hat: '🍵', x: 34.0, y: 74.0, minScore: 60 },
-  { id: 'T2_3', tier: 2, title: 'Tú Tài', hat: '🍵', x: 50.0, y: 74.0, minScore: 60 },
-  { id: 'T2_4', tier: 2, title: 'Tú Tài', hat: '🍵', x: 66.0, y: 74.0, minScore: 60 },
-  { id: 'T2_5', tier: 2, title: 'Tú Tài', hat: '🍵', x: 82.0, y: 74.0, minScore: 60 },
+  // HÀNG 3 (y: 87.5%): TÚ TÀI (5 ghế đối xứng)
+  { id: 'T2_1', tier: 2, title: 'Tú Tài', hat: '🍵', x: 18.0, y: 87.5, minScore: 60 },
+  { id: 'T2_2', tier: 2, title: 'Tú Tài', hat: '🍵', x: 34.0, y: 87.5, minScore: 60 },
+  { id: 'T2_3', tier: 2, title: 'Tú Tài', hat: '🍵', x: 50.0, y: 87.5, minScore: 60 },
+  { id: 'T2_4', tier: 2, title: 'Tú Tài', hat: '🍵', x: 66.0, y: 87.5, minScore: 60 },
+  { id: 'T2_5', tier: 2, title: 'Tú Tài', hat: '🍵', x: 82.0, y: 87.5, minScore: 60 },
 
-  // HÀNG 4 (y: 84.5%): ĐỒNG SINH (5 ghế hàng đầu sân lát gạch chuẩn đối xứng)
-  { id: 'T1_1', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 18.0, y: 84.5, minScore: 0 },
-  { id: 'T1_2', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 34.0, y: 84.5, minScore: 0 },
-  { id: 'T1_3', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 50.0, y: 84.5, minScore: 0 },
-  { id: 'T1_4', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 66.0, y: 84.5, minScore: 0 },
-  { id: 'T1_5', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 82.0, y: 84.5, minScore: 0 }
+  // HÀNG 4 (y: 94.0%): ĐỒNG SINH (5 ghế hàng đầu sân lát gạch chuẩn đối xứng)
+  { id: 'T1_1', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 18.0, y: 94.0, minScore: 0 },
+  { id: 'T1_2', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 34.0, y: 94.0, minScore: 0 },
+  { id: 'T1_3', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 50.0, y: 94.0, minScore: 0 },
+  { id: 'T1_4', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 66.0, y: 94.0, minScore: 0 },
+  { id: 'T1_5', tier: 1, title: 'Đồng Sinh', hat: '📜', x: 82.0, y: 94.0, minScore: 0 }
 ];
 
 // =========================================================================
@@ -163,7 +164,7 @@ function playSound(type) {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(520, now);
       osc.frequency.exponentialRampToValueAtTime(840, now + 0.16);
-      gain.gain.setValueAtTime(0.16, now);
+      gain.gain.setValueAtTime(0.08, now); // Giảm âm lượng xuống ~35%
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
       osc.connect(gain).connect(audioCtx.destination);
       osc.start(now);
@@ -174,7 +175,7 @@ function playSound(type) {
         const gain = audioCtx.createGain();
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-        gain.gain.setValueAtTime(0.18, now + idx * 0.08);
+        gain.gain.setValueAtTime(0.09, now + idx * 0.08);
         gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.25);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(now + idx * 0.08);
@@ -186,7 +187,7 @@ function playSound(type) {
         const gain = audioCtx.createGain();
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(freq, now + idx * 0.1);
-        gain.gain.setValueAtTime(0.15, now + idx * 0.1);
+        gain.gain.setValueAtTime(0.08, now + idx * 0.1);
         gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.18);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(now + idx * 0.1);
@@ -198,7 +199,7 @@ function playSound(type) {
         const gain = audioCtx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(300 + i * 95, now + i * 0.075);
-        gain.gain.setValueAtTime(0.14, now + i * 0.075);
+        gain.gain.setValueAtTime(0.07, now + i * 0.075);
         gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.075 + 0.12);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(now + i * 0.075);
@@ -210,7 +211,7 @@ function playSound(type) {
         const gain = audioCtx.createGain();
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(freq, now + idx * 0.07);
-        gain.gain.setValueAtTime(0.22, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.10, now + idx * 0.07);
         gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.42);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(now + idx * 0.07);
@@ -223,7 +224,7 @@ function playSound(type) {
         const gain = audioCtx.createGain();
         osc.type = idx % 2 === 0 ? 'sawtooth' : 'triangle';
         osc.frequency.setValueAtTime(freq, now + idx * 0.055);
-        gain.gain.setValueAtTime(0.2, now + idx * 0.055);
+        gain.gain.setValueAtTime(0.10, now + idx * 0.055);
         gain.gain.exponentialRampToValueAtTime(0.0008, now + 1.8);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(now + idx * 0.055);
@@ -235,7 +236,7 @@ function playSound(type) {
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(240, now);
       osc.frequency.exponentialRampToValueAtTime(50, now + 0.5);
-      gain.gain.setValueAtTime(0.28, now);
+      gain.gain.setValueAtTime(0.12, now);
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
       osc.connect(gain).connect(audioCtx.destination);
       osc.start(now);
@@ -314,8 +315,8 @@ const AudioFX = {
       filter.Q.value = 2.0;
 
       const gain = this.ctx.createGain();
-      gain.gain.setValueAtTime(0.35, now);
-      gain.gain.linearRampToValueAtTime(0.01, now + 0.18);
+      gain.gain.setValueAtTime(0.14, now); // Giảm âm lượng xuống ~35%
+      gain.gain.linearRampToValueAtTime(0.005, now + 0.18);
 
       noise.connect(filter);
       filter.connect(gain);
@@ -336,7 +337,7 @@ const AudioFX = {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, now);
 
-        const initialVol = 0.22 / (idx + 1);
+        const initialVol = 0.10 / (idx + 1); // Giảm âm lượng xuống ~35%
         gain.gain.setValueAtTime(initialVol, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + (idx === 0 ? 0.9 : 0.45));
 
@@ -360,8 +361,8 @@ const AudioFX = {
       osc.frequency.setValueAtTime(160, now);
       osc.frequency.exponentialRampToValueAtTime(75, now + 0.22);
 
-      gain.gain.setValueAtTime(0.25, now);
-      gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
+      gain.gain.setValueAtTime(0.11, now); // Giảm âm lượng xuống ~35%
+      gain.gain.linearRampToValueAtTime(0.005, now + 0.22);
 
       osc.connect(gain);
       gain.connect(this.ctx.destination);
@@ -388,12 +389,29 @@ function stopAllSpeech(broadcast = true) {
   }
 }
 
-function speakImperial(text, priority = false) {
+let isReadingQuiz = false;
+const imperialSpeechQueue = [];
+
+function speakImperial(text, priority = false, isQuizQuestion = false) {
   if (isCleanLiveView) return;
   if (!audioEnabled || !('speechSynthesis' in window)) return;
+
+  // Nếu hệ thống đang đọc Câu hỏi thi và 4 đáp án A/B/C/D:
+  // TUYỆT ĐỐI KHÔNG HỦY ĐỀ THI! Xếp vào hàng đợi để đọc ngay sau khi đọc xong đề bài!
+  if (isReadingQuiz && !isQuizQuestion) {
+    if (priority && imperialSpeechQueue.length < 2) {
+      imperialSpeechQueue.push(text);
+    }
+    return;
+  }
+
+  if (isQuizQuestion) {
+    isReadingQuiz = true;
+  }
+
   try {
     ensureBgmPlaying();
-    if (priority) {
+    if (priority || isQuizQuestion) {
       currentSpeechToken++;
       window.speechSynthesis.pause();
       window.speechSynthesis.cancel();
@@ -410,11 +428,19 @@ function speakImperial(text, priority = false) {
         isSpeakingNow = false;
         applyBgmVolume();
         window.speechSynthesis.cancel();
+        if (isQuizQuestion) isReadingQuiz = false;
         return;
       }
       if (idx >= chunks.length) {
         isSpeakingNow = false;
         applyBgmVolume();
+        if (isQuizQuestion) {
+          isReadingQuiz = false;
+          if (imperialSpeechQueue.length > 0) {
+            const nextItem = imperialSpeechQueue.shift();
+            speakImperial(nextItem, false, false);
+          }
+        }
         return;
       }
       isSpeakingNow = true;
@@ -436,7 +462,9 @@ function speakImperial(text, priority = false) {
       window.speechSynthesis.speak(utter);
     }
     speakNextChunk();
-  } catch (e) {}
+  } catch (e) {
+    if (isQuizQuestion) isReadingQuiz = false;
+  }
 }
 
 
@@ -668,17 +696,27 @@ function strikeSeatWithLight(seat, isEmperor = false) {
 // =========================================================================
 // 5. QUẢN LÝ TỌA ĐỘ GHẾ & HIỂN THỊ AVATAR RIÊNG TỪNG SĨ TỬ SẮC NÉT
 // =========================================================================
+function resetSeatPositions() {
+  localStorage.removeItem('tra_quan_seats_v10');
+  localStorage.removeItem('tra_quan_seats_v8');
+  localStorage.removeItem('tra_quan_seats_v6');
+  localStorage.removeItem('tra_quan_seats_v5');
+  localStorage.removeItem('tra_quan_seats_v3');
+  seats = DEFAULT_SEATS.map(s => ({ ...s, occupantId: null }));
+  reassignAllSeats();
+}
+window.resetSeatPositions = resetSeatPositions;
+
 function loadSeatsConfig() {
   try {
+    localStorage.removeItem('tra_quan_seats_v8');
     localStorage.removeItem('tra_quan_seats_v6');
     localStorage.removeItem('tra_quan_seats_v5');
     localStorage.removeItem('tra_quan_seats_v3');
-    const saved = localStorage.getItem('tra_quan_seats_v8');
+    const saved = localStorage.getItem('tra_quan_seats_v10');
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length === DEFAULT_SEATS.length) {
-        const emp = parsed.find(s => s.id === 'T6_1');
-        if (emp) { emp.x = 50.0; emp.y = 41.5; }
         return parsed.map(s => ({ ...s, occupantId: null }));
       }
     }
@@ -688,9 +726,7 @@ function loadSeatsConfig() {
 
 function saveSeatsConfig() {
   const clean = seats.map(({ occupantId, ...rest }) => rest);
-  const emp = clean.find(s => s.id === 'T6_1');
-  if (emp) { emp.x = 50.0; emp.y = 41.5; }
-  localStorage.setItem('tra_quan_seats_v8', JSON.stringify(clean));
+  localStorage.setItem('tra_quan_seats_v10', JSON.stringify(clean));
 }
 
 function renderSeats() {
@@ -1141,6 +1177,59 @@ function startBossRoundQuiz() {
   speakImperial('Khai mở Điện Thí Hoàng Cung! Tám giây bắt đầu! Trả lời đúng nhân ba điểm, trả lời sai khi quân phạm thượng bị trừ một trăm điểm!', true);
 }
 
+// =========================================================================
+// CƠ CHẾ STATE MACHINE CHO KHU VỰC TRUNG TÂM (MODE_QUIZ vs MODE_PVP vs MODE_CHEST)
+// Đảm bảo tại 1 thời điểm chỉ hiển thị 1 màn hình chính, không chồng chéo
+// =========================================================================
+const SCREEN_MODES = {
+  QUIZ: 'MODE_QUIZ',
+  PVP: 'MODE_PVP',
+  CHEST: 'MODE_CHEST'
+};
+let currentScreenMode = SCREEN_MODES.QUIZ;
+
+function setScreenMode(mode) {
+  currentScreenMode = mode;
+  const stage = document.getElementById('liveStage');
+  const qModal = document.getElementById('quizModal');
+  const arena = document.getElementById('specialEventArena');
+  const pvpBox = document.getElementById('pvpArenaBox');
+  const chestBox = document.getElementById('treasureEventBox');
+
+  if (stage) {
+    stage.classList.remove('screen-mode-quiz', 'screen-mode-pvp', 'screen-mode-chest');
+    if (mode === SCREEN_MODES.QUIZ) stage.classList.add('screen-mode-quiz');
+    else if (mode === SCREEN_MODES.PVP) stage.classList.add('screen-mode-pvp');
+    else if (mode === SCREEN_MODES.CHEST) stage.classList.add('screen-mode-chest');
+  }
+
+  if (mode === SCREEN_MODES.QUIZ) {
+    if (arena) arena.classList.add('hidden');
+    if (pvpBox) pvpBox.classList.add('hidden');
+    if (chestBox) chestBox.classList.add('hidden');
+    if (qModal) {
+      qModal.classList.remove('hidden');
+      qModal.style.display = 'block';
+    }
+  } else if (mode === SCREEN_MODES.PVP) {
+    if (arena) arena.classList.remove('hidden');
+    if (pvpBox) pvpBox.classList.remove('hidden');
+    if (chestBox) chestBox.classList.add('hidden');
+    if (qModal) {
+      qModal.classList.remove('hidden');
+      qModal.style.display = 'block';
+    }
+  } else if (mode === SCREEN_MODES.CHEST) {
+    if (qModal) {
+      qModal.classList.add('hidden');
+      qModal.style.display = 'none';
+    }
+    if (arena) arena.classList.remove('hidden');
+    if (pvpBox) pvpBox.classList.add('hidden');
+    if (chestBox) chestBox.classList.remove('hidden');
+  }
+}
+
 function startPvpArenaEvent() {
   pvpArenaState = {
     active: true,
@@ -1149,13 +1238,7 @@ function startPvpArenaEvent() {
     timer: 25,
     voters: new Map()
   };
-  const arena = document.getElementById('specialEventArena');
-  const pvpBox = document.getElementById('pvpArenaBox');
-  const chestBox = document.getElementById('treasureEventBox');
-  if (arena) arena.classList.remove('hidden');
-  if (pvpBox) pvpBox.classList.remove('hidden');
-  if (chestBox) chestBox.classList.add('hidden');
-
+  setScreenMode(SCREEN_MODES.PVP);
   updatePvpHud();
   showImperialDecree('⚔️ ĐẤU TRƯỜNG VĂN CHƯƠNG ⚔️', 'Phân chia phe phái! Phe Văn Quan chọn A/B vs Phe Võ Tướng chọn C/D! Bên nào áp đảo sẽ giành kho vàng thưởng!');
   speakImperial('Đấu trường Văn Chương khai mở! Phe Văn Quan gõ A hoặc B, phe Võ Tướng gõ C hoặc D! Trận chiến bắt đầu!', true);
@@ -1209,10 +1292,7 @@ function finishPvpArenaEvent() {
     if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(35);
   }
 
-  const arena = document.getElementById('specialEventArena');
-  const pvpBox = document.getElementById('pvpArenaBox');
-  if (arena) arena.classList.add('hidden');
-  if (pvpBox) pvpBox.classList.add('hidden');
+  setScreenMode(SCREEN_MODES.QUIZ);
   pvpArenaState = null;
   nextAutoQuizCooldown = 20;
 }
@@ -1225,12 +1305,7 @@ function startTreasureChestEvent() {
     timer: 15,
     lastHitUser: null
   };
-  const arena = document.getElementById('specialEventArena');
-  const pvpBox = document.getElementById('pvpArenaBox');
-  const chestBox = document.getElementById('treasureEventBox');
-  if (arena) arena.classList.remove('hidden');
-  if (pvpBox) pvpBox.classList.add('hidden');
-  if (chestBox) chestBox.classList.remove('hidden');
+  setScreenMode(SCREEN_MODES.CHEST);
 
   updateTreasureChestHud();
   showImperialDecree('🎁 CƯỚP LỘC ĐẦU XUÂN 🎁', 'Rương Châu Báu xuất hiện! Khán giả spam "phatloc" hoặc thả tim liên tục trong 15s để đập vỡ rương nhận Bão Điểm!');
@@ -1283,10 +1358,7 @@ function finishTreasureChestEvent(isBroken = false) {
     if (typeof fxEngine.triggerCoinRain === 'function') fxEngine.triggerCoinRain(50);
   }
 
-  const arena = document.getElementById('specialEventArena');
-  const chestBox = document.getElementById('treasureEventBox');
-  if (arena) arena.classList.add('hidden');
-  if (chestBox) chestBox.classList.add('hidden');
+  setScreenMode(SCREEN_MODES.QUIZ);
   treasureChestState = null;
   nextAutoQuizCooldown = 20;
 }
@@ -2161,6 +2233,7 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   quizFirstBloodWinners = [];
   quizOptionVotes = { A: 0, B: 0, C: 0, D: 0 };
   quizTotalVotes = 0;
+  setScreenMode(pvpArenaState && pvpArenaState.active ? SCREEN_MODES.PVP : SCREEN_MODES.QUIZ);
 
   const fbCard = document.getElementById('firstBloodCard');
   if (fbCard) fbCard.classList.add('hidden');
@@ -2217,7 +2290,7 @@ function triggerImperialQuiz(customQuizObj = null, decreeEmpId = null) {
   }
 
   playSound('gong');
-  speakImperial(`${quiz.q} A: ${quiz.options.A}. B: ${quiz.options.B}. C: ${quiz.options.C}. D: ${quiz.options.D}.`, true);
+  speakImperial(`${quiz.q} Đáp án A: ${quiz.options.A}. B: ${quiz.options.B}. C: ${quiz.options.C}. D: ${quiz.options.D}.`, true, true);
 }
 
 function evaluateQuizComment(player, commentText) {
@@ -2351,6 +2424,7 @@ function evaluateQuizComment(player, commentText) {
       const rightText = activeQuiz.options[rightKey];
       const optBox = document.getElementById(`quizOpt_${rightKey}`);
       if (optBox) optBox.classList.add('opt-correct');
+      AudioFX.playBellDing();
 
       fb.className = 'quiz-live-feedback fb-wrong';
       fb.innerHTML = `💥 Cả Vua & Thừa Tướng đều chọn sai! Đáp án đúng: <b>${rightKey}. ${escapeHtml(rightText)}</b>`;
@@ -3418,22 +3492,44 @@ function finishThroneDuel() {
 // =========================================================================
 // 9. CẬP NHẬT HUD, TOP PILL & KHUNG PILL COMMENT GÓC DƯỚI PHẢI
 // =========================================================================
+const bannerQueue = [];
+let isBannerDisplaying = false;
+let bannerTimer = null;
+
 function updateTopHighlightPill(player, line1Html, line2Text, icon = '📜') {
+  bannerQueue.push({ player, line1Html, line2Text, icon });
+  if (!isBannerDisplaying) {
+    processNextBanner();
+  }
+}
+
+function processNextBanner() {
+  if (bannerQueue.length === 0) {
+    isBannerDisplaying = false;
+    return;
+  }
+  isBannerDisplaying = true;
+  const item = bannerQueue.shift();
   const pill = document.getElementById('topHighlightPill');
   const avt = document.getElementById('topPillAvatar');
   const l1 = document.getElementById('topPillLine1');
   const l2 = document.getElementById('topPillLine2');
   const ic = document.getElementById('topPillIcon');
-  if (!pill) return;
+  if (pill) {
+    if (item.player && item.player.avatar && avt) avt.src = item.player.avatar;
+    if (l1) l1.innerHTML = item.line1Html;
+    if (l2) l2.textContent = item.line2Text;
+    if (ic) ic.textContent = item.icon;
 
-  if (player && player.avatar) avt.src = player.avatar;
-  l1.innerHTML = line1Html;
-  l2.textContent = line2Text;
-  ic.textContent = icon;
+    pill.classList.remove('pulse-pill');
+    void pill.offsetWidth;
+    pill.classList.add('pulse-pill');
+  }
 
-  pill.classList.remove('pulse-pill');
-  void pill.offsetWidth;
-  pill.classList.add('pulse-pill');
+  clearTimeout(bannerTimer);
+  bannerTimer = setTimeout(() => {
+    processNextBanner();
+  }, 3200);
 }
 
 function addCompactCommentPill(player, actionText, badgeText = '❤️ +10') {
@@ -3725,6 +3821,7 @@ setInterval(() => {
       const rightText = activeQuiz.options[rightKey];
       const optBox = document.getElementById(`quizOpt_${rightKey}`);
       if (optBox) optBox.classList.add('opt-correct');
+      AudioFX.playBellDing();
 
       const fb = document.getElementById('quizLiveFeedback');
       fb.className = 'quiz-live-feedback fb-right';
@@ -4938,12 +5035,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('resetSeatsBtn').addEventListener('click', () => {
-    localStorage.removeItem('tra_quan_seats_v8');
-    localStorage.removeItem('tra_quan_seats_v6');
-    localStorage.removeItem('tra_quan_seats_v5');
-    localStorage.removeItem('tra_quan_seats_v3');
-    seats = DEFAULT_SEATS.map(s => ({ ...s, occupantId: null }));
-    reassignAllSeats();
+    resetSeatPositions();
   });
 
   document.getElementById('resetGameBtn').addEventListener('click', () => {

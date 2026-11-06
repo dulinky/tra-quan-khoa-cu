@@ -181,18 +181,24 @@ body {
   text-shadow: 0 0.3cqw 1cqw #000, 0 0 1.8cqw rgba(255, 215, 0, 0.45);
 }
 
-/* Thanh Pill nổi bật trên đỉnh (Nằm hoàn toàn phía trên Menu Quà) */
+/* Thanh Pill nổi bật trên đỉnh (Cố định chiều cao 45px, chống giật layout) */
 .top-highlight-pill {
   display: flex;
   align-items: center;
   gap: 1.8cqw;
   width: 88%;
-  padding: 0.85cqw 2.2cqw 0.85cqw 1.2cqw;
+  height: 45px !important;
+  min-height: 45px !important;
+  max-height: 45px !important;
+  box-sizing: border-box !important;
+  padding: 0 2cqw 0 1.2cqw !important;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(28, 20, 12, 0.92) 0%, rgba(45, 32, 14, 0.88) 100%);
+  background: linear-gradient(90deg, rgba(28, 20, 12, 0.94) 0%, rgba(45, 32, 14, 0.90) 100%);
   border: 0.35cqw solid #ffd666;
   box-shadow: 0 0.8cqw 2.6cqw rgba(0, 0, 0, 0.85), 0 0 2.2cqw rgba(255, 215, 0, 0.32);
   transition: transform 0.25s ease;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
 }
 
 .top-highlight-pill.pulse-pill {
@@ -206,10 +212,10 @@ body {
 }
 
 .top-pill-avatar {
-  width: 6.4cqw;
-  height: 6.4cqw;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 50%;
-  border: 0.35cqw solid #ffd700;
+  border: 0.3cqw solid #ffd700;
   background: #1a2238;
   object-fit: cover;
   flex-shrink: 0;
@@ -218,7 +224,12 @@ body {
 .top-pill-content {
   flex: 1;
   min-width: 0;
-  line-height: 1.18;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  line-height: 1.2;
 }
 
 .top-pill-line1 {
@@ -1063,7 +1074,9 @@ body {
 .digivolve-stage {
   position: absolute;
   inset: 0;
-  z-index: 95;
+  width: 100%;
+  height: 100%;
+  z-index: 9990;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1788,18 +1801,24 @@ body.clean-live-mode .live-stage {
    KHUNG VIỀN HOÀNG GIA & DẤU ẤN NGỌC TỈ BIẾN HÌNH THĂNG QUAN ĐỈNH CAO
    ========================================================================== */
 .evo-center-box {
-  position: relative;
-  z-index: 98;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 88% !important;
+  max-width: 360px !important;
+  box-sizing: border-box !important;
+  z-index: 9999 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 4cqw 3cqw;
-  width: 88%;
-  background: radial-gradient(circle at center, rgba(30, 20, 10, 0.75) 0%, rgba(5, 7, 18, 0.88) 100%);
-  border: 0.45cqw solid rgba(255, 215, 0, 0.7);
+  padding: 3.5cqw 2.8cqw;
+  background: radial-gradient(circle at center, rgba(30, 20, 10, 0.85) 0%, rgba(5, 7, 18, 0.95) 100%);
+  border: 0.45cqw solid rgba(255, 215, 0, 0.8);
   border-radius: 3.5cqw;
   box-shadow: 0 0 8cqw rgba(255, 215, 0, 0.45), inset 0 0 5cqw rgba(255, 215, 0, 0.25);
+  margin: 0 !important;
 }
 
 .evo-royal-frame {
@@ -2652,4 +2671,122 @@ body.clean-live-mode .live-stage {
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
   display: block !important;
+}
+
+/* ==========================================================================
+   10. CƠ CHẾ STATE MACHINE CHO KHU VỰC TRUNG TÂM (QUIZ vs PVP vs CHEST)
+   ========================================================================== */
+
+/* Trạng thái 1: MODE_QUIZ (Mặc định) */
+.live-stage.screen-mode-quiz #specialEventArena,
+.live-stage.screen-mode-quiz .special-event-arena,
+.live-stage.screen-mode-quiz #pvpArenaBox,
+.live-stage.screen-mode-quiz #treasureEventBox {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.live-stage.screen-mode-quiz #quizModal {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  top: 22% !important;
+  width: 90cqw !important;
+  max-width: 92% !important;
+}
+
+/* Trạng thái 2: MODE_PVP (Đấu Trường Văn Quan vs Võ Tướng kết hợp Câu Hỏi) */
+.live-stage.screen-mode-pvp #specialEventArena {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  top: 18.5% !important;
+  width: 90cqw !important;
+  z-index: 125 !important;
+}
+
+.live-stage.screen-mode-pvp #pvpArenaBox {
+  display: block !important;
+}
+
+.live-stage.screen-mode-pvp #treasureEventBox {
+  display: none !important;
+}
+
+.live-stage.screen-mode-pvp #quizModal {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  top: 32% !important;
+  width: 90cqw !important;
+  max-width: 92% !important;
+}
+
+/* Trạng thái 3: MODE_CHEST (Cướp Lộc Đầu Xuân - Mở Rương Châu Báu 15s) */
+.live-stage.screen-mode-chest #quizModal {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.live-stage.screen-mode-chest #pvpArenaBox {
+  display: none !important;
+}
+
+.live-stage.screen-mode-chest #specialEventArena {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  top: 25% !important;
+  width: 88cqw !important;
+  z-index: 130 !important;
+}
+
+.live-stage.screen-mode-chest #treasureEventBox {
+  display: block !important;
+  padding: 3cqw 2cqw !important;
+  border-radius: 3cqw !important;
+  box-shadow: 0 1cqw 5cqw rgba(0,0,0,0.98), 0 0 4cqw rgba(255, 215, 0, 0.7) !important;
+}
+
+.live-stage.screen-mode-chest .treasure-chest-graphic {
+  font-size: 15cqw !important;
+  margin: 1.5cqw 0 !important;
+  animation: chestBounce 1s infinite alternate ease-in-out !important;
+  filter: drop-shadow(0 0 3cqw rgba(255, 215, 0, 0.8)) !important;
+}
+
+@keyframes chestBounce {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-1.5cqw) scale(1.08); }
+}
+
+/* ==========================================================================
+   11. NỔI BẬT ĐÁP ÁN ĐÚNG KHI HẾT GIỜ (HIGHLIGHT XANH LÁ + PHÓNG TO)
+   ========================================================================== */
+.quiz-opt-box.opt-correct {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  transform: scale(1.06) !important;
+  box-shadow: 0 0 25px rgba(52, 211, 153, 0.95), 0 0 45px rgba(16, 185, 129, 0.7) !important;
+  z-index: 15 !important;
+  animation: correctHighlightPulse 0.85s infinite alternate ease-in-out !important;
+}
+
+.quiz-opt-box.opt-correct .quiz-opt-key {
+  background: #ffffff !important;
+  color: #065f46 !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+}
+
+@keyframes correctHighlightPulse {
+  0% { transform: scale(1.04); box-shadow: 0 0 18px rgba(52, 211, 153, 0.75); }
+  100% { transform: scale(1.08); box-shadow: 0 0 35px rgba(52, 211, 153, 1), 0 0 55px rgba(16, 185, 129, 0.9); }
 }
