@@ -6,7 +6,7 @@ let express, Server;
 try {
   express = require('express');
   ({ Server } = require('socket.io'));
-} catch (e) {}
+} catch (e) { }
 
 let TikTokLiveConnection = null;
 async function loadTikTokConnector() {
@@ -143,7 +143,7 @@ if (express && Server) {
     }
 
     if (tiktokConnection) {
-      try { await tiktokConnection.disconnect(); } catch (e) {}
+      try { await tiktokConnection.disconnect(); } catch (e) { }
       tiktokConnection = null;
     }
 
@@ -221,7 +221,7 @@ if (express && Server) {
           avatar: u.avatar,
           likeCount: Number(data?.count || data?.likeCount || 15)
         });
-      } catch (e) {}
+      } catch (e) { }
     });
 
     tiktokConnection.on('share', (data) => {
@@ -233,7 +233,7 @@ if (express && Server) {
           nickname: u.nickname,
           avatar: u.avatar
         });
-      } catch (e) {}
+      } catch (e) { }
     });
 
     tiktokConnection.on('social', (data) => {
@@ -255,7 +255,7 @@ if (express && Server) {
             avatar: u.avatar
           });
         }
-      } catch (e) {}
+      } catch (e) { }
     });
 
     tiktokConnection.on('member', (data) => {
@@ -267,7 +267,7 @@ if (express && Server) {
           nickname: u.nickname,
           avatar: u.avatar
         });
-      } catch (e) {}
+      } catch (e) { }
     });
 
     tiktokConnection.on('streamEnd', () => {
