@@ -59,12 +59,12 @@ function getDistinctAvatar(uniqueId, nickname, providedAvatar, tier = 1) {
 const IMPERIAL_QUIZZES = (window.IMPERIAL_QUIZ_BANK && window.IMPERIAL_QUIZ_BANK.length)
   ? window.IMPERIAL_QUIZ_BANK
   : [
-      {
-        q: 'Vị Trạng Nguyên trẻ tuổi nhất lịch sử khoa cử Việt Nam (đỗ năm 13 tuổi) là ai?',
-        options: { A: 'Nguyễn Hiền', B: 'Mạc Đĩnh Chi', C: 'Lương Thế Vinh', D: 'Nguyễn Bỉnh Khiêm' },
-        correct: 'A'
-      }
-    ];
+    {
+      q: 'Vị Trạng Nguyên trẻ tuổi nhất lịch sử khoa cử Việt Nam (đỗ năm 13 tuổi) là ai?',
+      options: { A: 'Nguyễn Hiền', B: 'Mạc Đĩnh Chi', C: 'Lương Thế Vinh', D: 'Nguyễn Bỉnh Khiêm' },
+      correct: 'A'
+    }
+  ];
 
 let unusedQuizIndices = [];
 function getNextRandomQuiz() {
@@ -135,7 +135,7 @@ function ensureBgmPlaying() {
   if (!bgmEl) return;
   applyBgmVolume();
   if (audioEnabled && bgmEnabled && bgmEl.paused) {
-    bgmEl.play().catch(() => {});
+    bgmEl.play().catch(() => { });
   } else if ((!audioEnabled || !bgmEnabled) && !bgmEl.paused) {
     bgmEl.pause();
   }
@@ -242,7 +242,7 @@ function playSound(type) {
       osc.start(now);
       osc.stop(now + 0.5);
     }
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // =========================================================================
@@ -290,7 +290,7 @@ const AudioFX = {
       if (AudioCtx) this.ctx = new AudioCtx();
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume().catch(() => {});
+      this.ctx.resume().catch(() => { });
     }
   },
   // Tiếng lật trang giấy trúc sột soạt tự nhiên khi ra câu hỏi mới
@@ -322,7 +322,7 @@ const AudioFX = {
       filter.connect(gain);
       gain.connect(this.ctx.destination);
       noise.start(now);
-    } catch (e) {}
+    } catch (e) { }
   },
   // Tiếng chuông ngân vàng trong trẻo khi đáp đúng
   playBellDing() {
@@ -346,7 +346,7 @@ const AudioFX = {
         osc.start(now);
         osc.stop(now + 0.95);
       });
-    } catch (e) {}
+    } catch (e) { }
   },
   // Tiếng gõ mõ sai trầm dứt khoát
   playWrongBuzz() {
@@ -368,7 +368,7 @@ const AudioFX = {
       gain.connect(this.ctx.destination);
       osc.start(now);
       osc.stop(now + 0.24);
-    } catch (e) {}
+    } catch (e) { }
   }
 };
 
@@ -383,7 +383,7 @@ function stopAllSpeech(broadcast = true) {
       window.speechSynthesis.pause();
       window.speechSynthesis.cancel();
     }
-  } catch (e) {}
+  } catch (e) { }
   if (broadcast && socketRef) {
     socketRef.emit('stop_all_speech');
   }
@@ -720,7 +720,7 @@ function loadSeatsConfig() {
         return parsed.map(s => ({ ...s, occupantId: null }));
       }
     }
-  } catch (e) {}
+  } catch (e) { }
   return DEFAULT_SEATS.map(s => ({ ...s, occupantId: null }));
 }
 
@@ -754,7 +754,7 @@ function renderSeats() {
     node.style.top = `${seat.y}%`;
 
     const occKey = occupant
-      ? `${occupant.uniqueId}_${occupant.score}_${getAvatarFrame(occupant)}_${getDonorTitle(occupant.uniqueId)}_${occupant.streak || 1}_${hasShield ? 1 : 0}_${hasStreak ? occupant.correctStreak : 0}_${isJailed ? Math.ceil((occupant.jailedUntil - Date.now())/1000) : 0}`
+      ? `${occupant.uniqueId}_${occupant.score}_${getAvatarFrame(occupant)}_${getDonorTitle(occupant.uniqueId)}_${occupant.streak || 1}_${hasShield ? 1 : 0}_${hasStreak ? occupant.correctStreak : 0}_${isJailed ? Math.ceil((occupant.jailedUntil - Date.now()) / 1000) : 0}`
       : '__empty__';
 
     // Chỉ cập nhật DOM bên trong khi có thay đổi thực sự -> Giúp 60FPS mượt mà, không chớp giật avatar
@@ -762,7 +762,7 @@ function renderSeats() {
       node.dataset.renderedState = occKey;
       if (occupant) {
         const streakBadge = hasStreak ? `<span class="scholar-streak-badge">🔥x${occupant.correctStreak}</span>` : '';
-        const jailOverlay = isJailed ? `<div class="jailed-cage-overlay">⛓️ NGỤC (${Math.ceil((occupant.jailedUntil - Date.now())/1000)}s)</div>` : '';
+        const jailOverlay = isJailed ? `<div class="jailed-cage-overlay">⛓️ NGỤC (${Math.ceil((occupant.jailedUntil - Date.now()) / 1000)}s)</div>` : '';
         node.innerHTML = `
           <div class="scholar-figure">
             <div class="scholar-halo"></div>
@@ -1410,7 +1410,7 @@ function renderGiftHud() {
 const DONOR_STORE_KEY = 'tra_quan_donors_v1';
 let donorStore = {};
 try { donorStore = JSON.parse(localStorage.getItem(DONOR_STORE_KEY) || '{}') || {}; } catch (e) { donorStore = {}; }
-function saveDonorStore() { try { localStorage.setItem(DONOR_STORE_KEY, JSON.stringify(donorStore)); } catch (e) {} }
+function saveDonorStore() { try { localStorage.setItem(DONOR_STORE_KEY, JSON.stringify(donorStore)); } catch (e) { } }
 function getDonorTitle(uniqueId) {
   const c = (donorStore[uniqueId] && donorStore[uniqueId].coins) || 0;
   if (c >= 1000) return '💎 Quốc Thương';
@@ -2667,7 +2667,7 @@ function handleTikTokEvent(evt) {
     const isTop1OrEmperor = (top1Player && top1Player.uniqueId === player.uniqueId) || (currentEmperorId === player.uniqueId);
 
     const jailMatch = text.match(/^(?:(?:\/|!)(?:giam|nhot))\s+@?(.+)$/i) ||
-                      normCmd.match(/^(?:(?:\/|!)(?:giam|nhot))\s+@?(.+)$/i);
+      normCmd.match(/^(?:(?:\/|!)(?:giam|nhot))\s+@?(.+)$/i);
     if (jailMatch) {
       if (!isTop1OrEmperor) {
         if (player.seatId) showFloatingToastOnSeat(player.seatId, '⚠️ Chỉ Top 1 hoặc Hoàng Đế mới có quyền nhốt ngục!', 'toast-wrong');
@@ -2690,7 +2690,7 @@ function handleTikTokEvent(evt) {
     }
 
     const rewardMatch = text.match(/^(?:(?:\/|!)(?:thuong|banthuong))\s+@?(.+)$/i) ||
-                        normCmd.match(/^(?:(?:\/|!)(?:thuong|banthuong))\s+@?(.+)$/i);
+      normCmd.match(/^(?:(?:\/|!)(?:thuong|banthuong))\s+@?(.+)$/i);
     if (rewardMatch) {
       if (!isTop1OrEmperor) {
         if (player.seatId) showFloatingToastOnSeat(player.seatId, '⚠️ Chỉ Top 1 hoặc Hoàng Đế mới có quyền ban thưởng!', 'toast-wrong');
@@ -2751,7 +2751,7 @@ function handleTikTokEvent(evt) {
     }
 
     const smiteMatch = text.match(/^(?:!?\s*(?:tram|trảm|chem|chém))(?:\s+(.*))?$/i) ||
-                       normCmd.match(/^(?:!?\s*(?:tram|chem))(?:\s+(.*))?$/i);
+      normCmd.match(/^(?:!?\s*(?:tram|chem))(?:\s+(.*))?$/i);
     if (smiteMatch) {
       if (currentEmperorId !== player.uniqueId) {
         if (player.seatId) {
@@ -3046,7 +3046,7 @@ function executeKingSmite(targetNameQuery, isManualAdmin = false) {
   // Bảo hộ người có Hộ Thân Phù hoặc vừa bị chém trong vòng 2 phút (không cho chém liên tiếp 1 người)
   if (!isManualAdmin && victim.shieldUntil && victim.shieldUntil > now) {
     const shieldLeft = Math.ceil((victim.shieldUntil - now) / 1000);
-    if ( victim.seatId ) {
+    if (victim.seatId) {
       showFloatingToastOnSeat(victim.seatId, `🛡️ Hộ Thân Phù miễn trảm (${shieldLeft}s)!`, 'toast-right');
     }
     speakImperial(`Sĩ tử ${victim.nickname} đang có Kim Bài Miễn Tử hộ thể, miễn tội trảm!`);
@@ -3111,7 +3111,7 @@ function applyGiftEffect(player, evt) {
 
   // 1. Quyết Đấu Vua vs Thừa Tướng: người đang đấu tặng quà >= 20 xu -> được quyền 50:50
   if (throneDuelState && coins >= 20 &&
-      (player.uniqueId === throneDuelState.empId || player.uniqueId === throneDuelState.minId)) {
+    (player.uniqueId === throneDuelState.empId || player.uniqueId === throneDuelState.minId)) {
     applyFiftyFifty();
     addCompactCommentPill(player, 'dùng 50:50 Quyết Đấu', '🎯 -2 đáp án');
     if (player.seatId) showFloatingToastOnSeat(player.seatId, '🎯 50:50 Trợ Giúp!', 'toast-right');
@@ -3606,14 +3606,14 @@ function updateHUDAndTables() {
   }
 }
 
-window.smiteSpecificPlayer = function(uniqueId) {
+window.smiteSpecificPlayer = function (uniqueId) {
   const p = players.get(uniqueId);
   if (!p) return;
   executeKingSmite(p.nickname, true);
   emitAdminAction({ kind: 'smite', query: p.nickname, isManualAdmin: true });
 };
 
-window.boostPlayer = function(uniqueId, amount) {
+window.boostPlayer = function (uniqueId, amount) {
   const p = players.get(uniqueId);
   if (!p) return;
   p.score += amount;
